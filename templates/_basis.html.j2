@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if umgebung == 'staging' %}[Staging] {% endif %}{% block titel %}{{ titel }}{% endblock %}</title>
+<meta name="description" content="{{ titel }}: wöchentliches Equity Screening mit Signalen zu Aktien, ETFs, Währungen, Rohstoffen und Indizes.">
+<meta name="theme-color" content="#e0ddd6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="{{ titel }}">
+<meta property="og:description" content="Wöchentliches Equity Screening nach festen Regeln.">
+{# Sicherheit: nur eigene Skripte; Finnhub (Live-Kurse) und TradingView (nur auf Klick) sind die einzigen Ausnahmen.
+   GitHub Pages kann keine Kopfzeilen setzen, darum als meta; live.py schickt dieselbe Policy zusätzlich als Header. #}
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://s3.tradingview.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://finnhub.io wss://ws.finnhub.io; frame-src https://*.tradingview.com https://www.tradingview-widget.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+{% if umgebung == 'staging' %}<meta name="robots" content="noindex, nofollow, noarchive">{% endif %}
+<script src="{{ basis }}assets/design.js"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23000%27/%3E%3Cpath d=%27M16 3v5%27 stroke=%27%23fff%27 stroke-width=%271.6%27/%3E%3Cpath d=%27M13.6 8h4.8v2.2l5.3 7.2L16 29l-7.7-11.6 5.3-7.2z%27 fill=%27%232997ff%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="{{ basis }}assets/stil.css">
+</head>
+<body{% if archiv_seite %} data-archiv{% endif %}{% if umgebung == 'staging' %} data-umgebung="staging"{% endif %}>
+{% if umgebung == 'staging' %}<div class="staging-band" role="note">Staging · Testumgebung, nicht die Live-Website. Keine E-Mails, keine echten Aufträge.</div>{% endif %}
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+<header class="leiste">
+  <div class="leiste-innen">
+    <div class="leiste-links">
+    <a class="marke" href="{{ basis }}index.html" aria-label="{{ titel }}, zur Übersicht">
+      {% set o = titel.lower().find('o') %}
+      <span class="marke-name" aria-hidden="true">{% if o > 0 %}{{ titel[:o] }}<svg class="lot-o" viewBox="0 0 12 20" aria-hidden="true"><path class="lot-faden" d="M6 0.4V4.6"/><path class="lot-koerper" fill-rule="evenodd" d="M4.5 4.4H7.5V5.9L10.8 10.4 6 18.8 1.2 10.4 4.5 5.9ZM6 8.9a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 1 0 0-3.8Z"/></svg>{{ titel[o + 1:] }}{% else %}{{ titel }}{% endif %}</span>
+      <span class="marke-zusatz">Equity Screening</span>
+    </a>
+    </div>
+    <div class="leiste-rechts">
+      {% block leiste %}{% endblock %}
+      <button type="button" class="design-knopf" id="design-knopf" aria-label="Dunkles Design einschalten" title="Hell oder dunkel">
+        <svg class="sonne" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="mond" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M19.5 14.6A7.8 7.8 0 0 1 9.4 4.5a7.8 7.8 0 1 0 10.1 10.1z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<aside class="dock" id="dock" aria-label="Werkzeuge" data-dock-archiv="{{ '1' if archiv_seite else '' }}">
+  <a class="dock-lot" href="{{ basis }}index.html" aria-label="Zur Übersicht" title="Übersicht">
+    <svg viewBox="0 0 12 20" aria-hidden="true"><path class="lot-faden" d="M6 0.4V4.6"/><path class="lot-koerper" fill-rule="evenodd" d="M4.5 4.4H7.5V5.9L10.8 10.4 6 18.8 1.2 10.4 4.5 5.9ZM6 8.9a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 1 0 0-3.8Z"/></svg>
+  </a>
+  <ul class="dock-liste">
+    <li><a class="dock-w" data-dock="home" href="{{ basis }}index.html" aria-describedby="dock-k-home">
+        <span class="dock-symbol"><svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.8 11.2 12 4.5l8.2 6.7"/><path d="M6.2 9.6v10h11.6v-10"/><rect x="10" y="13.6" width="4" height="6" class="voll"/></svg></span>
+        <b class="dock-wert">{% if kw is defined %}KW {{ kw }}{% else %}Start{% endif %}</b><span class="dock-name">Home</span></a>
+      <div class="dock-karte" id="dock-k-home" role="tooltip"><p class="dock-k-titel">Home</p>
+        <p class="dock-k-text">Zurück zur Startseite: schließt alle Fenster und springt nach oben.</p>
+        <div class="dock-k-mehr" data-dock-mehr="home"></div></div></li>
+    <li class="dock-trenner" aria-hidden="true"></li>
+    <li><a class="dock-w" data-dock="work" href="{% if archiv_seite %}../../index.html{% endif %}#work" aria-describedby="dock-k-work">
+        <span class="dock-symbol"><svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="7.5" height="7"/><rect x="13" y="4" width="7.5" height="7" class="voll"/><rect x="3.5" y="13" width="7.5" height="7"/><rect x="13" y="13" width="7.5" height="7"/></svg><span class="dock-led" aria-hidden="true"></span></span>
+        <b class="dock-wert" data-dock-wert="work">–</b><span class="dock-name">Work</span></a>
+      <div class="dock-karte" id="dock-k-work" role="tooltip"><p class="dock-k-titel">Work-Modus</p>
+        <p class="dock-k-text">Alle Fenster auf einmal: Kurse, Nachrichten mit Kurzfassung, Kalender mit Countdown.</p>
+        <div class="dock-k-mehr" data-dock-mehr="work"></div></div></li>
+    <li><a class="dock-w" data-dock="backtest" href="{% if archiv_seite %}../../index.html{% endif %}#backtest" aria-describedby="dock-k-backtest">
+        <span class="dock-symbol"><svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 20.5h17"/><path d="M4 16l4.5-4.5 3.5 3 7.5-8"/><path d="M15 6.5h4.5V11" class="spitze"/></svg><span class="dock-led" aria-hidden="true"></span></span>
+        <b class="dock-wert" data-dock-wert="backtest">–</b><span class="dock-name">Backtest</span></a>
+      <div class="dock-karte" id="dock-k-backtest" role="tooltip"><p class="dock-k-titel">Backtest</p>
+        <p class="dock-k-text">Eigene Strategie aus Fakten oder als gezeichnete Chart-Taktik über bis zu zehn Jahre testen.</p>
+        <div class="dock-k-mehr" data-dock-mehr="backtest"></div></div></li>
+    {% if not archiv_seite %}
+    <li><button type="button" class="dock-w" data-dock="kriterien" data-kriterien-oeffnen="aktie" aria-describedby="dock-k-kriterien">
+        <span class="dock-symbol"><svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17M12 3.5v17M18 3.5v17"/><rect x="3.8" y="13" width="4.4" height="3.4" class="voll"/><rect x="9.8" y="6.5" width="4.4" height="3.4" class="voll"/><rect x="15.8" y="15" width="4.4" height="3.4" class="voll"/></svg><span class="dock-led" aria-hidden="true"></span></span>
+        <b class="dock-wert" data-dock-wert="kriterien">–</b><span class="dock-name">Screener</span></button>
+      <div class="dock-karte" id="dock-k-kriterien" role="tooltip"><p class="dock-k-titel">Screener</p>
+        <p class="dock-k-text">Welche Signale je Anlageklasse zählen und ab wann ein Wert Treffer ist.</p>
+        <div class="dock-k-mehr" data-dock-mehr="kriterien"></div></div></li>
+    {% if protokoll %}{% set pk = protokoll %}
+    <li><a class="dock-w" data-dock="protokoll" href="#protokoll" aria-describedby="dock-k-protokoll">
+        <span class="dock-symbol"><svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h14l-3.5-3.5"/><path d="M20 15.5H6l3.5 3.5"/></svg><span class="dock-led{% if pk.eintraege %} an{% endif %}" aria-hidden="true"></span></span>
+        <b class="dock-wert"><span class="plus">+{{ pk.gewonnen }}</span> <span class="minus">−{{ pk.verloren }}</span></b><span class="dock-name">Woche</span></a>
+      <div class="dock-karte" id="dock-k-protokoll" role="tooltip"><p class="dock-k-titel">Seit letzter Woche</p>
+        <p class="dock-k-text">{% if pk.eintraege %}{{ pk.gewonnen }} {{ 'Signal' if pk.gewonnen == 1 else 'Signale' }} neu erfüllt, {{ pk.verloren }} nicht mehr erfüllt.{% else %}Keine Wechsel seit dem letzten Bericht.{% endif %}</p>
+        {% if pk.eintraege %}<ul class="dock-k-liste">{% for e in pk.eintraege[:4] %}<li><b>{{ e.name }}</b><i class="{{ 'plus' if e.punkte > e.punkte_vorher else ('minus' if e.punkte < e.punkte_vorher else '') }}">{{ e.punkte_vorher }} → {{ e.punkte }}</i>{% if e.schwelle == 'rein' %}<em>jetzt Treffer</em>{% elif e.schwelle == 'raus' %}<em class="raus">kein Treffer mehr</em>{% endif %}</li>{% endfor %}</ul>{% endif %}
+      </div></li>
+    {% endif %}
+    <li><button type="button" class="dock-w" data-dock="journal" aria-describedby="dock-k-journal" aria-haspopup="dialog">
+        <span class="dock-symbol"><svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.8h11.2a1.6 1.6 0 0 1 1.6 1.6v14.8H7.6A1.6 1.6 0 0 1 6 18.6z"/><path d="M6 17a1.6 1.6 0 0 1 1.6-1.6h11.2M9.5 8h5.5M9.5 11h4"/></svg><span class="dock-led" aria-hidden="true"></span></span>
+        <b class="dock-wert" data-dock-wert="journal">–</b><span class="dock-name">Journal</span></button>
+      <div class="dock-karte" id="dock-k-journal" role="tooltip"><p class="dock-k-titel">Journal</p>
+        <p class="dock-k-text">Warum du gekauft hast, woran du merkst, dass du falsch liegst, und wann du wieder hinschaust.</p>
+        <div class="dock-k-mehr" data-dock-mehr="journal"></div></div></li>
+    {% endif %}
+    {% if not archiv_seite %}
+    <li class="dock-trenner" aria-hidden="true"></li>
+    <li><button type="button" class="dock-w" data-dock="termine" aria-describedby="dock-k-termine" aria-haspopup="dialog">
+        <span class="dock-symbol"><svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.8" y="5.5" width="16.4" height="14.5" rx="2.5"/><path d="M3.8 10h16.4M8.5 3.5v4M15.5 3.5v4"/><rect x="12.6" y="13" width="4" height="3.6" class="voll"/></svg><span class="dock-led" aria-hidden="true"></span></span>
+        <b class="dock-wert" data-dock-wert="termine">–</b><span class="dock-name">Termine</span></button>
+      <div class="dock-karte" id="dock-k-termine" role="tooltip"><p class="dock-k-titel">Termine</p>
+        <p class="dock-k-text">Quartalszahlen deiner Werte, Notenbanken, wichtige Wirtschaftsdaten und deine Wiedervorlagen.</p>
+        <div class="dock-k-mehr" data-dock-mehr="termine"></div></div></li>
+    <li><button type="button" class="dock-w" data-dock="alarme" aria-describedby="dock-k-alarme" aria-haspopup="dialog">
+        <span class="dock-symbol"><svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 16.5V11a5.8 5.8 0 0 1 11.6 0v5.5l1.7 2H4.5z"/><path d="M10 20.8a2.2 2.2 0 0 0 4 0" class="spitze"/></svg><span class="dock-led" aria-hidden="true"></span></span>
+        <b class="dock-wert" data-dock-wert="alarme">–</b><span class="dock-name">Alarme</span></button>
+      <div class="dock-karte" id="dock-k-alarme" role="tooltip"><p class="dock-k-titel">Alarme</p>
+        <p class="dock-k-text">Eigene Grenzen für Kurs, Tagesbewegung, Signale, Szenario und Termine. Prüft mit jedem Live-Kurs.</p>
+        <div class="dock-k-mehr" data-dock-mehr="alarme"></div></div></li>
+    <li><button type="button" class="dock-w" data-dock="depot" aria-describedby="dock-k-depot" aria-haspopup="dialog">
+        <span class="dock-symbol"><svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8a8.2 8.2 0 1 0 8.2 8.2H12z"/><path d="M14.6 3.9a8.2 8.2 0 0 1 5.5 5.5h-5.5z" class="voll"/></svg><span class="dock-led" aria-hidden="true"></span></span>
+        <b class="dock-wert" data-dock-wert="depot">–</b><span class="dock-name">Depot</span></button>
+      <div class="dock-karte" id="dock-k-depot" role="tooltip"><p class="dock-k-titel">Depot</p>
+        <p class="dock-k-text">Dein Depot auf einen Blick: Wert, Bewegung heute, Aufteilung, Röntgen und Szenarien.</p>
+        <div class="dock-k-mehr" data-dock-mehr="depot"></div></div></li>
+    {% endif %}
+  </ul>
+  <ul class="dock-liste dock-unten">
+    <li><button type="button" class="dock-w" data-dock="konto" aria-describedby="dock-k-konto" aria-haspopup="dialog">
+        <span class="dock-symbol dock-avatar" data-konto-avatar><svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="3.6"/><path d="M5 19.8c1.2-3.5 4-5.2 7-5.2s5.8 1.7 7 5.2"/></svg></span>
+        <b class="dock-wert" data-dock-wert="konto">Profil</b><span class="dock-name">Konto</span></button>
+      <div class="dock-karte" id="dock-k-konto" role="tooltip"><p class="dock-k-titel">Dein Konto</p>
+        <p class="dock-k-text">Profil, Einstellungen und deine Daten sichern oder umziehen.</p>
+        <div class="dock-k-mehr" data-dock-mehr="konto"></div>
+        <p class="dock-k-lokal"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Alles bleibt nur in diesem Browser.</p></div></li>
+  </ul>
+</aside>
+{% block band %}{% endblock %}
+<div class="seite">
+<main id="inhalt" tabindex="-1">
+{% block inhalt %}{% endblock %}
+</main>
+<footer class="fuss">
+  {% block fuss %}{% endblock %}
+  <p>Daten: Eulerpool, Yahoo Finance (yfinance), Leitzinsen der BIS, optional Finnhub. Stand {{ stand | datum }}. Werte können verzögert oder fehlerhaft sein.
+  {{ titel }} ist ein Screening nach selbst gewählten Regeln und keine Anlageberatung.</p>
+</footer>
+</div>
+<script src="{{ basis }}assets/basis.js" defer></script>
+<script src="{{ basis }}assets/kerzen.js" defer></script>
+<script src="{{ basis }}assets/charts.js" defer></script>
+<script src="{{ basis }}assets/app.js" defer></script>
+<script src="{{ basis }}assets/szenario-kern.js" defer></script>
+<script src="{{ basis }}assets/szenarien.js" defer></script>
+<script src="{{ basis }}assets/regeln.js" defer></script>
+<script src="{{ basis }}assets/werkzeuge.js" defer></script>
+<script src="{{ basis }}assets/backtest-kern.js" defer></script>
+<script src="{{ basis }}assets/taktik-kern.js" defer></script>
+<script src="{{ basis }}assets/zeichnen.js" defer></script>
+<script src="{{ basis }}assets/setup-kern.js" defer></script>
+<script src="{{ basis }}assets/backtest.js" defer></script>
+<script src="{{ basis }}assets/setups.js" defer></script>
+<script src="{{ basis }}assets/work-kern.js" defer></script>
+<script src="{{ basis }}assets/work.js" defer></script>
+<script src="{{ basis }}assets/konto.js" defer></script>
+<script src="{{ basis }}assets/seiten-kern.js" defer></script>
+<script src="{{ basis }}assets/seiten.js" defer></script>
+<script src="{{ basis }}assets/dock.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+# ------------------------------------------------------------------
+# Wochenbericht – Einstellungen
+# Hier änderst du Watchlist und Kriterien. Den Code musst du dafür
+# nicht anfassen.
+# ------------------------------------------------------------------
+
+titel: "Fathom"
+
+# Yahoo-Finance-Kürzel. Finden: finance.yahoo.com → Suche → Kürzel in Klammern.
+# Deutsche Börsenplätze enden auf .DE (Xetra), Hongkong auf .HK.
+# typ: "aktie", "etf" (nur beobachtet), "forex", "rohstoff" oder "index".
+# Jede Klasse hat eigene Signale (siehe unten) und eine eigene Kachel auf der Website.
+# Neue Werte lassen sich auch über die Suche der Website hinzufügen (python live.py).
+# Optional: isin: "…" (Kennung für Eulerpool und die Links zu onvista, Eulerpool usw.;
+#   fehlt sie, wird sie bei Yahoo nachgeschlagen).
+# Optional: tradingview: "BÖRSE:KÜRZEL", falls der TradingView-Chart den Wert nicht findet.
+# Optional: finnhub: "KÜRZEL" für Echtzeit-Kurse über Finnhub (kostenlos nur US-Aktien).
+#   US-Aktien ohne Börsenendung (z. B. MSFT) werden automatisch übernommen.
+#   finnhub: "" schaltet Finnhub für einen Wert ab.
+watchlist:
+  - { symbol: "SAP.DE",  isin: "DE0007164600", name: "SAP",          typ: aktie }
+  - { symbol: "ADBE",    isin: "US00724F1012", name: "Adobe",        typ: aktie }
+  - { symbol: "NOW",     isin: "US81762P1021", name: "ServiceNow",   typ: aktie }
+  - { symbol: "CRM",     isin: "US79466L3024", name: "Salesforce",   typ: aktie }
+  - { symbol: "MSFT",    isin: "US5949181045", name: "Microsoft",    typ: aktie }
+  - { symbol: "NVDA",    isin: "US67066G1040", name: "Nvidia",       typ: aktie }
+  - { symbol: "2899.HK", isin: "CNE100000502", name: "Zijin Mining", typ: aktie }
+  # Platzhalter für deinen ACWI-ETF: iShares MSCI ACWI (Xetra).
+  # Wenn du einen anderen ACWI-ETF besparst, hier dessen Kürzel eintragen.
+  - { symbol: "IUSQ.DE", isin: "IE00B6R52259", name: "MSCI ACWI (ETF)", typ: etf }
+  # Forex: Yahoo-Kürzel BASISKURS=X, z. B. EURUSD=X (Wert von 1 Euro in US-Dollar)
+  - { symbol: "EURUSD=X", name: "EUR/USD", typ: forex }
+  - { symbol: "EURJPY=X", name: "EUR/JPY", typ: forex }
+  - { symbol: "GBPUSD=X", name: "GBP/USD", typ: forex }
+  - { symbol: "EURCHF=X", name: "EUR/CHF", typ: forex }
+  # Rohstoffe: Front-Month-Futures (=F)
+  - { symbol: "GC=F", name: "Gold", typ: rohstoff }
+  - { symbol: "SI=F", name: "Silber", typ: rohstoff }
+  - { symbol: "BZ=F", name: "Brent-Öl", typ: rohstoff }
+  - { symbol: "HG=F", name: "Kupfer", typ: rohstoff }
+  # Indizes und Index-Futures (Basiswerte für Derivate wie Knock-outs)
+  - { symbol: "^GDAXI", name: "DAX", typ: index }
+  - { symbol: "^GSPC", name: "S&P 500", typ: index }
+  - { symbol: "^NDX", name: "Nasdaq 100", typ: index }
+  - { symbol: "^STOXX50E", name: "Euro Stoxx 50", typ: index }
+
+# Zehn Kriterien je Anlageklasse (Übersicht und Quellen: src/kriterien.py). Alle Schwellen sind frei wählbar.
+# Welche Kriterien zählen, steht weiter unten unter „auswahl“. Auf der Website lässt sich beides im
+# Kriterien-Fenster ausprobieren; „Für config.yaml kopieren“ liefert den passenden Ausschnitt.
+kriterien:
+  # 1) "Etwas größeres Unternehmen": Börsenwert mindestens … Mrd. Euro
+  min_boersenwert_mrd_eur: 50
+
+  # 2) "Gute Quartalszahlen": Wachstum im letzten Quartal ggü. Vorjahresquartal
+  min_umsatzwachstum: 0.05      # 0.05 = +5 %
+  min_gewinnwachstum: 0.00      # Gewinn darf nicht geschrumpft sein
+
+  # 3) "Lokales Tief": deutlich unter dem 52-Wochen-Hoch UND im unteren Teil
+  #    der 52-Wochen-Spanne (0 % = am Tief, 100 % = am Hoch)
+  min_abstand_hoch: 0.20        # mindestens 20 % unter dem Hoch
+  max_position_spanne: 0.40     # im unteren 40-%-Bereich der Spanne
+
+  # 4) "Bewertung passt nicht zum Börsenwert": Forward-KGV liegt deutlich
+  #    unter dem eigenen 5-Jahres-Median ODER Analysten sehen viel Luft
+  max_kgv_vs_median: 0.80       # KGV höchstens 80 % des eigenen Medians
+  min_kursziel_abstand: 0.20    # oder Analysten-Kursziel ≥ 20 % über Kurs
+
+  # Weitere Kriterien (MSCI-FaCS-Faktorgruppen, Faktor-Indizes von J.P. Morgan und Goldman Sachs)
+  min_momentum_12_1: 0.0        # Preis-Momentum: 12-1-Monats-Rendite nicht negativ
+  min_roe: 0.15                 # Profitabilität: Eigenkapitalrendite mind. 15 %
+  max_nd_ebitda: 2.0            # Solide Bilanz: Nettoverschuldung höchstens 2× EBITDA
+  min_fcf_rendite: 0.03         # FCF-Rendite: Free Cashflow mind. 3 % des Börsenwerts
+  min_eps_revision: 0.0         # Gewinnrevisionen: Schätzung in 90 Tagen nicht gesenkt
+  max_vol_1j: 0.35              # Niedrige Volatilität: Jahresschwankung höchstens 35 %
+
+# Forex: Carry (Zinsdifferenz), Momentum, Value, Vol-Regime
+kriterien_forex:
+  min_zinsdifferenz: 0.01       # Leitzins Basis mind. 1 Prozentpunkt über Gegenwährung
+  min_momentum: 0.0             # 12-1-Monats-Rendite nicht negativ
+  min_abweichung_mittel: 0.05   # mind. 5 % unter dem 5-Jahres-Mittel
+  max_vol_verhaeltnis: 1.0      # Vola 1 Monat höchstens so hoch wie ihr Jahres-Median
+  min_carry_risk: 0.0           # Carry-to-Risk: Zinsdifferenz ÷ Jahresschwankung
+  min_abstand_gd200: 0.0        # Trend: über der 200-Tage-Linie
+  min_rendite_3m: 0.0           # Kurzfrist-Momentum: 3-Monats-Rendite
+  min_zins_trend: 0.0           # Zinstrend: Zinsdifferenz in 3 Monaten nicht gesunken
+  min_realzins_diff: 0.0        # Realzins-Vorsprung (Leitzins minus Inflation, BIS)
+  max_vol_1j: 0.10              # Volatilitätsniveau: Jahresschwankung höchstens 10 %
+
+# Rohstoffe: Momentum, Pullback, Value, Vol-Regime
+kriterien_rohstoff:
+  min_momentum: 0.0
+  min_abstand_hoch: 0.10        # mind. 10 % unter dem 52-Wochen-Hoch …
+  max_position_spanne: 0.50     # … und in der unteren Hälfte der Jahresspanne
+  max_abweichung_mittel: 0.0    # unter dem 5-Jahres-Mittel
+  max_vol_verhaeltnis: 1.0
+  min_roll_rendite: 0.0         # Terminstruktur: Roll-Rendite p. a. (Backwardation)
+  min_abstand_gd200: 0.0        # Trend
+  min_rendite_3m: 0.0           # Kurzfrist-Momentum
+  min_saison: 0.0               # Saisonalität: Ø Rendite des kommenden Monats
+  max_cot_perzentil: 0.80       # Positionierung (CFTC): Fonds höchstens im 80-%-Perzentil
+  max_vol_1j: 0.30              # Volatilitätsniveau
+
+# Indizes und Index-Futures: Trend, Momentum, Pullback, Vol-Regime
+kriterien_index:
+  min_abstand_gd200: 0.0        # über der 200-Tage-Linie
+  min_momentum: 0.0
+  min_abstand_hoch: 0.05        # Korrektur von mind. 5 % vom Hoch
+  max_vol_verhaeltnis: 1.0
+  min_rendite_3m: 0.0           # Kurzfrist-Momentum
+  max_vix: 20                   # VIX höchstens 20 Punkte
+  max_vix_struktur: 1.0         # VIX ÷ VIX3M höchstens 1 (Contango)
+  max_hy_spread: 0.045          # Kreditrisiko: High-Yield-Spread höchstens 4,5 %
+  min_saison: 0.0               # Saisonalität
+  max_ko_risiko: 0.05           # Knock-out-Risiko bei Hebel 5 höchstens 5 % der 10-Tage-Fenster
+
+# Welche Kriterien zählen (zaehlt), welche erfüllt sein müssen (pflicht) und ab wie vielen erfüllten
+# ein Wert als Treffer gilt (treffer_ab). Fehlt ein Eintrag, zählen die vier Standard-Kriterien, Treffer ab 3.
+auswahl:
+  aktie:    { zaehlt: [Large Cap, Earnings Momentum, Pullback, Valuation Gap], pflicht: [], treffer_ab: 3 }
+  forex:    { zaehlt: [Carry, Momentum, Value, Vol-Regime], pflicht: [], treffer_ab: 3 }
+  rohstoff: { zaehlt: [Momentum, Pullback, Value, Vol-Regime], pflicht: [], treffer_ab: 3 }
+  index:    { zaehlt: [Trend, Momentum, Pullback, Vol-Regime], pflicht: [], treffer_ab: 3 }
+
+# Leitzinsen für das Carry-Signal kommen automatisch von der BIS (Bank für Internationalen
+# Zahlungsausgleich). Nur falls nötig hier überschreiben, in Prozent, z. B.:
+# leitzinsen: { EUR: 2.5, USD: 3.875 }
+
+# Warnung, wenn Quartalszahlen innerhalb so vieler Tage anstehen
+# (wichtig bei Hebelprodukten: Kurslücken!)
+zahlen_warnung_tage: 21
+
+# Adresse der Website (nach dem Einrichten von GitHub Pages eintragen,
+# dann steht in der E-Mail ein Link dorthin). Leer lassen = kein Link.
+website_url: ""
+
+# Backtest (Menü oben links). Exakte Kurse mit OANDA_API_TOKEN, Wirtschaftsdaten mit FRED_API_KEY,
+# Prognosen optional mit TRADINGECONOMICS_API_KEY oder FMP_API_KEY (alle als GitHub Secrets).
+backtest:
+  # Stunden- und Minutenkerzen von OANDA sind für die persönliche Nutzung gedacht. Lokal (python main.py,
+  # python live.py) stehen sie immer zur Verfügung; auf die öffentliche GitHub-Pages-Seite kommen sie nur mit true.
+  intraday_veroeffentlichen: false
+  # Backtest-Katalog: verbreitete Werte außerhalb der Watchlist (DAX, US-Schwergewichte, große ETFs, Währungen,
+  # Rohstoffe, Indizes), jede Woche mit vorberechnet, damit man sie auch auf GitHub Pages testen kann. Ohne Eintrag
+  # gilt die Standardliste aus src/backtest.py; eigene Liste z. B.:
+  #   katalog:
+  #     - { symbol: "OR.PA", name: "L'Oréal", typ: aktie }
+  # katalog: false schaltet ihn ab. Mit python live.py lässt sich zusätzlich jeder Wert aus der Suche testen.

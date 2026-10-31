@@ -1,0 +1,458 @@
+{# Die Analyse eines Werts. Wird im Panel der Übersicht angezeigt. #}
+{% from "_akku.html.j2" import akku, stern, erwartung_feld %}
+{% macro analyse(a, charts, quartalstabelle, einordnung, vorher, nachher) %}
+{% set w = a.waehrung or '' %}
+{% set sl = slug(a.symbol) %}
+<article class="analyse" id="analyse-{{ sl }}" data-slug="{{ sl }}" aria-labelledby="titel-{{ sl }}" hidden>
+<div class="panel-leiste">
+  <div class="panel-links">
+    <button type="button" class="knopf schliessen-knopf" data-aktion="schliessen"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Schließen</button>
+    <button type="button" class="knopf entfernen-knopf" data-entfernen="{{ a.symbol }}" data-name="{{ a.name }}" hidden><span class="nur-gross-text">Von der Watchlist </span>entfernen</button>
+  </div>
+  <nav aria-label="Weitere Werte">
+    {% if vorher %}<a href="#{{ slug(vorher.symbol) }}" class="knopf-text">Vorheriges: {{ vorher.name }}</a>{% endif %}
+    {% if nachher %}<a href="#{{ slug(nachher.symbol) }}" class="knopf-text">Nächstes: {{ nachher.name }}</a>{% endif %}
+  </nav>
+</div>
+<div class="panel-innen">
+<header class="firma">
+  <h1 id="titel-{{ sl }}">{{ a.name }}</h1>
+  <p class="firma-meta">{{ a.symbol }}{% if a.profil and a.profil.branche %}, {{ a.profil.branche }}{% endif %}{% if a.profil and a.profil.land %}, {{ a.profil.land }}{% endif %}{% if a.boersenwert_eur %}, Market Cap {{ a.boersenwert_eur | gross('€') }}{% endif %}</p>
+  {% if a.links %}<p class="absprung"><span>Öffnen in</span> {% for l in a.links if l.url %}<a href="{{ l.url }}" target="_blank" rel="noopener noreferrer" title="{{ l.zweck }}{% if l.art == 'suche' %} (erste Fundstelle über die Suche){% endif %}">{{ l.name }}</a>{% if not loop.last %}<i aria-hidden="true">, </i>{% endif %}{% endfor %}</p>{% endif %}
+  <div class="kurszeile">
+    <span class="kurs"><span data-live="kurs">{{ a.kurs | zahl(a.dezimalen or 2) }}</span><small>{{ w }}</small></span>
+    <span class="veraenderung" data-zeitraum="1T" data-live-sichtbar hidden><b data-live="heute">–</b><span>1T</span></span>
+    <span class="veraenderung" data-zeitraum="1W"><b class="{{ a.rendite_1w | vk }}">{{ a.rendite_1w | pct }}</b><span>1W</span></span>
+    <span class="veraenderung" data-zeitraum="YTD"><b class="{{ a.rendite_ytd | vk }}">{{ a.rendite_ytd | pct(nachkomma=0) }}</b><span>YTD</span></span>
+    <span class="veraenderung" data-zeitraum="12M"><b class="{{ a.rendite_1j | vk }}">{{ a.rendite_1j | pct(nachkomma=0) }}</b><span>12M</span></span>
+  </div>
+  <p class="kurs-stand" data-live="zeit">Schlusskurs vom {{ a.kurs_datum | datum }}</p>
+  <p class="firma-aktionen"><button type="button" class="knopf" data-seite-oeffnen="alarme" data-slug="{{ sl }}"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M6.2 16.5V11a5.8 5.8 0 0 1 11.6 0v5.5l1.7 2H4.5z"/><path d="M10 20.8a2.2 2.2 0 0 0 4 0"/></svg>Alarm setzen</button><button type="button" class="knopf" data-seite-oeffnen="journal" data-slug="{{ sl }}"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M6 3.8h11.2a1.6 1.6 0 0 1 1.6 1.6v14.8H7.6A1.6 1.6 0 0 1 6 18.6z"/><path d="M9.5 8h5.5M9.5 11h4"/></svg>Ins Journal</button></p>
+  {% if a.naechste_zahlen %}
+  <p class="termin-band">Nächste Earnings am {{ a.naechste_zahlen | datum('lang') }}{% if a.zahlen_bald %}, in {{ (a.naechste_zahlen - stand).days }} Tagen{% endif %}</p>
+  {% if a.erwartung %}<p class="erwartung-zeile">{{ erwartung_feld(a.erwartung, w) }}</p>{% endif %}
+  {% endif %}
+</header>
+
+<section class="abschnitt" data-live-sichtbar hidden>
+  <div class="abschnitt-kopf">
+    <h2>Intraday</h2>
+    <p class="legende"><span><i class="key-linie" style="--farbe: var(--reihe-1)"></i>Kursverlauf des Handelstags</span><span><i class="key-ref"></i>Vortagesschluss</span></p>
+  </div>
+  <p class="erklaerung">Kursverlauf des laufenden Handelstags in 5-Minuten-Schritten. Die waagerechte Linie markiert den Schlusskurs des Vortags: Liegt der Kurs darüber, notiert die Aktie heute im Plus. Kurse über Yahoo Finance sind je nach Börse bis zu 15 Minuten verzögert, US-Werte über Finnhub kommen in Echtzeit, Handel für Handel.</p>
+  <div class="chart flach" data-chart="heute"></div>
+</section>
+
+{% if a.bewertung %}
+{% set aw = auswahl[a.typ] %}
+<section class="abschnitt">
+  <div class="abschnitt-kopf">
+    <h2>Signale</h2>
+    <p class="klein"><span data-live="punkte">{{ a.bewertung.punkte }}</span> von <span data-live="max">{{ a.bewertung.max_punkte }}</span> erfüllt<span class="treffer-marke" data-live="treffer"{% if not a.bewertung.treffer %} hidden{% endif %}>Treffer</span>
+      <button type="button" class="knopf-text" data-kriterien-oeffnen="{{ a.typ }}">Screener anpassen</button></p>
+  </div>
+  {% if a.typ == 'forex' %}
+  <p class="erklaerung">Zehn Faktoren, mit denen Banken Währungen systematisch bewerten. <b>Carry</b> ist der Zinsvorsprung der Basiswährung, <b>Carry-to-Risk</b> setzt ihn ins Verhältnis zur Schwankung, denn ein kleiner Vorsprung in einer schwankungsreichen Währung ist wenig wert. <b>Zinstrend</b> zeigt, ob die Notenbanken den Vorsprung zuletzt ausgebaut haben, <b>Realzins-Vorsprung</b> zieht die Inflation ab: Investoren suchen reale, nicht nominale Rendite. <b>Momentum</b>, <b>Kurzfrist-Momentum</b> und <b>Trend</b> nutzen die Neigung von Wechselkursen, Trends fortzusetzen. <b>Value</b> misst den Abstand zum 5-Jahres-Mittel als Ersatz für die Kaufkraftparität. <b>Vol-Regime</b> und <b>Volatilitätsniveau</b> zeigen, ob der Markt ruhig ist; Carry-Positionen verlieren vor allem in plötzlichen Stressphasen. Welche Faktoren zählen, legst du im Screener fest.</p>
+  {% elif a.typ == 'rohstoff' %}
+  <p class="erklaerung">Zehn Faktoren aus der systematischen Rohstoffanalyse. <b>Momentum</b>, <b>Kurzfrist-Momentum</b> und <b>Trend</b> sind bei Rohstoff-Futures die am besten belegten Renditequellen. <b>Terminstruktur</b> misst die Roll-Rendite zwischen den nächsten Kontrakten: Liegt die Kurve in Backwardation, verdient der Halter beim Rollen, in Contango verliert er. <b>Positionierung</b> wertet den wöchentlichen CFTC-Bericht aus; sind die Fonds so stark long wie selten, fehlen neue Käufer. <b>Saisonalität</b> erfasst wiederkehrende Muster wie Heizsaison oder Ernte. <b>Pullback</b> und <b>Value</b> suchen günstige Einstiege, <b>Vol-Regime</b> und <b>Volatilitätsniveau</b> begrenzen das Risiko. Hinweis: Die Kurse sind Front-Month-Futures.</p>
+  {% elif a.typ == 'index' %}
+  <p class="erklaerung">Zehn Signale, mit denen Aktienstrategen und Derivate-Desks die Aktienquote steuern und die zugleich die Basis für Knock-outs, Optionsscheine und Futures sind. <b>Trend</b>, <b>Momentum</b> und <b>Kurzfrist-Momentum</b> zeigen die Richtung, <b>Pullback</b> eine Korrektur vom Hoch. <b>VIX</b> und <b>VIX-Kurve</b> lesen die Angst aus dem Optionsmarkt ab: Liegt der kurzfristige VIX über dem 3-Monats-VIX, ist Stress akut. <b>Kreditrisiko</b> beobachtet die Aufschläge für Hochzinsanleihen, die oft vor Aktien drehen. <b>Saisonalität</b> erfasst den Kalender, <b>Knock-out-Risiko</b> zählt, wie oft ein Hebel-5-Produkt im letzten Jahr ausgestoppt worden wäre. Die Marktindikatoren (VIX, Kredit) gelten für alle Indizes gleich.</p>
+  {% else %}
+  <p class="erklaerung">Zehn Signale nach den Faktorgruppen, die MSCI, J.P. Morgan und Goldman Sachs für ihre Aktienmodelle nutzen. <b>Size</b> (Large Cap), <b>Value</b> (Valuation Gap, FCF-Rendite), <b>Quality</b> (Profitabilität, Solide Bilanz), <b>Growth</b> (Earnings Momentum, Gewinnrevisionen), <b>Momentum</b> (Preis-Momentum, Pullback) und <b>Volatilität</b> (Niedrige Volatilität). Gewinnrevisionen zeigen, ob Analysten ihre Schätzungen anheben, ein Signal, das Kursen oft vorausläuft. Der Balken zeigt, wie deutlich ein Wert die Schwelle erreicht; ab halber Füllung gilt das Signal als erfüllt. Welche zählen und welche Pflicht sind, legst du im Screener fest. Die Signale sind ein Filter für die eigene Recherche, keine Kaufempfehlung.</p>
+  {% endif %}
+  <div class="kriterien">
+  {% for name, p in a.katalog.items() %}
+    <div class="kriterium{% if name in aw.pflicht %} pflicht{% endif %}" data-kriterium="{{ name }}"{% if name not in aw.zaehlt and name not in aw.pflicht %} hidden{% endif %}>
+      <p class="krit-familie">{{ p.familie }}<span class="pflicht-marke">Pflicht</span></p>
+      <h3 class="krit-name">{{ name }}{{ stern(definitionen[a.typ][name]) }}</h3>
+      <p class="krit-erkl">{{ p.erklaerung }}</p>
+      <div class="krit-stand">
+        {{ akku(name, p) }}
+        <span class="status {{ 'ja' if p.erfuellt else 'nein' }}" data-krit-status="{{ name }}">{{ 'erfüllt' if p.erfuellt else ('Daten fehlen' if p.erfuellt is none else 'nicht erfüllt') }}</span>
+      </div>
+      <p class="krit-text" data-krit-text="{{ name }}">{{ p.begruendung }}</p>
+      <button type="button" class="knopf-text rechenweg-knopf" data-rechenweg="{{ name }}" aria-expanded="false">Rechenweg</button>
+    </div>
+  {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="abschnitt">
+  <div class="abschnitt-kopf">
+    <h2>Kursverlauf 12M</h2>
+    <p class="legende">
+      <span><i class="key-linie" style="--farbe: var(--reihe-1)"></i>Kurs</span>
+      <span><i class="key-linie" style="--farbe: var(--reihe-2)"></i>200-Tage-Linie</span>
+      {% if charts.kurs and charts.kurs.band %}<span><i class="key-band"></i>Spanne der Analysten-Kursziele, Strich = Durchschnitt</span>{% endif %}
+    </p>
+  </div>
+  <p class="erklaerung">Schlusskurse der letzten zwölf Monate mit der 200-Tage-Linie, dem gleitenden Durchschnitt der letzten 200 Handelstage. Notiert der Kurs darunter, gilt der langfristige Trend als angeschlagen; ein nachhaltiger Ausbruch darüber wird oft als Trendwende gelesen. Der RSI (Relative-Stärke-Index) misst das Verhältnis von Auf- zu Abwärtstagen: Werte unter 30 gelten als überverkauft, über 70 als überkauft.{% if charts.kurs and charts.kurs.band %} Der Balken rechts zeigt die Spanne der Analysten-Kursziele.{% endif %}</p>
+  <div class="chart" data-chart="kurs"></div>
+  <dl class="kennzahlen">
+    <div><dt>52-Wochen-Hoch</dt><dd>{{ a.hoch_52w | zahl(a.dezimalen or 2) }}</dd></div>
+    <div><dt>52-Wochen-Tief</dt><dd>{{ a.tief_52w | zahl(a.dezimalen or 2) }}</dd></div>
+    <div><dt>Abstand zum Hoch</dt><dd data-live="unter-hoch">{{ a.abstand_hoch | pct(vorzeichen=False, nachkomma=0) }}</dd></div>
+    <div><dt>Lage in der Jahresspanne</dt><dd data-live="lage">{{ a.position_spanne | pct(vorzeichen=False, nachkomma=0) }}</dd></div>
+    <div><dt>200-Tage-Linie</dt><dd>{{ a.gd200 | zahl(a.dezimalen or 2) }} <span class="klein {{ a.abstand_gd200 | vk }}">{{ a.abstand_gd200 | pct(nachkomma=0) }}</span></dd></div>
+    <div><dt>RSI (14 Tage)</dt><dd>{{ a.rsi14 | zahl(0) }}</dd></div>
+  </dl>
+</section>
+
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>Interaktiver Chart</h2><p class="klein">TradingView, {{ a.tradingview }}</p></div>
+  <p class="erklaerung">Der Chart von TradingView bietet alle Zeiträume von Minuten bis Jahrzehnten, über hundert Indikatoren und
+  Zeichenwerkzeuge für Trendlinien, Unterstützungen und Widerstände. Er wird erst auf Klick geladen, weil dabei Daten von
+  TradingView abgerufen und deine IP-Adresse an TradingView übertragen wird. Die Entscheidung gilt danach für alle Werte.</p>
+  <div class="tv-rahmen" data-tv="{{ a.tradingview }}">
+    <button type="button" class="knopf tv-laden">Chart von TradingView laden</button>
+  </div>
+</section>
+
+{% if a.technik %}
+{% set tk = a.technik %}
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>Technische Analyse</h2><p class="klein">Tageschart, Stand Wochenbericht</p></div>
+  <p class="erklaerung">Zusammenfassung nach dem Muster von Investing.com: Zwölf gleitende Durchschnitte (einfach und exponentiell über
+  5 bis 200 Tage) stimmen mit Kaufen, wenn der Kurs darüber liegt, sonst mit Verkaufen. Sieben Oszillatoren wie RSI, Stochastik,
+  MACD und CCI zeigen überkaufte oder überverkaufte Lagen und Schwung. Das Ergebnis beschreibt die kurzfristige Lage des Charts,
+  nicht den Wert des Unternehmens; für die Hebelplanung ist es ein Baustein neben den Screening-Signalen.</p>
+  <div class="technik">
+    <div class="technik-tacho">
+      {{ technik_svg(tk) | safe }}
+      <p class="technik-fazit {{ 'plus' if tk.score >= 0.1 else 'minus' if tk.score <= -0.1 else '' }}">{{ tk.fazit }}</p>
+      <p class="klein">{{ tk.kaufen }} Kaufen, {{ tk.neutral }} Neutral, {{ tk.verkaufen }} Verkaufen</p>
+    </div>
+    {% for titel, liste, f in [('Gleitende Durchschnitte', tk.ma, tk.ma_fazit), ('Oszillatoren', tk.oszillatoren, tk.osz_fazit)] %}
+    <div class="technik-liste">
+      <h3>{{ titel }}<span class="{{ 'plus' if f.score >= 0.1 else 'minus' if f.score <= -0.1 else 'leise' }}">{{ f.fazit }}</span></h3>
+      <details><summary>{{ f.kaufen }} Kaufen, {{ f.neutral }} Neutral, {{ f.verkaufen }} Verkaufen</summary>
+        <dl class="liste">{% for x in liste %}<div><dt>{{ x.name }}</dt><dd><span class="leise">{{ x.wert | zahl(2) }}</span> <span class="{{ 'plus' if x.signal == 'kaufen' else 'minus' if x.signal == 'verkaufen' else 'leise' }}">{{ x.signal | capitalize }}</span></dd></div>{% endfor %}</dl>
+      </details>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if a.typ == 'aktie' and a.snowflake and a.snowflake.gesamt is not none %}
+{% set sf_erkl = {'Bewertung': 'Forward-KGV gegenüber eigenem Median, Upside, PEG', 'Zukunft': 'Erwartetes Gewinn- und Umsatzwachstum',
+                  'Vergangenheit': 'Wachstum zuletzt und über mehrere Jahre, Nettomarge', 'Gesundheit': 'Verschuldung, Cash-Polster, freier Cashflow',
+                  'Dividende': 'Dividendenrendite'} %}
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>Snowflake</h2><p class="klein">Gesamt {{ a.snowflake.gesamt | round | int }} von 100</p></div>
+  <p class="erklaerung">Das Unternehmen auf einen Blick, nach dem Prinzip von Simply Wall St: fünf Achsen von 0 (schwach) bis 100 (stark).
+  Je größer und gleichmäßiger die Fläche, desto runder das Gesamtbild; die Farbe reicht von Rot (schwach) bis Grün (stark).
+  Eine kleine Achse ist kein Ausschlusskriterium: Wachstumswerte zahlen oft keine Dividende, günstige Werte wachsen oft langsamer.</p>
+  <div class="sf-layout">
+    {{ snowflake_svg(a.snowflake) | safe }}
+    <dl class="liste sf-liste">
+      {% for n, v in a.snowflake.achsen.items() %}<div><dt>{{ n }}<span class="klein">{{ sf_erkl[n] }}</span></dt>
+        <dd>{% if v is not none %}<span class="akku{% if v < 10 %} kritisch{% endif %}" style="--s: {{ '%.3f' % (v / 100) }}" aria-hidden="true"><i></i></span> {{ v | round | int }}{% else %}–{% endif %}</dd></div>{% endfor %}
+    </dl>
+  </div>
+</section>
+{% endif %}
+
+{% if a.typ == 'aktie' %}
+<div class="zweispaltig">
+  <section class="abschnitt">
+    <div class="abschnitt-kopf"><h2>Quartalszahlen</h2><p class="klein">Umsatz je Quartal in {{ w }}</p></div>
+  <p class="erklaerung">Umsatz der letzten Quartale und das Wachstum gegenüber dem Vorjahresquartal (YoY). Der Vergleich mit demselben Quartal des Vorjahres bereinigt saisonale Effekte wie ein starkes Jahresendgeschäft. Die Nettomarge zeigt, welcher Anteil des Umsatzes als Gewinn übrig bleibt; der freie Cashflow, wie viel Geld nach Investitionen tatsächlich erwirtschaftet wurde und für Dividenden, Aktienrückkäufe oder Schuldenabbau zur Verfügung steht.</p>
+    {% if charts.umsatz %}<div class="chart flach" data-chart="umsatz"></div>{% endif %}
+    {% if quartalstabelle %}
+    <div class="tabelle-rahmen kompakt">
+    <table>
+      <thead><tr><th>Quartal bis</th><th>Umsatz</th><th>ggü. Vorjahr</th><th>Nettogewinn</th><th class="nur-gross">Marge</th><th class="nur-breit">Freier Cashflow</th></tr></thead>
+      <tbody>
+      {% for q in quartalstabelle %}
+      <tr><td title="{{ q.datum | datum }}">{{ q.datum | datum('monat') }}</td><td>{{ q.umsatz | gross }}</td><td class="{{ q.wachstum | vk }}">{{ q.wachstum | pct }}</td>
+        <td>{{ q.nettogewinn | gross }}</td><td class="nur-gross">{{ q.marge | pct(vorzeichen=False) }}</td><td class="nur-breit">{{ q.fcf | gross }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    <p class="klein">Wachstum ggü. Vorjahr nur, wenn Yahoo das Vorjahresquartal liefert. Letztes gemeldetes Quartal laut Yahoo: Umsatz {{ a.umsatzwachstum | pct }}, Gewinn {{ a.gewinnwachstum | pct }}.</p>
+    {% else %}<p class="klein">Keine Quartalszahlen verfügbar.</p>{% endif %}
+  </section>
+
+  <section class="abschnitt">
+    <div class="abschnitt-kopf"><h2>Bewertung</h2><p class="klein">Forward-KGV (Multiple) je Quartalsende</p></div>
+  <p class="erklaerung">Das Forward-KGV teilt den Kurs durch den erwarteten Gewinn je Aktie der nächsten zwölf Monate und sagt, wie viele Jahresgewinne der Markt heute bezahlt. Aussagekräftig ist vor allem der Vergleich mit dem eigenen 5-Jahres-Median: Liegt das KGV deutlich darunter, ist die Aktie gemessen an ihrer Historie günstig, oder der Markt traut dem Wachstum weniger zu. EV/EBITDA bezieht die Verschuldung mit ein, die PEG-Ratio setzt das KGV ins Verhältnis zum erwarteten Gewinnwachstum (unter 1 gilt als günstig).</p>
+    {% if charts.kgv %}<div class="chart flach" data-chart="kgv"></div>{% else %}<p class="klein">Keine KGV-Historie verfügbar.</p>{% endif %}
+    <dl class="liste">
+      <div><dt>KGV, letzte 12 Monate</dt><dd>{{ a.kgv | zahl(1) }}</dd></div>
+      <div><dt>Forward-KGV, nächste 12 Monate</dt><dd data-live="kgv">{{ a.forward_kgv | zahl(1) }}</dd></div>
+      <div><dt>Median Forward-KGV, 5 Jahre</dt><dd>{{ a.forward_kgv_median_5j | zahl(1) }}</dd></div>
+      <div><dt>PEG-Ratio</dt><dd>{{ a.multiples.peg | zahl(2) }}</dd></div>
+      <div><dt>EV / EBITDA</dt><dd>{{ a.multiples.ev_ebitda | zahl(1) }}</dd></div>
+      <div><dt>Kurs-Umsatz-Verhältnis</dt><dd>{{ a.multiples.kuv | zahl(1) }}</dd></div>
+      <div><dt>Kurs-Buchwert-Verhältnis</dt><dd>{{ a.multiples.kbv | zahl(1) }}</dd></div>
+      <div><dt>Dividendenrendite</dt><dd>{{ a.multiples.dividendenrendite | pct(vorzeichen=False) }}</dd></div>
+    </dl>
+  </section>
+</div>
+
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>Analysten-Konsens</h2>
+    <p class="klein">{{ a.analysten_anzahl or '–' }} Analysten, Tenor: {{ a.empfehlung | empfehlung }}</p></div>
+  <p class="erklaerung">Durchschnitt der Kursziele, Ratings und Schätzungen aller Analysten, die den Wert beobachten. Wichtiger als das absolute Kursziel sind oft die Revisionen: Werden die Gewinnschätzungen angehoben, folgt der Kurs häufig mit Verzögerung (Earnings-Revision-Effekt). Die Earnings Surprises zeigen, ob das Unternehmen die Erwartungen der letzten Quartale übertroffen oder verfehlt hat; wer regelmäßig übertrifft, gilt als konservativ planend.</p>
+  <div class="zweispaltig">
+    <div>
+      <h3 class="unterueberschrift">Kursziele</h3>
+      <dl class="liste">
+        <div><dt>Durchschnitt</dt><dd>{{ a.kursziel_mittel | zahl }} {{ w }} <span class="klein {{ a.kursziel_abstand | vk }}" data-live="kursziel">{{ a.kursziel_abstand | pct(nachkomma=0) }}</span></dd></div>
+        <div><dt>Niedrigstes</dt><dd>{{ a.kursziel_tief | zahl }} {{ w }}</dd></div>
+        <div><dt>Höchstes</dt><dd>{{ a.kursziel_hoch | zahl }} {{ w }}</dd></div>
+      </dl>
+      {% set v = a.analysten_verteilung %}
+      {% if v %}
+      {% set summe = v.strongBuy + v.buy + v.hold + v.sell + v.strongSell %}
+      {% if summe %}
+      <h3 class="unterueberschrift">Ratings diesen Monat</h3>
+      <div class="verteilung" role="img" aria-label="Einstufungen: {{ v.strongBuy }} starker Kauf, {{ v.buy }} Kauf, {{ v.hold }} Halten, {{ v.sell }} Verkauf, {{ v.strongSell }} starker Verkauf">
+        {% for key, farbe in [('strongBuy','--v-sk'),('buy','--v-k'),('hold','--v-h'),('sell','--v-v'),('strongSell','--v-sv')] %}{% if v[key] %}<span style="flex: {{ v[key] }}; background: var({{ farbe }})"></span>{% endif %}{% endfor %}
+      </div>
+      <p class="verteilung-legende">
+        <span><i style="--farbe: var(--v-sk)"></i>Starker Kauf <b>{{ v.strongBuy }}</b></span>
+        <span><i style="--farbe: var(--v-k)"></i>Kauf <b>{{ v.buy }}</b></span>
+        <span><i style="--farbe: var(--v-h)"></i>Halten <b>{{ v.hold }}</b></span>
+        <span><i style="--farbe: var(--v-v)"></i>Verkauf <b>{{ v.sell }}</b></span>
+        <span><i style="--farbe: var(--v-sv)"></i>Starker Verkauf <b>{{ v.strongSell }}</b></span>
+      </p>
+      {% endif %}{% endif %}
+    </div>
+    <div>
+      <h3 class="unterueberschrift">Earnings Surprises</h3>
+      {% if a.eps_historie %}
+      <div class="tabelle-rahmen"><table>
+        <thead><tr><th>Quartal bis</th><th>Erwartet</th><th>Tatsächlich</th><th>Abweichung</th></tr></thead>
+        <tbody>{% for e in a.eps_historie | reverse %}
+          <tr><td title="{{ e.quartal | datum }}">{{ e.quartal | datum('monat') }}</td><td>{{ e.schaetzung | zahl }}</td><td>{{ e.ist | zahl }}</td><td class="{{ e.ueberraschung | vk }}">{{ e.ueberraschung | pct }}</td></tr>
+        {% endfor %}</tbody>
+      </table></div>
+      <p class="klein">Gewinn je Aktie in {{ w }}.</p>
+      {% else %}<p class="klein">Keine Daten verfügbar.</p>{% endif %}
+    </div>
+  </div>
+
+  {% if a.schaetzungen %}
+  <h3 class="unterueberschrift">Konsensschätzungen EPS und Umsatz</h3>
+  <div class="tabelle-rahmen kompakt"><table>
+    <thead><tr><th>Zeitraum</th><th>Gewinn je Aktie</th><th class="nur-breit">Spanne</th><th>ggü. Vorjahr</th>
+      <th class="nur-breit">Vor 90 Tagen</th><th class="nur-breit">Umsatz</th><th class="nur-breit">ggü. Vorjahr</th><th>Revisionen 30 Tage</th></tr></thead>
+    <tbody>{% for s in a.schaetzungen %}
+      <tr><td>{{ s.periode }}</td><td>{{ s.eps_mittel | zahl }}</td><td class="nur-breit leise">{{ s.eps_tief | zahl }} – {{ s.eps_hoch | zahl }}</td>
+        <td class="{{ s.eps_wachstum | vk }}">{{ s.eps_wachstum | pct(nachkomma=0) }}</td>
+        <td class="nur-breit leise">{{ s.eps_vor_90_tagen | zahl }}</td>
+        <td class="nur-breit">{{ s.umsatz_mittel | gross }}</td><td class="nur-breit {{ s.umsatz_wachstum | vk }}">{{ s.umsatz_wachstum | pct(nachkomma=0) }}</td>
+        <td class="umbruch">{% if s.hoch_30 is not none or s.runter_30 is not none %}<span class="plus">{{ (s.hoch_30 or 0) | int }} hoch</span>, <span class="minus">{{ (s.runter_30 or 0) | int }} runter</span>{% else %}–{% endif %}</td></tr>
+    {% endfor %}</tbody>
+  </table></div>
+  <p class="klein">„Vor 90 Tagen“ zeigt die damalige Durchschnittsschätzung. Steigt sie, werden die Analysten zuversichtlicher.</p>
+  {% endif %}
+</section>
+
+{% if a.jahreswerte %}
+{% set jw = a.jahreswerte %}{% set fw = a.finanzwaehrung or w %}
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>Finanzen im Zeitverlauf</h2><p class="klein">{{ jw | length }} Geschäftsjahre in {{ fw }}</p></div>
+  <p class="erklaerung">Die Entwicklung über viele Jahre, wie in den Terminals von TIKR oder Koyfin. Entscheidend ist weniger ein
+  einzelnes Jahr als die Richtung: steigende Margen bei wachsendem Umsatz deuten auf Skaleneffekte und Preissetzungsmacht, ein
+  freier Cashflow dauerhaft über dem Nettogewinn auf hohe Gewinnqualität. Werte in der Berichtswährung des Unternehmens.</p>
+  <div class="tabelle-rahmen terminal"><table>
+    <thead><tr><th>Geschäftsjahr</th>{% for j in jw %}<th>{{ j.jahr }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      <tr><td>Umsatz</td>{% for j in jw %}<td>{{ j.umsatz | gross }}</td>{% endfor %}</tr>
+      <tr class="unter-zeile"><td>Wachstum</td>{% for j in jw %}<td class="{{ j.umsatz_wachstum | vk }}">{{ j.umsatz_wachstum | pct(nachkomma=0) }}</td>{% endfor %}</tr>
+      <tr><td>Bruttomarge</td>{% for j in jw %}<td>{{ j.bruttomarge | pct(vorzeichen=False, nachkomma=0) }}</td>{% endfor %}</tr>
+      <tr><td>EBIT</td>{% for j in jw %}<td>{{ j.ebit | gross }}</td>{% endfor %}</tr>
+      <tr class="unter-zeile"><td>EBIT-Marge</td>{% for j in jw %}<td>{{ j.ebit_marge | pct(vorzeichen=False, nachkomma=0) }}</td>{% endfor %}</tr>
+      <tr><td>Nettogewinn</td>{% for j in jw %}<td>{{ j.nettogewinn | gross }}</td>{% endfor %}</tr>
+      <tr class="unter-zeile"><td>Nettomarge</td>{% for j in jw %}<td>{{ j.netto_marge | pct(vorzeichen=False, nachkomma=0) }}</td>{% endfor %}</tr>
+      <tr><td>Gewinn je Aktie</td>{% for j in jw %}<td>{{ j.eps | zahl }}</td>{% endfor %}</tr>
+      <tr><td>Freier Cashflow</td>{% for j in jw %}<td>{{ j.fcf | gross }}</td>{% endfor %}</tr>
+      <tr class="unter-zeile"><td>FCF-Marge</td>{% for j in jw %}<td>{{ j.fcf_marge | pct(vorzeichen=False, nachkomma=0) }}</td>{% endfor %}</tr>
+    </tbody>
+  </table></div>
+</section>
+{% endif %}
+
+{% if a.multiples_historie %}
+{% set mh = a.multiples_historie %}
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>Bewertung im Zeitverlauf</h2><p class="klein">Zum Kurs am Ende des Geschäftsjahres</p></div>
+  <p class="erklaerung">Historische Multiples zeigen, ob der Markt heute mehr oder weniger für das Unternehmen bezahlt als früher.
+  Das <b>KGV</b> setzt den Kurs ins Verhältnis zum Gewinn je Aktie, das <b>KUV</b> den Börsenwert zum Umsatz. <b>EV/EBITDA</b>
+  bezieht die Nettoverschuldung mit ein und eignet sich deshalb für den Vergleich von Unternehmen mit unterschiedlicher
+  Finanzierung. Die <b>FCF-Rendite</b> ist der freie Cashflow im Verhältnis zum Börsenwert, also die „Verzinsung“ aus Sicht des Eigentümers.</p>
+  {% if charts.multiples %}
+  <p class="legende"><span><i class="key-linie" style="--farbe: var(--reihe-1)"></i>KGV</span><span><i class="key-linie" style="--farbe: var(--reihe-2)"></i>EV/EBITDA</span></p>
+  <div class="chart flach" data-chart="multiples"></div>
+  {% endif %}
+  <div class="tabelle-rahmen terminal"><table>
+    <thead><tr><th>Geschäftsjahr</th>{% for m in mh %}<th>{{ m.jahr }}</th>{% endfor %}<th>Heute</th></tr></thead>
+    <tbody>
+      <tr><td>KGV</td>{% for m in mh %}<td>{{ m.kgv | zahl(1) }}</td>{% endfor %}<td><b>{{ a.kgv | zahl(1) }}</b></td></tr>
+      <tr><td>EV/EBITDA</td>{% for m in mh %}<td>{{ m.ev_ebitda | zahl(1) }}</td>{% endfor %}<td><b>{{ a.multiples.ev_ebitda | zahl(1) if a.multiples else '–' }}</b></td></tr>
+      <tr><td>KUV</td>{% for m in mh %}<td>{{ m.kuv | zahl(1) }}</td>{% endfor %}<td><b>{{ a.multiples.kuv | zahl(1) if a.multiples else '–' }}</b></td></tr>
+      <tr><td>FCF-Rendite</td>{% for m in mh %}<td>{{ m.fcf_rendite | pct(vorzeichen=False) }}</td>{% endfor %}<td><b>{{ (a.bilanz.freier_cashflow / a.boersenwert) | pct(vorzeichen=False) if a.bilanz and a.bilanz.freier_cashflow and a.boersenwert else '–' }}</b></td></tr>
+    </tbody>
+  </table></div>
+</section>
+{% endif %}
+
+{% if a.peers_tabelle and a.peers_tabelle.zeilen | length > 1 %}
+{% set pt = a.peers_tabelle %}
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>Peer-Vergleich</h2><p class="klein">{{ pt.gruppe or 'Gleiche Branche' }}, Werte auf deiner Watchlist</p></div>
+  <p class="erklaerung">Ein Multiple sagt erst im Vergleich etwas aus. Koyfin und TIKR stellen deshalb jedes Unternehmen seinen
+  Wettbewerbern gegenüber: Ist das Forward-KGV niedriger als bei Peers mit ähnlichem Wachstum und ähnlichen Margen, spricht das
+  für eine relative Unterbewertung; ist es höher, sollte die Qualität (Marge, Rendite auf das Eigenkapital) das rechtfertigen.</p>
+  <div class="tabelle-rahmen kompakt"><table class="peers">
+    <thead><tr><th>Unternehmen</th><th>Market Cap</th><th>Fwd-KGV</th><th class="nur-gross">EV/EBITDA</th><th>Umsatz YoY</th>
+      <th class="nur-gross">Bruttomarge</th><th class="nur-breit">Op. Marge</th><th class="nur-breit">FCF-Rendite</th><th class="nur-breit">ROE</th><th class="nur-gross">Drawdown</th></tr></thead>
+    <tbody>
+    {% for r in pt.zeilen %}
+      <tr{% if r.selbst %} class="selbst"{% endif %}>
+        <td>{% if r.selbst %}<b>{{ r.name }}</b>{% else %}<a href="#{{ slug(r.symbol) }}">{{ r.name }}</a>{% endif %}</td>
+        <td>{{ r.boersenwert_eur | gross('€') }}</td><td>{{ r.forward_kgv | zahl(1) }}</td><td class="nur-gross">{{ r.ev_ebitda | zahl(1) }}</td>
+        <td class="{{ r.umsatzwachstum | vk }}">{{ r.umsatzwachstum | pct(nachkomma=0) }}</td><td class="nur-gross">{{ r.bruttomarge | pct(vorzeichen=False, nachkomma=0) }}</td>
+        <td class="nur-breit">{{ r.operative_marge | pct(vorzeichen=False, nachkomma=0) }}</td><td class="nur-breit">{{ r.fcf_rendite | pct(vorzeichen=False) }}</td>
+        <td class="nur-breit">{{ r.eigenkapitalrendite | pct(vorzeichen=False, nachkomma=0) }}</td><td class="nur-gross">{{ r.abstand_hoch | pct(vorzeichen=False, nachkomma=0) }}</td>
+      </tr>
+    {% endfor %}
+      <tr class="median"><td>Median</td><td>{{ pt.median.boersenwert_eur | gross('€') }}</td><td>{{ pt.median.forward_kgv | zahl(1) }}</td><td class="nur-gross">{{ pt.median.ev_ebitda | zahl(1) }}</td>
+        <td>{{ pt.median.umsatzwachstum | pct(nachkomma=0) }}</td><td class="nur-gross">{{ pt.median.bruttomarge | pct(vorzeichen=False, nachkomma=0) }}</td>
+        <td class="nur-breit">{{ pt.median.operative_marge | pct(vorzeichen=False, nachkomma=0) }}</td><td class="nur-breit">{{ pt.median.fcf_rendite | pct(vorzeichen=False) }}</td>
+        <td class="nur-breit">{{ pt.median.eigenkapitalrendite | pct(vorzeichen=False, nachkomma=0) }}</td><td class="nur-gross">{{ pt.median.abstand_hoch | pct(vorzeichen=False, nachkomma=0) }}</td></tr>
+    </tbody>
+  </table></div>
+  {% if pt.weitere %}<p class="klein">Weitere Wettbewerber laut Eulerpool: {% for q in pt.weitere %}{% if q.isin %}<a href="https://eulerpool.com/stock/{{ q.name | replace(' ', '-') }}-Stock-{{ q.isin }}" target="_blank" rel="noopener noreferrer">{{ q.name }}</a>{% else %}{{ q.name }}{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}. Über die Suche lassen sie sich zur Watchlist hinzufügen.</p>{% endif %}
+</section>
+{% elif a.peers_tabelle and a.peers_tabelle.weitere %}
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>Peer-Vergleich</h2></div>
+  <p class="erklaerung">Auf deiner Watchlist steht noch kein Wert derselben Branche. Wettbewerber laut Eulerpool:
+  {% for q in a.peers_tabelle.weitere %}{{ q.name }}{% if not loop.last %}, {% endif %}{% endfor %}. Über die Suche lassen sie sich hinzufügen, dann erscheint hier der Vergleich.</p>
+</section>
+{% endif %}
+
+<div class="zweispaltig">
+  <section class="abschnitt">
+    <div class="abschnitt-kopf"><h2>Profitabilität und Bilanz</h2></div>
+  <p class="erklaerung">Die Margen zeigen die Ertragskraft auf drei Stufen: nach Herstellkosten (Bruttomarge), nach allen operativen Kosten (operative Marge, EBIT) und nach Zinsen und Steuern (Nettomarge). Die Eigenkapitalrendite (ROE) misst, wie gut das Kapital der Aktionäre verzinst wird. Verschuldungsgrad, liquide Mittel und Finanzschulden zeigen, wie robust die Bilanz in einem Abschwung oder bei steigenden Zinsen ist.</p>
+    <dl class="liste">
+      <div><dt>Bruttomarge</dt><dd>{{ a.bilanz.bruttomarge | pct(vorzeichen=False) }}</dd></div>
+      <div><dt>Operative Marge</dt><dd>{{ a.bilanz.operative_marge | pct(vorzeichen=False) }}</dd></div>
+      <div><dt>Nettomarge</dt><dd>{{ a.bilanz.nettomarge | pct(vorzeichen=False) }}</dd></div>
+      <div><dt>Eigenkapitalrendite</dt><dd>{{ a.bilanz.eigenkapitalrendite | pct(vorzeichen=False) }}</dd></div>
+      <div><dt>Verschuldungsgrad (Schulden / Eigenkapital)</dt><dd>{{ a.bilanz.verschuldungsgrad | pct(vorzeichen=False, nachkomma=0) }}</dd></div>
+      <div><dt>Freier Cashflow, 12 Monate</dt><dd>{{ a.bilanz.freier_cashflow | gross(w) }}</dd></div>
+      <div><dt>Liquide Mittel</dt><dd>{{ a.bilanz.liquide_mittel | gross(w) }}</dd></div>
+      <div><dt>Finanzschulden</dt><dd>{{ a.bilanz.schulden | gross(w) }}</dd></div>
+    </dl>
+  </section>
+{% elif a.typ in ['forex', 'rohstoff', 'index'] %}
+<div class="zweispaltig">
+  <section class="abschnitt">
+    <div class="abschnitt-kopf"><h2>Faktoren</h2></div>
+    <p class="erklaerung">Die Rohwerte hinter den Signalen. Das 5-Jahres-Mittel ist der Durchschnittskurs der letzten fünf Jahre, die 1-Monats-Volatilität die auf ein Jahr hochgerechnete Schwankung der letzten 21 Handelstage.{% if a.typ == 'forex' %} Die Leitzinsen stammen aus der Statistik der BIS (Bank für Internationalen Zahlungsausgleich).{% endif %}</p>
+    <dl class="liste">
+      {% if a.typ == 'forex' %}<div><dt>Zinsdifferenz (Carry p. a.)</dt><dd class="{{ a.zinsdifferenz | vk }}">{{ a.zinsdifferenz | pct(nachkomma=2) }}</dd></div>{% endif %}
+      <div><dt>Momentum 12-1 Monate</dt><dd class="{{ a.momentum_12_1 | vk }}">{{ a.momentum_12_1 | pct }}</dd></div>
+      <div><dt>5-Jahres-Mittel</dt><dd>{{ a.mittel_5j | zahl(a.dezimalen or 2) }}</dd></div>
+      <div><dt>Abweichung vom 5-Jahres-Mittel</dt><dd>{{ a.abweichung_mittel_5j | pct }}</dd></div>
+      <div><dt>Abstand zur 200-Tage-Linie</dt><dd class="{{ a.abstand_gd200 | vk }}">{{ a.abstand_gd200 | pct }}</dd></div>
+      <div><dt>Volatilität 1 Monat</dt><dd>{{ a.vol_1m | pct(vorzeichen=False) }}</dd></div>
+      <div><dt>Volatilität, Median 12 Monate</dt><dd>{{ a.vol_median_1j | pct(vorzeichen=False) }}</dd></div>
+    </dl>
+  </section>
+{% else %}
+<div>
+{% endif %}
+
+  <section class="abschnitt">
+    <div class="abschnitt-kopf"><h2>Risiko und Hebel</h2></div>
+  <p class="erklaerung">Die Volatilität ist die auf ein Jahr hochgerechnete Standardabweichung der Tagesrenditen, Beta die Schwankung im Verhältnis zum Gesamtmarkt (über 1 schwankt der Wert stärker als der Markt). Der größte Rückgang (Maximum Drawdown) ist der höchste Verlust von einem Hoch bis zum folgenden Tief. Bei Hebelprodukten vervielfachen sich diese Bewegungen: Mit Hebel 5 wird ein Long-Knock-out bereits bei rund 20 Prozent Kursrückgang ausgelöst, mit Hebel 10 bei rund 10 Prozent.</p>
+    <dl class="liste">
+      <div><dt>Schwankung pro Jahr (Volatilität)</dt><dd>{{ a.volatilitaet | pct(vorzeichen=False, nachkomma=0) }}</dd></div>
+      <div><dt>Typische Tagesbewegung</dt><dd>{{ a.typische_tagesbewegung | pct(vorzeichen=False) }}</dd></div>
+      <div><dt>Größter Rückgang in 12 Monaten</dt><dd>{{ a.max_rueckgang_1j | pct(vorzeichen=False, nachkomma=0) }}</dd></div>
+      {% if a.bilanz %}<div><dt>Beta (Schwankung ggü. Markt)</dt><dd>{{ a.bilanz.beta | zahl }}</dd></div>{% endif %}
+    </dl>
+    <h3 class="unterueberschrift">Was ein Hebel bei diesem Wert bedeutet</h3>
+    <div class="tabelle-rahmen kompakt"><table>
+      <thead><tr><th>Hebel</th><th>Typischer Tag</th><th>Abstand Knock-out</th><th>Knock-out in 2 Wochen</th></tr></thead>
+      <tbody>{% for h in [2, 5, 10] %}
+        <tr><td>{{ h }}-fach</td><td>± {{ (a.typische_tagesbewegung * h) | pct(vorzeichen=False) if a.typische_tagesbewegung is not none else '–' }}</td>
+          <td>{{ (1 / h) | pct(vorzeichen=False, nachkomma=0) }}</td><td>{{ a.knockout[h] | pct(vorzeichen=False, nachkomma=0) }}</td></tr>
+      {% endfor %}</tbody>
+    </table></div>
+    <p class="klein">Letzte Spalte: in wie vielen aller 2-Wochen-Zeiträume der letzten 12 Monate ein Long-Knock-out mit diesem Hebel ausgelöst worden wäre. Vereinfachte Rechnung ohne Finanzierungskosten.</p>
+  </section>
+</div>
+
+{% if a.szenarien %}
+{% set sz = a.szenarien %}
+<section class="abschnitt szenario" data-szenario="{{ sl }}" aria-labelledby="sz-titel-{{ sl }}">
+  <div class="abschnitt-kopf"><h2 id="sz-titel-{{ sl }}">Szenarien</h2><p class="klein">Nächste vier Quartale, Rechnung mit Annahmen, keine Prognose</p></div>
+  {% if sz.m == 'gewinn' %}
+  <p class="erklaerung">Drei Rechnungen auf demselben Treiberbaum: <b>Kurs in vier Quartalen = Kurs heute × (1 + Gewinnwachstum) × (1 + Bewertungsänderung)</b>, dazu die Dividende. Ausgangspunkt ist der Gewinn der zuletzt berichteten vier Quartale; jeden Montag setzt der Wochenbericht neu auf die letzten Ist-Zahlen auf. Downside, Basis und Upside unterscheiden sich nur in den Annahmen. Jede Annahme steht mit Größe und Grundlage in der Tabelle und lässt sich ändern; Rechnung, Memo und Protokoll folgen sofort.</p>
+  {% else %}
+  <p class="erklaerung">Drei Rechnungen auf demselben Treiberbaum: <b>Kurs in vier Quartalen = Kurs heute × (1 + Kursveränderung)</b>{% if sz.t.e %}, dazu {{ 'der Carry' if sz.t.e.n == 'Carry' else 'die Roll-Rendite' }}{% endif %}. {% if a.typ == 'aktie' %}Ohne berichtete Gewinne fehlt die Gewinnbasis, deshalb rechnen die Szenarien mit der Kursschwankung.{% else %}Für {{ 'Währungen' if a.typ == 'forex' else 'Rohstoffe' if a.typ == 'rohstoff' else 'Fonds und Indizes' }} gibt es keinen Gewinn je Aktie; die Spanne kommt aus der Kursschwankung des letzten Jahres.{% endif %} Downside, Basis und Upside unterscheiden sich nur in den Annahmen, jede lässt sich ändern.</p>
+  {% endif %}
+  <div class="sz-inhalt"><p class="klein">{{ szenario_zeile(sz) }}</p></div>
+</section>
+{% endif %}
+
+{% if einordnung and (einordnung.dafuer or einordnung.dagegen) %}
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>Bull und Bear Case</h2><p class="klein">Automatisch aus den Kennzahlen abgeleitet, keine Empfehlung</p></div>
+  <p class="erklaerung">Der Bull Case sammelt die Argumente für steigende Kurse, der Bear Case die Risiken dagegen. Beide Listen werden regelbasiert aus den Kennzahlen dieser Seite abgeleitet, etwa aus KGV gegenüber Median, Analysten-Upside, Schätzungsrevisionen, Earnings Surprises und Volatilität. Sie ersetzen keine eigene Analyse von Geschäftsmodell, Wettbewerbsposition und Management.</p>
+  <div class="einordnung">
+    <div class="dafuer"><h3>Bull Case</h3>
+      <ul>{% for s in einordnung.dafuer %}<li>{{ s }}</li>{% else %}<li class="leise">Aus den Daten ergibt sich nichts Auffälliges.</li>{% endfor %}</ul></div>
+    <div class="dagegen"><h3>Bear Case</h3>
+      <ul>{% for s in einordnung.dagegen %}<li>{{ s }}</li>{% else %}<li class="leise">Aus den Daten ergibt sich nichts Auffälliges.</li>{% endfor %}</ul></div>
+  </div>
+</section>
+{% endif %}
+
+{% if a.profil and a.profil.beschreibung %}
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>{{ 'Über das Unternehmen' if a.typ == 'aktie' else 'Über den Fonds' }}</h2><p class="klein">Beschreibung von {{ a.quellen.Profil if a.quellen and a.quellen.Profil else 'Yahoo Finance' }}</p></div>
+  <p class="beschreibung" lang="en">{{ a.profil.beschreibung }}</p>
+  {% if a.profil.sektor or a.profil.branche or a.profil.land %}
+  <dl class="kennzahlen">
+    <div><dt>Sektor</dt><dd>{{ a.profil.sektor or '–' }}</dd></div>
+    <div><dt>Branche</dt><dd>{{ a.profil.branche or '–' }}</dd></div>
+    <div><dt>Sitz</dt><dd>{{ a.profil.land or '–' }}</dd></div>
+    <div><dt>Mitarbeiter</dt><dd>{{ a.profil.mitarbeiter | zahl(0) if a.profil.mitarbeiter else '–' }}</dd></div>
+    {% if a.profil.website %}<div><dt>Website</dt><dd><a href="{{ a.profil.website }}" rel="noopener">{{ a.profil.website | replace('https://', '') | replace('http://', '') }}</a></dd></div>{% endif %}
+  </dl>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if a.links %}
+<section class="abschnitt">
+  <div class="abschnitt-kopf"><h2>Auf anderen Plattformen</h2></div>
+  <p class="erklaerung">Jede Plattform hat eine eigene Stärke. Direkte Links führen auf die Seite des Werts; bei Plattformen ohne
+  öffentliches Adressmuster öffnet der Link die erste passende Seite über eine Suche. Portfolio Performance holt sich Kurse
+  direkt von Fathom: Feed-Adresse kopieren, in PP beim Wertpapier unter Kurse die Quelle „JSON“ wählen, die Adresse einfügen
+  und als Pfad für das Datum <code>$[*].date</code>, für den Kurs <code>$[*].close</code> eintragen.</p>
+  <ul class="plattformen">
+  {% for l in a.links %}
+    <li>{% if l.url %}<a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">{{ l.name }}</a>{% else %}<span class="pf-name">{{ l.name }}</span>{% endif %}
+      <span class="klein">{{ l.zweck }}{% if l.art == 'suche' %}, über die Suche{% endif %}</span>
+      {% if l.art == 'feed' %}<button type="button" class="knopf-text feed-kopieren" data-feed="daten/kurse/{{ sl }}.json">Feed-Adresse kopieren</button>{% endif %}</li>
+  {% endfor %}
+  </ul>
+  {% if a.quellen %}<p class="klein quellen">Datenquellen für diesen Wert: {% for k, v in a.quellen.items() %}{{ k }} {{ v }}{% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
+</section>
+{% endif %}
+
+</div>
+</article>
+{% endmacro %}

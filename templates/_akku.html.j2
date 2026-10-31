@@ -1,0 +1,22 @@
+{# Signal-Balken: Füllung = Stärke 0–100, ab halber Füllung erfüllt. Ohne Zahl, Details im Tooltip.
+   Unter 10 % Stärke läuft die Farbe von Orange nach Rot (Klasse „kritisch“). #}
+{% macro akku(name, p, versteckt=false) -%}
+<span{% if versteckt %} hidden{% endif %} class="akku{% if p.erfuellt %} an{% endif %}{% if p.staerke is not none and p.staerke < 10 %} kritisch{% endif %}{% if p.erfuellt is none or p.staerke is none %} offen{% endif %}" data-krit="{{ name }}" style="--s: {{ '%.3f' % ((p.staerke or 0) / 100) }}" role="img" aria-label="{{ name }}: {{ 'erfüllt' if p.erfuellt else ('Daten fehlen' if p.erfuellt is none else 'nicht erfüllt') }}" title="{{ name }}: {{ p.begruendung }}"><i></i></span>
+{%- endmacro %}
+
+{# Sternchen, das beim Zeigen oder Antippen eine kurze Definition darüber einblendet (assets/app.js) #}
+{% macro stern(text) -%}
+<button type="button" class="def" data-def="{{ text }}" aria-label="Definition anzeigen: {{ text }}">*</button>
+{%- endmacro %}
+
+{# Kleines Feld unter jeder Earnings-Anzeige: erwartete Veränderung gegenüber dem Vorjahresquartal.
+   kurz=True für Tabellenzeilen, sonst mit Beträgen und zweiter Quelle (Finnhub). #}
+{% macro erwartung_feld(e, w='', kurz=false) -%}
+{%- if e and (e.eps_veraenderung is not none or e.umsatz_veraenderung is not none) -%}
+{%- if kurz -%}
+<span class="erwartung" title="Analystenkonsens für das anstehende Quartal gegenüber dem Vorjahresquartal"><span>EPS <b class="{{ e.eps_veraenderung | vk }}">{{ e.eps_veraenderung | pct(nachkomma=0) }}</b></span> <span>Umsatz <b class="{{ e.umsatz_veraenderung | vk }}">{{ e.umsatz_veraenderung | pct(nachkomma=0) }}</b></span></span>
+{%- else -%}
+<span class="erwartung">Konsens{% if e.analysten %} ({{ e.analysten | int }} Analysten){% endif %}: EPS {{ e.eps | zahl }} {{ w }} <b class="{{ e.eps_veraenderung | vk }}">{{ e.eps_veraenderung | pct }}</b>, Umsatz {{ e.umsatz | gross(w) }} <b class="{{ e.umsatz_veraenderung | vk }}">{{ e.umsatz_veraenderung | pct }}</b> gegenüber dem Vorjahresquartal{% if e.finnhub_eps is not none or e.finnhub_umsatz is not none %}. Finnhub: EPS {{ e.finnhub_eps | zahl }}{% if e.finnhub_eps_veraenderung is not none %} ({{ e.finnhub_eps_veraenderung | pct }}){% endif %}, Umsatz {{ e.finnhub_umsatz | gross(w) }}{% if e.finnhub_umsatz_veraenderung is not none %} ({{ e.finnhub_umsatz_veraenderung | pct }}){% endif %}{% endif %}</span>
+{%- endif -%}
+{%- endif -%}
+{%- endmacro %}

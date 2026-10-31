@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="de">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{{ titel }}</title></head>
+{% set url = website_url.rstrip('/') ~ '/' if website_url else '' %}
+<body style="margin:0;padding:0;background:#ffffff;color:#1d1d1f;font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Arial,sans-serif;font-size:15px;line-height:1.5;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;">
+<tr><td align="center" style="padding:28px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;">
+
+  <tr><td style="padding-bottom:12px;border-bottom:1px solid #1d1d1f;">
+    <span style="font-weight:600;">{{ titel }}</span>
+    <span style="float:right;color:#6e6e73;font-size:14px;">KW {{ kw }}, {{ stand | datum('lang') }}</span>
+  </td></tr>
+  {% if demo %}<tr><td style="padding-top:12px;color:#d70015;font-size:13px;">Demo-Daten: simuliert und nicht aktuell.</td></tr>{% endif %}
+
+  <tr><td style="padding:28px 0 6px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-weight:700;font-size:25px;line-height:1.25;letter-spacing:-0.01em;">{{ fazit }}</td></tr>
+  {% if fazit_unter %}<tr><td style="color:#6e6e73;padding-bottom:4px;">{{ fazit_unter }}</td></tr>{% endif %}
+
+  {% if protokoll and protokoll.eintraege %}
+  <tr><td style="padding:28px 0 6px;font-weight:600;border-bottom:1px solid #e8e8ed;">Seit letzter Woche: {{ protokoll.gewonnen }} Signale neu erfüllt, {{ protokoll.verloren }} nicht mehr</td></tr>
+  {% for e in protokoll.eintraege[:8] %}
+  <tr><td style="padding:8px 0;border-bottom:1px solid #e8e8ed;">
+    <span style="font-weight:600;">{{ e.name }}</span>
+    <span style="float:right;color:#6e6e73;font-size:14px;">{{ e.punkte_vorher }} → {{ e.punkte }} von {{ e.max }}</span><br>
+    <span style="font-size:13px;">{% for g in e.gewonnen %}<span style="color:#1f8a3c;">{{ g.signal }} neu erfüllt</span>{% if not loop.last or e.verloren %}, {% endif %}{% endfor %}{% for g in e.verloren %}<span style="color:#6e6e73;">{{ g.signal }} nicht mehr erfüllt</span>{% if not loop.last %}, {% endif %}{% endfor %}</span>
+  </td></tr>
+  {% endfor %}
+  {% endif %}
+
+  {% if termine %}
+  <tr><td style="padding:28px 0 6px;font-weight:600;border-bottom:1px solid #e8e8ed;">Earnings in den nächsten {{ zahlen_warnung_tage }} Tagen</td></tr>
+  {% for t in termine %}
+  <tr><td style="padding:8px 0;border-bottom:1px solid #e8e8ed;">
+    <span style="display:inline-block;width:96px;font-weight:500;">{{ t.datum | datum('tag') }}</span>{{ t.name }}
+    <span style="float:right;color:#8a5a00;font-size:14px;">in {{ t.tage }} {{ 'Tag' if t.tage == 1 else 'Tagen' }}</span>
+    {% set e = t.erwartung %}{% if e and (e.eps_veraenderung is not none or e.umsatz_veraenderung is not none) %}
+    <br><span style="display:inline-block;margin-left:96px;color:#86868b;font-size:12px;">Erwartet ggü. Vorjahresquartal: EPS {{ e.eps_veraenderung | pct }}, Umsatz {{ e.umsatz_veraenderung | pct }}</span>{% endif %}
+  </td></tr>
+  {% endfor %}
+  {% endif %}
+
+  <tr><td style="padding:28px 0 0;font-weight:600;">Watchlist</td></tr>
+  <tr><td>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;">
+      <tr style="color:#6e6e73;font-size:12.5px;">
+        <td style="padding:10px 0 8px;border-bottom:1px solid #e8e8ed;">Unternehmen</td>
+        <td align="right" style="padding:10px 0 8px;border-bottom:1px solid #e8e8ed;">Kurs</td>
+        <td align="right" style="padding:10px 0 8px;border-bottom:1px solid #e8e8ed;">1W</td>
+        <td align="right" style="padding:10px 0 8px;border-bottom:1px solid #e8e8ed;">Drawdown</td>
+        <td align="right" style="padding:10px 0 8px;border-bottom:1px solid #e8e8ed;">Signale</td>
+      </tr>
+      {% for a in aktien %}
+      {% set rand = '' if a.szenarien else 'border-bottom:1px solid #e8e8ed;' %}
+      <tr>
+        <td style="padding:10px 0 {{ '4px' if a.szenarien else '10px' }};{{ rand }}">
+          {% if url %}<a href="{{ url }}#{{ slug(a.symbol) }}" style="color:#1d1d1f;font-weight:500;text-decoration:none;">{{ a.name }}</a>{% else %}<span style="font-weight:500;">{{ a.name }}</span>{% endif %}
+          <br><span style="color:#86868b;font-size:12.5px;">{{ a.symbol }}</span></td>
+        <td align="right" style="padding:10px 0 {{ '4px' if a.szenarien else '10px' }};{{ rand }}">{{ a.kurs | zahl }} <span style="color:#86868b;font-size:12px;">{{ a.waehrung or '' }}</span></td>
+        <td align="right" style="padding:10px 0 {{ '4px' if a.szenarien else '10px' }};{{ rand }}color:{{ '#1f8a3c' if (a.rendite_1w or 0) > 0 else '#d70015' if (a.rendite_1w or 0) < 0 else '#1d1d1f' }};">{{ a.rendite_1w | pct }}</td>
+        <td align="right" style="padding:10px 0 {{ '4px' if a.szenarien else '10px' }};{{ rand }}">{{ a.abstand_hoch | pct(vorzeichen=False, nachkomma=0) }}</td>
+        <td align="right" style="padding:10px 0 {{ '4px' if a.szenarien else '10px' }};{{ rand }}white-space:nowrap;">{% for n, p in a.bewertung.pruefungen.items() %}<span title="{{ n }}" style="display:inline-block;width:24px;height:10px;padding:1px;margin-left:4px;border:1px solid #b0b0b6;border-radius:3px;vertical-align:middle;text-align:left;"><span style="display:block;height:8px;width:{{ ((p.staerke or 0) | round) | int }}%;{% if p.staerke is not none and p.staerke < 10 %}min-width:2px;{% endif %}background:{{ ('hsl(%d,100%%,48%%)' % (4 + p.staerke * 3.2)) if (p.staerke is not none and p.staerke < 10) else '#1d1d1f' }};border-radius:1px;"></span></span>{% endfor %}</td>
+      </tr>
+      {% if a.szenarien %}<tr><td colspan="5" style="padding:0 0 10px;border-bottom:1px solid #e8e8ed;color:#86868b;font-size:12.5px;">{{ szenario_zeile(a.szenarien) }}</td></tr>{% endif %}
+      {% endfor %}
+    </table>
+  </td></tr>
+  <tr><td style="padding-top:8px;color:#6e6e73;font-size:12.5px;">Signale in dieser Reihenfolge: {{ (auswahl.aktie.zaehlt + auswahl.aktie.pflicht) | join(', ') }}. Ab halber Füllung erfüllt, Treffer ab {{ auswahl.aktie.treffer_ab }}. Szenarien: Rendite in vier Quartalen, gerechnet ab den letzten Ist-Zahlen; Annahmen, Unsicherheiten und Memo stehen in der Analyse. Rechnung mit Annahmen, keine Empfehlung.</td></tr>
+
+  {% for typ, titel in [('forex', 'Forex'), ('rohstoff', 'Rohstoffe'), ('index', 'Indizes & Futures')] %}{% if klassen and klassen[typ] %}
+  <tr><td style="padding:28px 0 0;font-weight:600;">{{ titel }}</td></tr>
+  <tr><td>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;">
+      {% for a in klassen[typ] %}
+      <tr>
+        <td style="padding:9px 0;border-bottom:1px solid #e8e8ed;">{% if url %}<a href="{{ url }}#{{ slug(a.symbol) }}" style="color:#1d1d1f;font-weight:500;text-decoration:none;">{{ a.name }}</a>{% else %}<span style="font-weight:500;">{{ a.name }}</span>{% endif %}</td>
+        <td align="right" style="padding:9px 0;border-bottom:1px solid #e8e8ed;">{{ a.kurs | zahl(a.dezimalen or 2) }}</td>
+        <td align="right" style="padding:9px 0;border-bottom:1px solid #e8e8ed;color:{{ '#1f8a3c' if (a.rendite_1w or 0) > 0 else '#d70015' if (a.rendite_1w or 0) < 0 else '#1d1d1f' }};">{{ a.rendite_1w | pct }}</td>
+        <td align="right" style="padding:9px 0;border-bottom:1px solid #e8e8ed;white-space:nowrap;">{% for n, p in a.bewertung.pruefungen.items() %}<span title="{{ n }}" style="display:inline-block;width:24px;height:10px;padding:1px;margin-left:4px;border:1px solid #b0b0b6;border-radius:6px;vertical-align:middle;text-align:left;"><span style="display:block;height:8px;width:{{ ((p.staerke or 0) | round) | int }}%;background:{{ ('hsl(%d,100%%,48%%)' % (4 + p.staerke * 3.2)) if (p.staerke is not none and p.staerke < 10) else '#1d1d1f' }};border-radius:4px;"></span></span>{% endfor %}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </td></tr>
+  <tr><td style="padding-top:6px;color:#6e6e73;font-size:12.5px;">Signale: {{ (auswahl[typ].zaehlt + auswahl[typ].pflicht) | join(', ') }}.</td></tr>
+  {% endif %}{% endfor %}
+
+  {% if url %}
+  <tr><td style="padding:28px 0 0;"><a href="{{ url }}" style="color:#1f6c9f;text-decoration:none;font-weight:500;">Ganzen Bericht mit Analysen je Unternehmen öffnen</a></td></tr>
+  {% endif %}
+
+  <tr><td style="padding-top:32px;color:#86868b;font-size:12px;border-top:1px solid #e8e8ed;margin-top:32px;">
+    Daten: Yahoo Finance, Stand {{ stand | datum }}. Screening nach selbst gewählten Regeln, keine Anlageberatung.</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>

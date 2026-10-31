@@ -1,0 +1,474 @@
+{% extends "_basis.html.j2" %}
+{% from "_analyse.html.j2" import analyse with context %}
+{% block titel %}{{ titel }}, KW {{ kw }}{% endblock %}
+
+{% from "_akku.html.j2" import akku, stern, erwartung_feld %}
+{% set DRAWDOWN = "Drawdown: prozentualer Abstand des aktuellen Kurses zum höchsten Schlusskurs der letzten 52 Wochen" %}
+
+{% block leiste %}
+{% if not archiv_seite %}
+<button type="button" class="such-knopf" id="such-knopf" aria-label="Suchen" title="Suchen (Taste /)" aria-controls="suche" aria-expanded="false">
+  <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+</button>
+<button type="button" class="live-status" id="live-knopf" aria-expanded="false" aria-controls="live-einstellungen">
+  <i class="live-punkt"></i><span id="live-text">Wochenstand</span>
+</button>
+{% endif %}
+{% endblock %}
+
+{% block band %}
+{% set markt = (klassen.index or []) + (klassen.rohstoff or []) + (klassen.forex or []) %}
+{% if markt and not archiv_seite %}
+<nav class="marktband" aria-label="Märkte">
+  <div class="marktband-innen">
+    {% for a in markt %}
+    <a class="mt-wert" href="#{{ slug(a.symbol) }}" data-slug="{{ slug(a.symbol) }}">
+      <span class="mt-name">{{ a.name }}</span>
+      <span class="mt-kurs" data-live="kurs">{{ a.kurs | zahl(a.dezimalen or 2) }}</span>
+      <span class="mt-delta"><span data-live-sichtbar hidden data-zeitraum="1T"><span data-live="heute" class="leise">–</span></span><span class="mt-woche {{ a.rendite_1w | vk }}" data-zeitraum="1W"><b>{{ a.rendite_1w | pct }}</b><small>1W</small></span></span>
+    </a>
+    {% endfor %}
+  </div>
+</nav>
+{% endif %}
+{% endblock %}
+
+{% block inhalt %}
+{% macro kriterien_leiste(typ) %}
+{% set aw = auswahl[typ] %}
+<div class="kriterien-leiste" data-kriterien-leiste="{{ typ }}">
+  <p class="kl-text"><b>{{ aw.zaehlt | length + aw.pflicht | length }} von {{ KATALOG[typ] | length }} Signalen aktiv</b>, Treffer ab {{ aw.treffer_ab }} erfüllten{% if aw.pflicht %}, Pflicht: {{ aw.pflicht | join(', ') }}{% endif %}.<span class="kl-namen">{{ aw.zaehlt | join(', ') }}</span></p>
+  {% if not archiv_seite %}<button type="button" class="knopf kriterien-knopf" data-kriterien-oeffnen="{{ typ }}"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Screener anpassen<span class="kl-marke" hidden>eigene Auswahl</span></button>{% endif %}
+</div>
+{% endmacro %}
+{% macro krit_kopf(typ) %}{% set aw = auswahl[typ] %}{% for name, k in KATALOG[typ].items() %}<th class="krit nur-gross{% if name in aw.pflicht %} pflicht{% endif %}" data-spalte="{{ name }}"{% if name not in aw.zaehlt and name not in aw.pflicht %} hidden{% endif %}>{{ k.kurz }}{{ stern(name ~ ': ' ~ definitionen[typ][name]) }}</th>{% endfor %}
+      <th class="nur-klein krit-profil">Signale{{ stern('Ein Balken je aktivem Signal, in der Reihenfolge des Screeners; ab halber Füllung erfüllt') }}</th>{% endmacro %}
+{% macro krit_zellen(typ, a) %}{% set aw = auswahl[typ] %}{% for name, p in a.katalog.items() %}<td class="krit nur-gross" data-spalte="{{ name }}"{% if name not in aw.zaehlt and name not in aw.pflicht %} hidden{% endif %}>{{ akku(name, p) }}</td>{% endfor %}
+      <td class="nur-klein krit-profil"><span class="akkus">{% for name, p in a.katalog.items() %}{{ akku(name, p, name not in aw.zaehlt and name not in aw.pflicht) }}{% endfor %}</span></td>{% endmacro %}
+
+{% macro pruefstand_abschnitt(typ) %}
+{% set ps = (pruefstand or {}).get(typ) %}
+{% if ps and ps.zeilen %}
+<section class="abschnitt teil pruefstand" data-pruefstand="{{ typ }}">
+  <div class="abschnitt-kopf">
+    <h2>Regel-Prüfstand</h2>
+    <div class="ansicht" role="group" aria-label="Zeitraum nach dem Signal">
+      {% for h in ['3M', '6M', '12M'] %}<button type="button" class="ansicht-knopf" data-ps-h="{{ h }}" aria-pressed="{{ 'true' if h == '6M' else 'false' }}">{{ h | replace('M', ' Monate') }}</button>{% endfor %}
+    </div>
+  </div>
+  <p class="erklaerung">Was geschah, nachdem ein Signal erfüllt war? Für jedes Monatsende von {{ ps.von | datum('monat') }} bis {{ ps.bis | datum('monat') }}
+  prüft {{ titel }} die Signale mit den damaligen Kursen und misst die Kursentwicklung danach, über {{ ps.werte }} {{ KLASSEN[typ].titel if ps.werte != 1 else KLASSEN[typ].einzahl }} der Watchlist.
+  <b>Vorsprung</b> ist der Unterschied der durchschnittlichen Entwicklung mit und ohne erfülltes Signal, <b>positiv</b> der Anteil der Fälle mit Kursplus.
+  {% if ps.ausgelassen %}Nicht getestet: {{ ps.ausgelassen | join(', ') }}, weil {{ 'die Leitzinsen' if typ == 'forex' else 'Quartalszahlen, Analystenschätzungen und Kursziele' }} von damals nicht vorliegen; mit heutigen Werten zurückzurechnen wäre ein Blick in die Zukunft.{% endif %}</p>
+  {% for h in ['3M', '6M', '12M'] %}
+  <div class="tabelle-rahmen" data-ps-tabelle="{{ h }}"{% if h != '6M' %} hidden{% endif %}>
+  <table class="ps-tabelle">
+    <thead><tr><th>Signal</th><th>Fälle erfüllt</th><th>Ø erfüllt</th><th class="nur-breit">Ø nicht erfüllt</th><th>Vorsprung</th><th class="nur-gross">Positiv erfüllt</th><th class="nur-breit">Positiv sonst</th></tr></thead>
+    <tbody>
+    {% for z in ps.zeilen %}{% set x = z.h[h] %}
+    <tr{% if z.kombi %} class="ps-kombi"{% endif %}>
+      <td class="name">{% if z.kombi %}Kombination<span class="unter">{{ ps.kombi_text }}</span>{% else %}{{ z.signal }}{% endif %}</td>
+      <td>{{ x.n_ja }}<span class="unter">von {{ x.n_ja + x.n_nein }}</span></td>
+      <td>{{ x.mittel_ja | pct }}</td>
+      <td class="nur-breit">{{ x.mittel_nein | pct }}</td>
+      <td><b class="{{ x.vorsprung | vk }}">{{ x.vorsprung | pct }}</b>{% if x.wenig %}<span class="unter">wenige Fälle</span>{% endif %}</td>
+      <td class="nur-gross">{{ x.quote_ja | pct(vorzeichen=False, nachkomma=0) }}</td>
+      <td class="nur-breit">{{ x.quote_nein | pct(vorzeichen=False, nachkomma=0) }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% endfor %}
+  <p class="klein ps-grenzen">Grenzen: nur Werte, die heute auf der Watchlist stehen (gescheiterte fehlen), überlappende Zeiträume, ohne Kosten,
+  Steuern und Dividenden{% if typ == 'rohstoff' %}, ohne Rollkosten der Futures{% endif %}. Gerechnet mit den Schwellen aus config.yaml, nicht mit eigenen Reglern.
+  Vergangene Muster sagen nichts Sicheres über die Zukunft.</p>
+</section>
+{% endif %}
+{% endmacro %}
+{% if not archiv_seite %}
+<div class="suche" id="suche" hidden>
+  <div class="suche-schleier" data-suche-zu></div>
+  <div class="suche-box" role="dialog" aria-modal="true" aria-label="Werte suchen und zur Watchlist hinzufügen">
+    <div class="suche-feld">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+      <label for="suche-eingabe" class="unsichtbar">Suchbegriff</label>
+      <input id="suche-eingabe" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search"
+        placeholder="Aktie, ETF, Währung, Rohstoff oder Index">
+      <button type="button" class="knopf" data-suche-zu>Abbrechen</button>
+    </div>
+    <div class="suche-ergebnisse" id="suche-ergebnisse" aria-live="polite"></div>
+  </div>
+</div>
+<div class="aufbau-hinweis" id="aufbau-hinweis" role="status" hidden></div>
+<div class="live-einstellungen" id="live-einstellungen" hidden>
+  <h2>Live-Kurse</h2>
+  <p>Ohne Live-Quelle zeigt die Seite die Schlusskurse vom Tag des Wochenberichts. Mit einer Live-Quelle aktualisieren sich Kurse,
+  Tagesveränderung, Drawdown, Upside und die Signale laufend.</p>
+  <div class="quelle">
+    <h3>Lokaler Live-Server <span class="quelle-status" id="status-lokal">nicht gefunden</span></h3>
+    <p>Alle Werte über Yahoo Finance, je nach Börse bis zu 15 Minuten verzögert. Starten im Projektordner mit
+    <code>python live.py</code> und dann <code>http://localhost:8000</code> öffnen.</p>
+  </div>
+  <div class="quelle">
+    <h3>Finnhub <span class="quelle-status" id="status-finnhub">aus</span></h3>
+    <p>Echtzeit für US-Aktien, jeder Handel einzeln. Kostenlosen Schlüssel auf finnhub.io anlegen und hier eintragen.
+    Er wird nur in diesem Browser gespeichert.</p>
+    <form id="finnhub-form" class="schluessel">
+      <label for="finnhub-schluessel" class="unsichtbar">Finnhub-Schlüssel</label>
+      <input id="finnhub-schluessel" type="password" autocomplete="off" spellcheck="false" placeholder="Finnhub-Schlüssel">
+      <button type="submit" class="knopf">Speichern</button>
+      <button type="button" class="knopf-text" id="finnhub-entfernen">Entfernen</button>
+    </form>
+  </div>
+</div>
+{% endif %}
+
+<div class="seitenkopf">
+  <div>
+    <p class="seitenkopf-zeile">KW {{ kw }} · Wochensignale</p>
+    <h1 class="titel-3d">Lotung</h1>
+    <p class="seitenkopf-meta">Stand {{ stand | datum('lang') }}</p>
+  </div>
+  {% if demo %}<p class="demo">Demo-Daten: Kurse und Kennzahlen sind simuliert.</p>{% endif %}
+</div>
+
+{% set aw_a = auswahl.aktie %}
+{% macro namen(liste) -%}
+{%- for a in liste %}<a href="#{{ slug(a.symbol) }}">{{ a.name }}</a>{% if not loop.last %}, {% endif %}{% endfor -%}
+{%- endmacro %}
+<dl class="lage">
+  <div class="lage-feld">
+    <dt data-lage="treffer-titel">Treffer: mindestens {{ aw_a.treffer_ab }} von {{ (aw_a.zaehlt | length) + (aw_a.pflicht | length) }} Signalen{% if aw_a.pflicht %}, alle Pflichtsignale{% endif %}</dt>
+    <dd class="lage-wert" data-lage="treffer-zahl">{{ treffer | length }}<span> von {{ aktien | length }}</span></dd>
+    <dd class="lage-namen" data-lage="treffer-namen">{% if treffer %}{{ namen(treffer) }}{% else %}Diese Woche keine{% endif %}</dd>
+  </div>
+  <div class="lage-feld">
+    <dt>Knapp verfehlt, ein Signal fehlt</dt>
+    <dd class="lage-wert" data-lage="knapp-zahl">{{ knapp | length }}</dd>
+    <dd class="lage-namen" data-lage="knapp-namen">{% if knapp %}{{ namen(knapp) }}{% else %}Keine{% endif %}</dd>
+  </div>
+  <div class="lage-feld">
+    <dt>Nächste Earnings</dt>
+    {% if termine %}{% set t = termine[0] %}
+    <dd class="lage-wert">{{ t.datum | datum('tag') }}</dd>
+    <dd class="lage-namen"><a href="#{{ slug(t.symbol) }}">{{ t.name }}</a>, in {{ t.tage }} {{ 'Tag' if t.tage == 1 else 'Tagen' }}{% if termine | length > 1 %}, danach {{ termine | length - 1 }} weitere{% endif %}</dd>
+    {% else %}
+    <dd class="lage-wert">Keine</dd>
+    <dd class="lage-namen">in den nächsten {{ zahlen_warnung_tage }} Tagen</dd>
+    {% endif %}
+  </div>
+</dl>
+
+{% if protokoll and not archiv_seite %}
+{% set pk = protokoll %}
+<section class="protokoll" id="protokoll" aria-labelledby="protokoll-titel">
+  <div class="abschnitt-kopf">
+    <h2 id="protokoll-titel">Seit letzter Woche</h2>
+    <p class="klein">{% if pk.eintraege %}{{ pk.gewonnen }} {{ 'Signal' if pk.gewonnen == 1 else 'Signale' }} neu erfüllt, {{ pk.verloren }} nicht mehr erfüllt{% else %}Keine Wechsel{% endif %}{% if pk.datum_vorher %}, verglichen mit dem {{ pk.datum_vorher | datum }}{% endif %}</p>
+  </div>
+  {% if pk.eintraege %}
+  {% macro pk_eintrag(e) %}
+    <li class="pk-eintrag{% if e.schwelle %} pk-{{ e.schwelle }}{% endif %}">
+      <div class="pk-kopf">
+        <a href="#{{ slug(e.symbol) }}" class="pk-name">{{ e.name }}</a>
+        <span class="pk-klasse">{{ KLASSEN[e.typ].einzahl }}</span>
+        <span class="pk-punkte"><span class="leise">{{ e.punkte_vorher }} →</span> <b class="{{ 'plus' if e.punkte > e.punkte_vorher else ('minus' if e.punkte < e.punkte_vorher else '') }}">{{ e.punkte }}</b> von {{ e.max }}{% if e.schwelle == 'rein' %}<span class="pk-marke">jetzt Treffer</span>{% elif e.schwelle == 'raus' %}<span class="pk-marke raus">kein Treffer mehr</span>{% endif %}</span>
+      </div>
+      <ul class="pk-wechsel">
+        {% for g in e.gewonnen %}<li class="ja"><b>{{ g.signal }}</b> neu erfüllt<span>{{ g.text }}</span></li>{% endfor %}
+        {% for g in e.verloren %}<li class="nein"><b>{{ g.signal }}</b> nicht mehr erfüllt<span>{{ g.text }}</span></li>{% endfor %}
+      </ul>
+    </li>
+  {% endmacro %}
+  <ul class="pk-liste">
+    {% for e in pk.eintraege[:6] %}{{ pk_eintrag(e) }}{% endfor %}
+  </ul>
+  {% if pk.eintraege | length > 6 %}
+  <details class="pk-mehr"><summary>Alle {{ pk.eintraege | length }} Wechsel anzeigen</summary>
+    <ul class="pk-liste">{% for e in pk.eintraege[6:] %}{{ pk_eintrag(e) }}{% endfor %}</ul>
+  </details>
+  {% endif %}
+  {% endif %}
+  <p class="klein pk-quelle">{% if pk.quelle == 'gespeichert' %}Vergleich mit dem gespeicherten Stand des letzten Berichts.{% else %}Vergleich mit denselben Regeln, gerechnet mit den Kursen von vor fünf Handelstagen. Quartalszahlen, Analystenschätzungen und Kursziele sind dabei die von heute; ab dem zweiten Bericht vergleicht {{ titel }} mit dem gespeicherten Stand.{% endif %}{% if pk.neu %} Neu auf der Watchlist: {{ pk.neu | join(', ') }}.{% endif %}</p>
+</section>
+{% endif %}
+
+{% set klassen_liste = [('aktie', aktien), ('etf', etfs), ('forex', klassen.forex), ('rohstoff', klassen.rohstoff), ('index', klassen.index)] %}
+<nav class="kacheln" aria-label="Anlageklassen">
+  {% for typ, liste in klassen_liste %}
+  <button type="button" class="kachel" data-kachel="{{ typ }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" aria-controls="kachel-{{ typ }}">
+    <span class="kachel-name">{{ KLASSEN[typ].titel }}</span>
+    <span class="kachel-zahl">{{ liste | length }}</span>
+    <span class="kachel-info"{% if typ != 'etf' %} data-kachel-info="{{ typ }}"{% endif %}>{% if typ == 'etf' %}Depot-Kern{% else %}{% set n = liste | selectattr('bewertung.treffer') | list | length %}{{ n }} Treffer{% endif %}</span>
+  </button>
+  {% endfor %}
+  <button type="button" class="kachel" data-kachel="depot" aria-pressed="false" aria-controls="kachel-depot">
+    <span class="kachel-name">Portfolio</span>
+    <span class="kachel-zahl" id="depot-zahl">–</span>
+    <span class="kachel-info" id="depot-info">Positionen erfassen</span>
+  </button>
+</nav>
+
+<div class="kachel-inhalt" id="kachel-aktie" data-kachel-inhalt="aktie">
+<section class="abschnitt teil">
+  <div class="abschnitt-kopf">
+    <h2>Aktien <span class="anzahl">{{ aktien | length }}</span></h2>
+    <div class="ansicht aktien-ansicht" role="group" aria-label="Ansicht">
+      <button type="button" class="ansicht-knopf" data-aktien-ansicht="watchlist" aria-pressed="true">Watchlist</button>
+      <button type="button" class="ansicht-knopf" data-aktien-ansicht="portfolio" aria-pressed="false">Mein Portfolio<span class="portfolio-anzahl" id="portfolio-anzahl"></span></button>
+    </div>
+  </div>
+  <p class="erklaerung">Jede Zeile bündelt Performance, Bewertung und die aktiven Signale eines Titels. <b>Drawdown</b> ist der
+  prozentuale Abstand zum 52-Wochen-Hoch, <b>Upside</b> der Abstand zum mittleren Kursziel der Analysten (Konsens). Das
+  <b>Forward-KGV</b> setzt den Kurs ins Verhältnis zum erwarteten Gewinn je Aktie der nächsten zwölf Monate und wird mit dem
+  eigenen 5-Jahres-Median verglichen, damit Branchenunterschiede keine Rolle spielen. Die Balken zeigen, wie deutlich ein Signal
+  erfüllt ist; ab halber Füllung gilt es als erfüllt. Zehn Signale stehen zur Wahl, welche zählen, legst du unter „Screener anpassen“ fest. Ein Klick auf ein Unternehmen öffnet die vollständige Analyse.</p>
+  <div class="komponist" id="komponist">
+    <div class="komponist-feld">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      <label for="komponist-eingabe" class="unsichtbar">Aktie suchen, um sie zur Watchlist oder ins Portfolio aufzunehmen</label>
+      <input id="komponist-eingabe" type="search" autocomplete="off" spellcheck="false"
+        placeholder="Aktie hinzufügen: Name oder ISIN">
+    </div>
+    <ul class="komponist-treffer" id="komponist-treffer" hidden></ul>
+    <form class="position-form" id="position-form" hidden>
+      <p class="position-titel" id="position-titel"></p>
+      <div class="position-felder">
+        <label class="nur-manuell">Name<input name="name" autocomplete="off"></label>
+        <label class="nur-manuell">ISIN (optional)<input name="isin" autocomplete="off" spellcheck="false" maxlength="12"></label>
+        <label>Stück<input name="stueck" inputmode="decimal" autocomplete="off" required></label>
+        <label>Kaufkurs je Stück in €<input name="kurs" inputmode="decimal" autocomplete="off" required></label>
+        <label>Kaufdatum<input name="datum" type="date"></label>
+      </div>
+      <label class="haken"><input type="checkbox" name="watchlist" checked> Auch auf die Watchlist setzen, damit die Aktie analysiert wird</label>
+      <div class="position-knoepfe">
+        <button type="submit" class="knopf primaer">Ins Portfolio aufnehmen</button>
+        <button type="button" class="knopf" data-position-abbrechen>Abbrechen</button>
+      </div>
+    </form>
+  </div>
+  <div class="aktien-portfolio" id="aktien-portfolio" hidden>
+    <div id="aktien-portfolio-inhalt"></div>
+    <details class="einfuegen" id="portfolio-einfuegen">
+      <summary>Portfolio einfügen</summary>
+      <p class="klein">Eine Position pro Zeile: ISIN oder Kürzel, Stückzahl, Kaufkurs in Euro und optional das Kaufdatum, getrennt
+      durch Semikolon oder Tabulator. Eine CSV aus Portfolio Performance oder Parqet kannst du ebenso einfügen oder als Datei wählen.
+      Alles bleibt in diesem Browser.</p>
+      <textarea id="portfolio-text" rows="5" spellcheck="false" placeholder="DE0007164600; 10; 201,00; 2024-03-12&#10;US00724F1012; 3; 360,50"></textarea>
+      <div class="position-knoepfe">
+        <button type="button" class="knopf primaer" id="portfolio-uebernehmen">Übernehmen</button>
+        <label class="knopf depot-datei">CSV-Datei wählen<input type="file" class="unsichtbar portfolio-datei" accept=".csv,text/csv,text/plain"></label>
+        <span class="klein" id="portfolio-meldung" aria-live="polite"></span>
+      </div>
+    </details>
+  </div>
+  {{ kriterien_leiste('aktie') }}
+  <div class="tabelle-rahmen">
+  <table data-kriterien-tabelle{% if (auswahl.aktie.zaehlt | length) + (auswahl.aktie.pflicht | length) > 5 %} class="viele"{% endif %}>
+    <thead><tr>
+      <th>Unternehmen</th><th>Kurs</th><th title="Veränderung zum Vortagesschluss">1T</th><th class="nur-gross" title="Performance eine Woche">1W</th><th class="nur-breit" title="Year to date, seit Jahresbeginn">YTD</th>
+      <th class="nur-xl">6M</th><th>Draw&shy;down{{ stern(DRAWDOWN) }}</th><th class="nur-breit" title="Forward-KGV und eigener 5-Jahres-Median">Fwd-KGV / Ø 5J</th><th class="nur-breit" title="Abstand zum mittleren Analysten-Kursziel">Upside</th>
+      {{ krit_kopf('aktie') }}
+    </tr></thead>
+    <tbody>
+    {% for a in aktien %}
+    {% set link = '#' ~ slug(a.symbol) %}
+    <tr data-href="{{ link }}" data-slug="{{ slug(a.symbol) }}" data-punkte="{{ a.punkte or 0 }}" data-treffer="{{ 1 if a.bewertung and a.bewertung.treffer else 0 }}" data-dd="{{ a.abstand_hoch or 0 }}" data-upside="{{ a.kursziel_abstand if a.kursziel_abstand is not none else '' }}" data-earnings="{{ 1 if a.zahlen_bald else 0 }}" data-technik="{{ a.technik.score if a.technik else 0 }}" data-isin="{{ a.isin or '' }}" data-symbol="{{ a.symbol }}">
+      <td class="name"><a href="{{ link }}">{{ a.name }}</a><span class="unter">{{ a.symbol }}</span>
+        {% if a.zahlen_bald %}<span class="termin-tag">Earnings {{ a.naechste_zahlen | datum('tag') }}</span>{{ erwartung_feld(a.erwartung, kurz=true) }}{% endif %}</td>
+      <td><span data-live="kurs">{{ a.kurs | zahl }}</span><span class="unter" data-live="zeit-kurz">{{ a.waehrung or '' }}</span></td>
+      <td data-zeitraum="1T"><span data-live="heute" class="leise">–</span></td>
+      <td class="nur-gross {{ a.rendite_1w | vk }}" data-zeitraum="1W">{{ a.rendite_1w | pct }}</td>
+      <td class="nur-breit {{ a.rendite_ytd | vk }}" data-zeitraum="YTD">{{ a.rendite_ytd | pct(nachkomma=0) }}</td>
+      <td class="nur-xl" data-zeitraum="6M">{{ sparkline(a.verlauf_6m) | safe }}</td>
+      <td data-live="unter-hoch">{{ a.abstand_hoch | pct(vorzeichen=False, nachkomma=0) }}</td>
+      <td class="nur-breit"><span data-live="kgv">{{ a.forward_kgv | zahl(1) }}</span> <span class="leise">/ {{ a.forward_kgv_median_5j | zahl(1) }}</span></td>
+      <td class="nur-breit {{ a.kursziel_abstand | vk }}" data-live="kursziel">{{ a.kursziel_abstand | pct(nachkomma=0) }}</td>
+      {{ krit_zellen(a.typ, a) }}
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+
+{% if termine %}
+<section class="abschnitt teil">
+  <div class="abschnitt-kopf">
+    <h2>Earnings-Kalender</h2>
+    <p class="klein">Nächste {{ zahlen_warnung_tage }} Tage</p>
+  </div>
+  <p class="erklaerung">An diesen Tagen veröffentlichen die Unternehmen ihre Quartalsergebnisse. Weichen Umsatz, Gewinn je Aktie (EPS)
+  oder der Ausblick (Guidance) vom Analystenkonsens ab, öffnet die Aktie oft mit einer Kurslücke (Gap) von 5 bis 15 Prozent.
+  Für gehebelte Produkte ist das das größte Einzelrisiko: Eine Lücke kann über die Knock-out-Schwelle springen, ohne dass ein
+  Stop-Loss dazwischen ausgeführt wird, und das Zertifikat ist über Nacht wertlos.</p>
+  <ul class="termine">
+  {% for t in termine %}
+    <li><span class="datum">{{ t.datum | datum('tag') }}</span><a href="#{{ slug(t.symbol) }}">{{ t.name }}</a><span class="abstand">in {{ t.tage }} {{ 'Tag' if t.tage == 1 else 'Tagen' }}</span>{{ erwartung_feld(t.erwartung, t.waehrung) }}</li>
+  {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{{ pruefstand_abschnitt('aktie') }}
+</div>
+
+<div class="kachel-inhalt" id="kachel-etf" data-kachel-inhalt="etf">
+{% if etfs %}<section class="abschnitt teil">
+  <div class="abschnitt-kopf"><h2>Depot-Kern <span class="anzahl">{{ etfs | length }}</span></h2><p class="klein">Nur beobachtet, keine Signale</p></div>
+  <p class="erklaerung">Breit gestreute Indexfonds bilden das Fundament des Depots (Core) und werden nicht nach den Screening-Signalen
+  bewertet. Sie sind zugleich die Benchmark für die Einzeltitel (Satellites): Eine Einzelaktie lohnt das zusätzliche
+  Klumpenrisiko nur, wenn sie sich über mehrere Jahre besser entwickelt als der Gesamtmarkt.</p>
+  <div class="tabelle-rahmen">
+  <table>
+    <thead><tr><th>ETF</th><th>Kurs</th><th>1T</th><th class="nur-gross">1W</th><th class="nur-breit">1M</th><th>YTD</th><th class="nur-breit">6M</th><th class="nur-breit">Drawdown{{ stern(DRAWDOWN) }}</th></tr></thead>
+    <tbody>
+    {% for e in etfs %}
+    {% set link = '#' ~ slug(e.symbol) %}
+    <tr data-href="{{ link }}" data-slug="{{ slug(e.symbol) }}" data-punkte="{{ e.punkte or 0 }}" data-dd="{{ e.abstand_hoch or 0 }}" data-upside="{{ e.kursziel_abstand if e.kursziel_abstand is not none else '' }}" data-earnings="{{ 1 if e.zahlen_bald else 0 }}" data-technik="{{ e.technik.score if e.technik else 0 }}" data-isin="{{ e.isin or '' }}" data-symbol="{{ e.symbol }}">
+      <td class="name"><a href="{{ link }}">{{ e.name }}</a><span class="unter">{{ e.symbol }}</span></td>
+      <td><span data-live="kurs">{{ e.kurs | zahl }}</span><span class="unter" data-live="zeit-kurz">{{ e.waehrung or '' }}</span></td>
+      <td data-zeitraum="1T"><span data-live="heute" class="leise">–</span></td>
+      <td class="nur-gross {{ e.rendite_1w | vk }}" data-zeitraum="1W">{{ e.rendite_1w | pct }}</td>
+      <td class="nur-breit {{ e.rendite_1m | vk }}" data-zeitraum="1M">{{ e.rendite_1m | pct }}</td>
+      <td class="{{ e.rendite_ytd | vk }}" data-zeitraum="YTD">{{ e.rendite_ytd | pct(nachkomma=0) }}</td>
+      <td class="nur-breit" data-zeitraum="6M">{{ sparkline(e.verlauf_6m) | safe }}</td>
+      <td class="nur-breit" data-live="unter-hoch">{{ e.abstand_hoch | pct(vorzeichen=False, nachkomma=0) }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+{% else %}<p class="leer">Noch keine ETFs auf der Watchlist. Über die Suche oben rechts hinzufügen.</p>{% endif %}
+</div>
+
+<div class="kachel-inhalt" id="kachel-depot" data-kachel-inhalt="depot">
+<section class="abschnitt teil">
+  <div class="abschnitt-kopf"><h2>Portfolio</h2><p class="klein">Bleibt in diesem Browser, wird nirgends hochgeladen</p></div>
+  <p class="erklaerung">Lies dein Depot aus <b>Portfolio Performance</b> oder <b>Parqet</b> ein, um zu sehen, welche Werte der
+  Watchlist du schon hältst, mit Einstand, aktuellem Wert und Gewinn oder Verlust. In Portfolio Performance unter Datei, Exportieren,
+  CSV die Depotumsätze (Wertpapier-Transaktionen) speichern; bei Parqet eine Datei im Parqet-CSV-Format. Erkannt werden Käufe,
+  Verkäufe, Ein- und Auslieferungen. getquin bietet keinen Export, kann aber Depots aus Portfolio Performance importieren; der
+  Weg führt also über PP. Die Datei wird nur in diesem Browser gelesen und gespeichert.</p>
+  <div class="depot-import">
+    <label class="knopf depot-datei">CSV-Datei wählen<input type="file" id="depot-datei" accept=".csv,text/csv,text/plain" class="unsichtbar"></label>
+    <span class="klein" id="depot-stand">Noch kein Depot eingelesen. Datei hierher ziehen oder auswählen.</span>
+  </div>
+  <div id="depot-inhalt"></div>
+  <div class="depot-export">
+    <h3>Export</h3>
+    <p class="klein">Die Watchlist als Wertpapierliste für den CSV-Import von Portfolio Performance (Datei, Importieren, CSV, Wertpapiere).
+    Das eingelesene Depot im Importformat von Parqet. Für laufende Kurse in PP gibt es im Panel jedes Werts den Kurs-Feed.</p>
+    <div class="depot-knoepfe">
+      <button type="button" class="knopf" data-export="pp">Watchlist für Portfolio Performance</button>
+      <button type="button" class="knopf" data-export="parqet" disabled>Portfolio als Parqet-CSV</button>
+      <button type="button" class="knopf entfernen-depot" data-export="loeschen" disabled>Portfolio aus diesem Browser löschen</button>
+    </div>
+  </div>
+</section>
+</div>
+
+
+{% macro klassen_tabelle(typ, liste, titel_spalte, spezial_titel, spezial_def) %}
+  {{ kriterien_leiste(typ) }}
+  <div class="tabelle-rahmen">
+  <table data-kriterien-tabelle{% if (auswahl[typ].zaehlt | length) + (auswahl[typ].pflicht | length) > 5 %} class="viele"{% endif %}>
+    <thead><tr>
+      <th>{{ titel_spalte }}</th><th>Kurs</th><th>1T</th><th class="nur-gross">1W</th><th class="nur-breit">YTD</th>
+      <th class="nur-xl">6M</th><th>Draw&shy;down{{ stern(DRAWDOWN) }}</th><th class="nur-breit">{{ spezial_titel }}{{ stern(spezial_def) }}</th>
+      {{ krit_kopf(typ) }}
+    </tr></thead>
+    <tbody>
+    {% for a in liste %}
+    {% set link = '#' ~ slug(a.symbol) %}
+    <tr data-href="{{ link }}" data-slug="{{ slug(a.symbol) }}" data-punkte="{{ a.punkte or 0 }}" data-treffer="{{ 1 if a.bewertung and a.bewertung.treffer else 0 }}" data-dd="{{ a.abstand_hoch or 0 }}" data-upside="{{ a.kursziel_abstand if a.kursziel_abstand is not none else '' }}" data-earnings="{{ 1 if a.zahlen_bald else 0 }}" data-technik="{{ a.technik.score if a.technik else 0 }}" data-isin="{{ a.isin or '' }}" data-symbol="{{ a.symbol }}">
+      <td class="name"><a href="{{ link }}">{{ a.name }}</a><span class="unter">{{ a.symbol }}</span></td>
+      <td><span data-live="kurs">{{ a.kurs | zahl(a.dezimalen or 2) }}</span><span class="unter" data-live="zeit-kurz">{{ a.waehrung or '' }}</span></td>
+      <td data-zeitraum="1T"><span data-live="heute" class="leise">–</span></td>
+      <td class="nur-gross {{ a.rendite_1w | vk }}" data-zeitraum="1W">{{ a.rendite_1w | pct }}</td>
+      <td class="nur-breit {{ a.rendite_ytd | vk }}" data-zeitraum="YTD">{{ a.rendite_ytd | pct(nachkomma=0) }}</td>
+      <td class="nur-xl" data-zeitraum="6M">{{ sparkline(a.verlauf_6m) | safe }}</td>
+      <td data-live="unter-hoch">{{ a.abstand_hoch | pct(vorzeichen=False, nachkomma=0) }}</td>
+      {% set sw = a.zinsdifferenz if typ == 'forex' else (a.abweichung_mittel_5j if typ == 'rohstoff' else a.abstand_gd200) %}
+      <td class="nur-breit {{ sw | vk }}">{{ sw | pct(nachkomma=2 if typ == 'forex' else 0) }}</td>
+      {{ krit_zellen(a.typ, a) }}
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+{% endmacro %}
+
+<div class="kachel-inhalt" id="kachel-forex" data-kachel-inhalt="forex">
+<section class="abschnitt teil">
+  <div class="abschnitt-kopf"><h2>Forex <span class="anzahl">{{ klassen.forex | length }}</span></h2><p class="klein">Sortiert nach Treffern und erfüllten Signalen</p></div>
+  <p class="erklaerung">Währungspaare werden immer als Basis gegen Gegenwährung notiert: EUR/USD 1,08 heißt, ein Euro kostet 1,08 US-Dollar.
+  Bewertet wird die Basiswährung mit den Faktoren, die Banken wie J.P. Morgan in ihren Währungsindizes nutzen. <b>Carry</b> ist die
+  Zinsdifferenz der beiden Notenbanken pro Jahr, die man beim Halten der höher verzinsten Währung verdient (Leitzinsen laut BIS).
+  <b>Momentum</b> setzt auf die Fortsetzung mittelfristiger Trends, <b>Value</b> auf die Rückkehr zum 5-Jahres-Mittel, und das
+  <b>Vol-Regime</b> zeigt, ob der Markt gerade ruhiger ist als üblich. Hebelprodukte auf Währungen reagieren schon auf kleine
+  Kursbewegungen stark: Ein Prozent beim Wechselkurs sind bei Hebel 20 bereits 20 Prozent im Produkt.</p>
+  {% if klassen.forex %}{{ klassen_tabelle('forex', klassen.forex, 'Währungspaar', 'Zinsdiff.', 'Carry: Zinsdifferenz Basis- minus Gegenwährung pro Jahr, nach den Leitzinsen der Notenbanken') }}
+  {% else %}<p class="leer">Noch keine Währungspaare auf der Watchlist. Über die Suche oben rechts hinzufügen, z. B. „EUR/USD“.</p>{% endif %}
+</section>
+{{ pruefstand_abschnitt('forex') }}
+</div>
+
+<div class="kachel-inhalt" id="kachel-rohstoff" data-kachel-inhalt="rohstoff">
+<section class="abschnitt teil">
+  <div class="abschnitt-kopf"><h2>Rohstoffe <span class="anzahl">{{ klassen.rohstoff | length }}</span></h2><p class="klein">Front-Month-Futures</p></div>
+  <p class="erklaerung">Rohstoffe werden über Terminkontrakte (Futures) gehandelt; angezeigt wird jeweils der nächstfällige Kontrakt.
+  Anders als Aktien werfen sie keine Gewinne ab, ihr Preis folgt allein Angebot, Nachfrage und Lagerhaltung. Deshalb stützt sich
+  die Bewertung auf Preisfaktoren: <b>Momentum</b> ist bei Rohstoffen der am besten belegte Faktor, <b>Pullback</b> sucht Rücksetzer,
+  <b>Value</b> vergleicht mit dem 5-Jahres-Mittel, weil hohe Preise neues Angebot anlocken. Bei ETCs und Zertifikaten auf Futures
+  kosten Rollverluste in Contango-Phasen (spätere Kontrakte teurer als der aktuelle) zusätzlich Rendite.</p>
+  {% if klassen.rohstoff %}{{ klassen_tabelle('rohstoff', klassen.rohstoff, 'Rohstoff', 'vs. Ø 5J', 'Abweichung vom 5-Jahres-Mittel des Preises') }}
+  {% else %}<p class="leer">Noch keine Rohstoffe auf der Watchlist. Über die Suche oben rechts hinzufügen, z. B. „Gold“.</p>{% endif %}
+</section>
+{{ pruefstand_abschnitt('rohstoff') }}
+</div>
+
+<div class="kachel-inhalt" id="kachel-index" data-kachel-inhalt="index">
+<section class="abschnitt teil">
+  <div class="abschnitt-kopf"><h2>Indizes &amp; Futures <span class="anzahl">{{ klassen.index | length }}</span></h2><p class="klein">Basiswerte für Derivate</p></div>
+  <p class="erklaerung">Aktienindizes und Index-Futures sind die häufigsten Basiswerte für Derivate wie Knock-outs, Optionsscheine
+  und Faktor-Zertifikate. Statt einzelner Produkte wird hier der Basiswert bewertet, denn er entscheidet über Gewinn, Verlust und
+  Knock-out. <b>Trend</b> und <b>Momentum</b> zeigen die Richtung, <b>Pullback</b> eine Korrektur vom Hoch. Ist beides erfüllt,
+  liegt ein Rücksetzer im Aufwärtstrend vor, das klassische Einstiegsmuster. <b>Vol-Regime</b> ist für Hebelprodukte entscheidend:
+  In ruhigen Phasen werden Knock-out-Schwellen seltener gerissen, Faktor-Zertifikate verlieren weniger durch Schwankung.</p>
+  {% if klassen.index %}{{ klassen_tabelle('index', klassen.index, 'Index', 'vs. 200T', 'Abstand des Index zu seiner 200-Tage-Linie') }}
+  {% else %}<p class="leer">Noch keine Indizes auf der Watchlist. Über die Suche oben rechts hinzufügen, z. B. „DAX“.</p>{% endif %}
+</section>
+{{ pruefstand_abschnitt('index') }}
+</div>
+
+{% if warnungen %}
+<section class="abschnitt teil">
+  <div class="abschnitt-kopf"><h2>Datenprobleme</h2></div>
+  <ul>{% for w in warnungen %}<li>{{ w }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+<div class="panel-huelle" id="panel" hidden>
+  <div class="panel-hintergrund" data-aktion="schliessen"></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-label="Analyse" tabindex="-1">
+  {% for a in alle %}
+    {{ analyse(a, charts[slug(a.symbol)], quartalstabellen[slug(a.symbol)], a.einordnung, alle[loop.index0 - 1] if not loop.first else none, alle[loop.index] if not loop.last else none) }}
+  {% endfor %}
+  </div>
+</div>
+<script id="chart-daten" type="application/json">{{ charts | tojson }}</script>
+<script id="live-basis" type="application/json">{{ live_basis | tojson }}</script>
+{% endblock %}
+
+{% block fuss %}
+<p><strong>Signale.</strong> Zehn je Anlageklasse, ausgewählt nach öffentlich dokumentierten Faktor-Frameworks
+(MSCI FaCS, Faktor-Indizes von J.P. Morgan und Goldman Sachs, Risikoprämien für Währungen und Rohstoffe, Risikoindikatoren der
+Aktienstrategen). Der Balken zeigt, wie deutlich ein Wert ein Signal erfüllt; ab halber Füllung gilt es als erfüllt. Definition
+und Schwelle stehen am Sternchen, die Rechnung im Rechenweg.</p>
+{% if archiv %}
+<p><strong>Frühere Wochen.</strong></p>
+<p class="archiv">{% for e in archiv %}<a href="{{ e.pfad }}">{{ e.datum | datum }}</a>{% endfor %}</p>
+{% endif %}
+{% endblock %}
