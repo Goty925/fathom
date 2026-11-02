@@ -1,0 +1,4616 @@
+{
+ "kriterien": {
+  "min_momentum_12_1": 0.0,
+  "min_roe": 0.15,
+  "max_nd_ebitda": 2.0,
+  "min_fcf_rendite": 0.03,
+  "min_eps_revision": 0.0,
+  "max_vol_1j": 0.35,
+  "min_boersenwert_mrd_eur": 50,
+  "min_umsatzwachstum": 0.05,
+  "min_gewinnwachstum": 0.0,
+  "min_abstand_hoch": 0.2,
+  "max_position_spanne": 0.4,
+  "max_kgv_vs_median": 0.8,
+  "min_kursziel_abstand": 0.2
+ },
+ "stand": "2026-11-02",
+ "werte": {
+  "now": {
+   "symbol": "NOW",
+   "finnhub": "NOW",
+   "name": "ServiceNow",
+   "typ": "aktie",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 105.12000274658203,
+   "kurs_datum": "2026-10-30",
+   "hoch": 186.93600463867188,
+   "tief": 83.0,
+   "ziel": 154.68826,
+   "fwd_kgv": 21.89243,
+   "kgv_median": 26.3852,
+   "boersenwert_eur": 97529708003.58984,
+   "isin": "US81762P1021",
+   "sektor": "Technology",
+   "rendite_1w": -0.3387015707932045,
+   "rendite_ytd": -0.3137933215531513,
+   "technik": "Starker Verkauf",
+   "zahlen": false,
+   "zahlen_staerke": 0.0,
+   "zahlen_text": "Umsatz +20 % YoY, Gewinn −44 % YoY (Vorjahresquartal)",
+   "umsatz_yoy": 0.205,
+   "gewinn_yoy": -0.442,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": -0.24448833,
+    "mittel_5j": 134.17681743,
+    "vol_1m": 1.02523555,
+    "vol_median_1j": 0.55291768,
+    "gd200": 114.98710011
+   },
+   "carry": null,
+   "py": {
+    "Large Cap": {
+     "e": true,
+     "s": 61.15
+    },
+    "Earnings Momentum": {
+     "e": false,
+     "s": 0.0
+    },
+    "Pullback": {
+     "e": true,
+     "s": 73.4
+    },
+    "Valuation Gap": {
+     "e": true,
+     "s": 95.26
+    },
+    "Preis-Momentum": {
+     "e": false,
+     "s": 0.0
+    },
+    "Profitabilität": {
+     "e": false,
+     "s": 39.49
+    },
+    "Solide Bilanz": {
+     "e": true,
+     "s": 100.0
+    },
+    "FCF-Rendite": {
+     "e": true,
+     "s": 72.74
+    },
+    "Gewinnrevisionen": {
+     "e": false,
+     "s": 9.14
+    },
+    "Niedrige Volatilität": {
+     "e": false,
+     "s": 0.0
+    }
+   },
+   "kz": {
+    "kurs": 105.12000275,
+    "abstand_hoch": 0.43766851,
+    "position_spanne": 0.21282329,
+    "momentum_12_1": -0.24448833,
+    "abweichung_mittel_5j": -0.21655615,
+    "mittel_5j": 134.17681743,
+    "vol_1m": 1.02523555,
+    "vol_median_1j": 0.55291768,
+    "vol_verhaeltnis": 1.85422819,
+    "gd200": 114.98710011,
+    "abstand_gd200": -0.08581047,
+    "rendite_3m": -0.07942902,
+    "kurs_3m": 114.19000244,
+    "saison": 0.0301853,
+    "saison_quote": 0.54545455,
+    "boersenwert_eur": 97529708003.58984,
+    "umsatzwachstum": 0.205,
+    "gewinnwachstum": -0.442,
+    "kursziel_abstand": 0.47153973,
+    "hoch": 186.93600464,
+    "tief": 83.0,
+    "vol_1j": 0.64108117,
+    "ziel": 154.68826,
+    "fwd_kgv": 21.89243,
+    "kgv_median": 26.3852,
+    "monat": "November",
+    "jahre": 11,
+    "ko_risiko": 0.05371901,
+    "kgv_rel": 0.82972386,
+    "roe": 0.11846,
+    "schulden": 2403000000.0,
+    "cash": 3726000000.0,
+    "ebitda": 3022000000.0,
+    "nd_ebitda": -0.43778954,
+    "fcf_rendite": 0.05274008,
+    "eps_neu": 4.80166,
+    "eps_alt": 5.00619,
+    "eps_revision": -0.04085542
+   },
+   "sz": {
+    "m": "gewinn",
+    "anker": {
+     "bis": "2026-09-30",
+     "eps": 3.79,
+     "kgv": 27.736148,
+     "fin": "USD",
+     "umgerechnet": false,
+     "q": "berichteter Gewinn je Aktie, bereinigt wie in den Analystenschätzungen"
+    },
+    "quartale": [
+     {
+      "bis": "2025-12-31",
+      "eps": 0.92
+     },
+     {
+      "bis": "2026-03-31",
+      "eps": 0.97
+     },
+     {
+      "bis": "2026-06-30",
+      "eps": 0.9
+     },
+     {
+      "bis": "2026-09-30",
+      "eps": 1.0
+     }
+    ],
+    "prognose": [
+     "2026-12-31",
+     "2027-03-31",
+     "2027-06-30",
+     "2027-09-30"
+    ],
+    "konsens_q": {
+     "eps": 1.07213,
+     "n": 38
+    },
+    "t": {
+     "g": {
+      "d": 0.079937,
+      "b": 0.2144,
+      "u": 0.332849,
+      "q": "Konsens für das nächste Geschäftsjahr: +21,4 % (44 Analysten). Upside und Downside aus der höchsten (+9,8 %) und der niedrigsten Schätzung (−11,1 %) gegenüber dem Mittel."
+     },
+     "v": {
+      "d": -0.130435,
+      "b": 0.0,
+      "u": 0.15,
+      "q": "Basis: das KGV bleibt, wie es ist. Für Upside und Downside fehlt eine ausreichende KGV-Historie: pauschal +15 % / −13 %."
+     },
+     "div": {
+      "b": 0.0,
+      "q": "Keine Dividende gemeldet."
+     }
+    },
+    "bew": {
+     "kgv": 21.89243,
+     "median": 26.3852
+    },
+    "analysten": 44,
+    "kurs": 105.120003,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": "2027-01-27",
+    "f": [
+     {
+      "k": "kgv_kurz",
+      "t": "Die KGV-Historie ist zu kurz für eine eigene Spanne: die Bewertungsänderung ist pauschal ±15 %.",
+      "g": 2
+     },
+     {
+      "k": "vol",
+      "t": "Die Kurse schwanken gerade 1,9-mal so stark wie im Jahresmittel: die Spanne der Szenarien kann zu eng sein.",
+      "g": 2
+     }
+    ]
+   }
+  },
+  "2899-hk": {
+   "symbol": "2899.HK",
+   "finnhub": null,
+   "name": "Zijin Mining",
+   "typ": "aktie",
+   "waehrung": "HKD",
+   "dez": 2,
+   "kurs": 27.440000534057617,
+   "kurs_datum": "2026-11-02",
+   "hoch": 44.84257125854492,
+   "tief": 27.003206253051758,
+   "ziel": 49.30111,
+   "fwd_kgv": 7.0187845,
+   "kgv_median": null,
+   "boersenwert_eur": 83121898751.08984,
+   "isin": "CNE100000502",
+   "sektor": "Basic Materials",
+   "rendite_1w": -0.01081468058889079,
+   "rendite_ytd": -0.20824670428025027,
+   "technik": "Starker Verkauf",
+   "zahlen": false,
+   "zahlen_staerke": 44.00000000000001,
+   "zahlen_text": "Umsatz +3 % YoY, Gewinn +25 % YoY (Vorjahresquartal)",
+   "umsatz_yoy": 0.032,
+   "gewinn_yoy": 0.254,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.04316982,
+    "mittel_5j": 17.27717895,
+    "vol_1m": 0.43566822,
+    "vol_median_1j": 0.48401494,
+    "gd200": 34.81500162
+   },
+   "carry": null,
+   "py": {
+    "Large Cap": {
+     "e": true,
+     "s": 58.48
+    },
+    "Earnings Momentum": {
+     "e": false,
+     "s": 44.0
+    },
+    "Pullback": {
+     "e": true,
+     "s": 81.35
+    },
+    "Valuation Gap": {
+     "e": true,
+     "s": 100.0
+    },
+    "Preis-Momentum": {
+     "e": true,
+     "s": 58.63
+    },
+    "Profitabilität": {
+     "e": true,
+     "s": 100.0
+    },
+    "Solide Bilanz": {
+     "e": true,
+     "s": 75.44
+    },
+    "FCF-Rendite": {
+     "e": true,
+     "s": 100.0
+    },
+    "Gewinnrevisionen": {
+     "e": true,
+     "s": 71.42
+    },
+    "Niedrige Volatilität": {
+     "e": false,
+     "s": 14.65
+    }
+   },
+   "kz": {
+    "kurs": 27.44000053,
+    "abstand_hoch": 0.38808146,
+    "position_spanne": 0.02448486,
+    "momentum_12_1": 0.04316982,
+    "abweichung_mittel_5j": 0.58822228,
+    "mittel_5j": 17.27717895,
+    "vol_1m": 0.43566822,
+    "vol_median_1j": 0.48401494,
+    "vol_verhaeltnis": 0.90011318,
+    "gd200": 34.81500162,
+    "abstand_gd200": -0.211834,
+    "rendite_3m": -0.16646409,
+    "kurs_3m": 32.91999817,
+    "saison": 0.05844283,
+    "saison_quote": 0.72727273,
+    "boersenwert_eur": 83121898751.08984,
+    "umsatzwachstum": 0.032,
+    "gewinnwachstum": 0.254,
+    "kursziel_abstand": 0.79668765,
+    "hoch": 44.84257126,
+    "tief": 27.00320625,
+    "vol_1j": 0.4913924,
+    "ziel": 49.30111,
+    "fwd_kgv": 7.0187845,
+    "kgv_median": null,
+    "monat": "Dezember",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "roe": 0.36134,
+    "schulden": 164492766171.0,
+    "cash": 65576737700.0,
+    "ebitda": 100679854537.0,
+    "nd_ebitda": 0.98248084,
+    "fcf_rendite": 0.08556299,
+    "eps_neu": 3.32729,
+    "eps_alt": 3.2575,
+    "eps_revision": 0.02142441
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.491392,
+    "t": {
+     "k": {
+      "d": -0.388226,
+      "b": 0.0,
+      "u": 0.634591,
+      "q": "Basis: ohne positive Gewinnbasis nimmt die Rechnung einen unveränderten Kurs an. Upside und Downside: eine Jahresschwankung (Volatilität 49 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 27.440001,
+    "waehrung": "HKD",
+    "dez": 2,
+    "stand": "2026-11-02",
+    "termin": null,
+    "f": [
+     {
+      "k": "ohne_gewinn",
+      "t": "Für diese Aktie fehlen berichtete Quartalsgewinne: die Szenarien rechnen nur mit der Kursschwankung.",
+      "g": 3
+     }
+    ]
+   }
+  },
+  "adbe": {
+   "symbol": "ADBE",
+   "finnhub": "ADBE",
+   "name": "Adobe",
+   "typ": "aktie",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 250.22999572753906,
+   "kurs_datum": "2026-10-30",
+   "hoch": 357.5299987792969,
+   "tief": 193.41000366210938,
+   "ziel": 272.31375,
+   "fwd_kgv": 9.096771,
+   "kgv_median": 11.1483,
+   "boersenwert_eur": 87056481355.61719,
+   "isin": "US00724F1012",
+   "sektor": "Technology",
+   "rendite_1w": -0.05151243734133626,
+   "rendite_ytd": -0.2850367075927813,
+   "technik": "Neutral",
+   "zahlen": true,
+   "zahlen_staerke": 63.125,
+   "zahlen_text": "Umsatz +13 % YoY, Gewinn +10 % YoY (Vorjahresquartal)",
+   "umsatz_yoy": 0.129,
+   "gewinn_yoy": 0.105,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": -0.28585802,
+    "mittel_5j": 417.391555,
+    "vol_1m": 0.41155663,
+    "vol_median_1j": 0.40097221,
+    "gd200": 250.43579979
+   },
+   "carry": null,
+   "py": {
+    "Large Cap": {
+     "e": true,
+     "s": 59.26
+    },
+    "Earnings Momentum": {
+     "e": true,
+     "s": 63.12
+    },
+    "Pullback": {
+     "e": true,
+     "s": 56.72
+    },
+    "Valuation Gap": {
+     "e": false,
+     "s": 48.0
+    },
+    "Preis-Momentum": {
+     "e": false,
+     "s": 0.0
+    },
+    "Profitabilität": {
+     "e": true,
+     "s": 100.0
+    },
+    "Solide Bilanz": {
+     "e": true,
+     "s": 96.9
+    },
+    "FCF-Rendite": {
+     "e": true,
+     "s": 100.0
+    },
+    "Gewinnrevisionen": {
+     "e": true,
+     "s": 55.79
+    },
+    "Niedrige Volatilität": {
+     "e": false,
+     "s": 33.88
+    }
+   },
+   "kz": {
+    "kurs": 250.22999573,
+    "abstand_hoch": 0.30011469,
+    "position_spanne": 0.34621005,
+    "momentum_12_1": -0.28585802,
+    "abweichung_mittel_5j": -0.400491,
+    "mittel_5j": 417.391555,
+    "vol_1m": 0.41155663,
+    "vol_median_1j": 0.40097221,
+    "vol_verhaeltnis": 1.02639687,
+    "gd200": 250.43579979,
+    "abstand_gd200": -0.00082178,
+    "rendite_3m": -0.00441633,
+    "kurs_3m": 251.33999634,
+    "saison": 0.04634835,
+    "saison_quote": 0.81818182,
+    "boersenwert_eur": 87056481355.61719,
+    "umsatzwachstum": 0.129,
+    "gewinnwachstum": 0.105,
+    "kursziel_abstand": 0.08825383,
+    "hoch": 357.52999878,
+    "tief": 193.41000366,
+    "vol_1j": 0.41447219,
+    "ziel": 272.31375,
+    "fwd_kgv": 9.096771,
+    "kgv_median": 11.1483,
+    "monat": "November",
+    "jahre": 11,
+    "ko_risiko": 0.02892562,
+    "kgv_rel": 0.81597831,
+    "roe": 0.61902,
+    "schulden": 6648000000.0,
+    "cash": 5431000000.0,
+    "ebitda": 9815000000.0,
+    "nd_ebitda": 0.12399389,
+    "fcf_rendite": 0.09595618,
+    "eps_neu": 27.50756,
+    "eps_alt": 27.34924,
+    "eps_revision": 0.00578883
+   },
+   "sz": {
+    "m": "gewinn",
+    "anker": {
+     "bis": "2026-08-31",
+     "eps": 23.65,
+     "kgv": 10.58055,
+     "fin": "USD",
+     "umgerechnet": false,
+     "q": "berichteter Gewinn je Aktie, bereinigt wie in den Analystenschätzungen"
+    },
+    "quartale": [
+     {
+      "bis": "2025-11-30",
+      "eps": 5.5
+     },
+     {
+      "bis": "2026-02-28",
+      "eps": 6.06
+     },
+     {
+      "bis": "2026-05-31",
+      "eps": 5.96
+     },
+     {
+      "bis": "2026-08-31",
+      "eps": 6.13
+     }
+    ],
+    "prognose": [
+     "2026-11-30",
+     "2027-02-28",
+     "2027-05-31",
+     "2027-08-31"
+    ],
+    "konsens_q": {
+     "eps": 6.32965,
+     "n": 29
+    },
+    "t": {
+     "g": {
+      "d": -0.073752,
+      "b": 0.1239,
+      "u": 0.192641,
+      "q": "Konsens für das nächste Geschäftsjahr: +12,4 % (37 Analysten). Upside und Downside aus der höchsten (+6,1 %) und der niedrigsten Schätzung (−17,6 %) gegenüber dem Mittel."
+     },
+     "v": {
+      "d": -0.130435,
+      "b": 0.0,
+      "u": 0.15,
+      "q": "Basis: das KGV bleibt, wie es ist. Für Upside und Downside fehlt eine ausreichende KGV-Historie: pauschal +15 % / −13 %."
+     },
+     "div": {
+      "b": 0.0,
+      "q": "Keine Dividende gemeldet."
+     }
+    },
+    "bew": {
+     "kgv": 9.096771,
+     "median": 11.1483
+    },
+    "analysten": 37,
+    "kurs": 250.229996,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": "2026-12-09",
+    "f": [
+     {
+      "k": "kgv_kurz",
+      "t": "Die KGV-Historie ist zu kurz für eine eigene Spanne: die Bewertungsänderung ist pauschal ±15 %.",
+      "g": 2
+     }
+    ]
+   }
+  },
+  "nvda": {
+   "symbol": "NVDA",
+   "finnhub": "NVDA",
+   "name": "Nvidia",
+   "typ": "aktie",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 204.63999938964844,
+   "kurs_datum": "2026-10-30",
+   "hoch": 239.24000549316406,
+   "tief": 164.79331970214844,
+   "ziel": 328.95346,
+   "fwd_kgv": 12.858633,
+   "kgv_median": 24.9377,
+   "boersenwert_eur": 4417154589904.875,
+   "isin": "US67066G1040",
+   "sektor": "Technology",
+   "rendite_1w": -0.029958319696068325,
+   "rendite_ytd": 0.09983303168051649,
+   "technik": "Starker Verkauf",
+   "zahlen": true,
+   "zahlen_staerke": 100.0,
+   "zahlen_text": "Umsatz +106 % YoY, Gewinn +128 % YoY (Vorjahresquartal)",
+   "umsatz_yoy": 1.059,
+   "gewinn_yoy": 1.278,
+   "earnings": "2026-11-17",
+   "f": {
+    "momentum_12_1": 0.1177218,
+    "mittel_5j": 97.7300618,
+    "vol_1m": 0.32114035,
+    "vol_median_1j": 0.38402997,
+    "gd200": 204.09216919
+   },
+   "carry": null,
+   "py": {
+    "Large Cap": {
+     "e": true,
+     "s": 100.0
+    },
+    "Earnings Momentum": {
+     "e": true,
+     "s": 100.0
+    },
+    "Pullback": {
+     "e": false,
+     "s": 36.16
+    },
+    "Valuation Gap": {
+     "e": true,
+     "s": 100.0
+    },
+    "Preis-Momentum": {
+     "e": true,
+     "s": 73.54
+    },
+    "Profitabilität": {
+     "e": true,
+     "s": 100.0
+    },
+    "Solide Bilanz": {
+     "e": true,
+     "s": 99.92
+    },
+    "FCF-Rendite": {
+     "e": false,
+     "s": 14.1
+    },
+    "Gewinnrevisionen": {
+     "e": true,
+     "s": 100.0
+    },
+    "Niedrige Volatilität": {
+     "e": false,
+     "s": 44.08
+    }
+   },
+   "kz": {
+    "kurs": 204.63999939,
+    "abstand_hoch": 0.14462467,
+    "position_spanne": 0.53523779,
+    "momentum_12_1": 0.1177218,
+    "abweichung_mittel_5j": 1.09393093,
+    "mittel_5j": 97.7300618,
+    "vol_1m": 0.32114035,
+    "vol_median_1j": 0.38402997,
+    "vol_verhaeltnis": 0.83623772,
+    "gd200": 204.09216919,
+    "abstand_gd200": 0.00268423,
+    "rendite_3m": -0.00857057,
+    "kurs_3m": 206.40904236,
+    "saison": 0.08271279,
+    "saison_quote": 0.72727273,
+    "boersenwert_eur": 4417154589904.875,
+    "umsatzwachstum": 1.059,
+    "gewinnwachstum": 1.278,
+    "kursziel_abstand": 0.60747391,
+    "hoch": 239.24000549,
+    "tief": 164.7933197,
+    "vol_1j": 0.37368327,
+    "ziel": 328.95346,
+    "fwd_kgv": 12.858633,
+    "kgv_median": 24.9377,
+    "monat": "November",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": 0.51563027,
+    "roe": 1.17211,
+    "schulden": 11040000000.0,
+    "cash": 10605000000.0,
+    "ebitda": 144552000000.0,
+    "nd_ebitda": 0.0030093,
+    "fcf_rendite": 0.00846107,
+    "eps_neu": 15.9146,
+    "eps_alt": 12.81483,
+    "eps_revision": 0.24188928
+   },
+   "sz": {
+    "m": "gewinn",
+    "anker": {
+     "bis": "2026-07-31",
+     "eps": 7.01,
+     "kgv": 29.192582,
+     "fin": "USD",
+     "umgerechnet": false,
+     "q": "berichteter Gewinn je Aktie, bereinigt wie in den Analystenschätzungen"
+    },
+    "quartale": [
+     {
+      "bis": "2025-10-31",
+      "eps": 1.3
+     },
+     {
+      "bis": "2026-01-31",
+      "eps": 1.62
+     },
+     {
+      "bis": "2026-04-30",
+      "eps": 1.87
+     },
+     {
+      "bis": "2026-07-31",
+      "eps": 2.22
+     }
+    ],
+    "prognose": [
+     "2026-10-31",
+     "2027-01-31",
+     "2027-04-30",
+     "2027-07-31"
+    ],
+    "konsens_q": {
+     "eps": 2.47325,
+     "n": 44
+    },
+    "t": {
+     "g": {
+      "d": 0.379729,
+      "b": 0.709,
+      "u": 1.013052,
+      "q": "Konsens für das nächste Geschäftsjahr: +70,9 % (52 Analysten). Upside und Downside aus der höchsten (+17,8 %) und der niedrigsten Schätzung (−19,3 %) gegenüber dem Mittel."
+     },
+     "v": {
+      "d": -0.130435,
+      "b": 0.0,
+      "u": 0.15,
+      "q": "Basis: das KGV bleibt, wie es ist. Für Upside und Downside fehlt eine ausreichende KGV-Historie: pauschal +15 % / −13 %."
+     },
+     "div": {
+      "b": 0.00131,
+      "q": "Dividendenrendite der letzten zwölf Monate: 0,1 %, in allen Szenarien gleich."
+     }
+    },
+    "bew": {
+     "kgv": 12.858633,
+     "median": 24.9377
+    },
+    "analysten": 52,
+    "kurs": 204.639999,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": "2026-11-17",
+    "f": [
+     {
+      "k": "wachstum",
+      "t": "Sehr hohes erwartetes Gewinnwachstum (+71 %), oft aus einer niedrigen Ausgangsbasis: kleine Änderungen am Gewinn verschieben das Ergebnis stark.",
+      "g": 2
+     },
+     {
+      "k": "kgv_kurz",
+      "t": "Die KGV-Historie ist zu kurz für eine eigene Spanne: die Bewertungsänderung ist pauschal ±15 %.",
+      "g": 2
+     },
+     {
+      "k": "zahlen",
+      "t": "Quartalszahlen am 17.11.2026: danach setzt die Rechnung auf die neuen Ist-Zahlen auf, bis dahin ist der Gewinn die unsicherste Annahme.",
+      "g": 2
+     }
+    ]
+   }
+  },
+  "crm": {
+   "symbol": "CRM",
+   "finnhub": "CRM",
+   "name": "Salesforce",
+   "typ": "aktie",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 229.1699981689453,
+   "kurs_datum": "2026-10-30",
+   "hoch": 264.4169616699219,
+   "tief": 149.85635375976562,
+   "ziel": 287.0836,
+   "fwd_kgv": 14.309504,
+   "kgv_median": 16.2602,
+   "boersenwert_eur": 168595709303.47266,
+   "isin": "US79466L3024",
+   "sektor": "Technology",
+   "rendite_1w": -0.07804646008626981,
+   "rendite_ytd": -0.1289822010363214,
+   "technik": "Verkaufen",
+   "zahlen": true,
+   "zahlen_staerke": 61.6,
+   "zahlen_text": "Umsatz +11 % YoY, Gewinn +119 % YoY (Vorjahresquartal)",
+   "umsatz_yoy": 0.108,
+   "gewinn_yoy": 1.189,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": -0.05075337,
+    "mittel_5j": 226.38444683,
+    "vol_1m": 0.33645227,
+    "vol_median_1j": 0.41219369,
+    "gd200": 197.64256142
+   },
+   "carry": null,
+   "py": {
+    "Large Cap": {
+     "e": true,
+     "s": 70.29
+    },
+    "Earnings Momentum": {
+     "e": true,
+     "s": 61.6
+    },
+    "Pullback": {
+     "e": false,
+     "s": 25.64
+    },
+    "Valuation Gap": {
+     "e": true,
+     "s": 58.79
+    },
+    "Preis-Momentum": {
+     "e": false,
+     "s": 33.08
+    },
+    "Profitabilität": {
+     "e": true,
+     "s": 60.95
+    },
+    "Solide Bilanz": {
+     "e": true,
+     "s": 80.38
+    },
+    "FCF-Rendite": {
+     "e": true,
+     "s": 100.0
+    },
+    "Gewinnrevisionen": {
+     "e": true,
+     "s": 82.42
+    },
+    "Niedrige Volatilität": {
+     "e": false,
+     "s": 18.72
+    }
+   },
+   "kz": {
+    "kurs": 229.16999817,
+    "abstand_hoch": 0.13330069,
+    "position_spanne": 0.69232912,
+    "momentum_12_1": -0.05075337,
+    "abweichung_mittel_5j": 0.01230452,
+    "mittel_5j": 226.38444683,
+    "vol_1m": 0.33645227,
+    "vol_median_1j": 0.41219369,
+    "vol_verhaeltnis": 0.81624797,
+    "gd200": 197.64256142,
+    "abstand_gd200": 0.15951745,
+    "rendite_3m": 0.2345963,
+    "kurs_3m": 185.62342834,
+    "saison": 0.03188606,
+    "saison_quote": 0.63636364,
+    "boersenwert_eur": 168595709303.47266,
+    "umsatzwachstum": 0.108,
+    "gewinnwachstum": 1.189,
+    "kursziel_abstand": 0.25271023,
+    "hoch": 264.41696167,
+    "tief": 149.85635376,
+    "vol_1j": 0.47510474,
+    "ziel": 287.0836,
+    "fwd_kgv": 14.309504,
+    "kgv_median": 16.2602,
+    "monat": "November",
+    "jahre": 11,
+    "ko_risiko": 0.00413223,
+    "kgv_rel": 0.88003247,
+    "roe": 0.19381,
+    "schulden": 17176000000.0,
+    "cash": 7327000000.0,
+    "ebitda": 12548000000.0,
+    "nd_ebitda": 0.78490596,
+    "fcf_rendite": 0.09401498,
+    "eps_neu": 16.01523,
+    "eps_alt": 15.51229,
+    "eps_revision": 0.03242203
+   },
+   "sz": {
+    "m": "gewinn",
+    "anker": {
+     "bis": "2026-07-31",
+     "eps": 16.84,
+     "kgv": 13.60867,
+     "fin": "USD",
+     "umgerechnet": false,
+     "q": "berichteter Gewinn je Aktie, bereinigt wie in den Analystenschätzungen"
+    },
+    "quartale": [
+     {
+      "bis": "2025-10-31",
+      "eps": 3.25
+     },
+     {
+      "bis": "2026-01-31",
+      "eps": 3.81
+     },
+     {
+      "bis": "2026-04-30",
+      "eps": 3.88
+     },
+     {
+      "bis": "2026-07-31",
+      "eps": 5.9
+     }
+    ],
+    "prognose": [
+     "2026-10-31",
+     "2027-01-31",
+     "2027-04-30",
+     "2027-07-31"
+    ],
+    "konsens_q": {
+     "eps": 3.4463,
+     "n": 42
+    },
+    "t": {
+     "g": {
+      "d": -0.124799,
+      "b": -0.0441,
+      "u": 0.081527,
+      "q": "Konsens für das nächste Geschäftsjahr: −4,4 % (53 Analysten). Upside und Downside aus der höchsten (+13,1 %) und der niedrigsten Schätzung (−8,4 %) gegenüber dem Mittel."
+     },
+     "v": {
+      "d": -0.130435,
+      "b": 0.0,
+      "u": 0.15,
+      "q": "Basis: das KGV bleibt, wie es ist. Für Upside und Downside fehlt eine ausreichende KGV-Historie: pauschal +15 % / −13 %."
+     },
+     "div": {
+      "b": 0.007414,
+      "q": "Dividendenrendite der letzten zwölf Monate: 0,7 %, in allen Szenarien gleich."
+     }
+    },
+    "bew": {
+     "kgv": 14.309504,
+     "median": 16.2602
+    },
+    "analysten": 53,
+    "kurs": 229.169998,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": "2026-12-02",
+    "f": [
+     {
+      "k": "kgv_kurz",
+      "t": "Die KGV-Historie ist zu kurz für eine eigene Spanne: die Bewertungsänderung ist pauschal ±15 %.",
+      "g": 2
+     }
+    ]
+   }
+  },
+  "msft": {
+   "symbol": "MSFT",
+   "finnhub": "MSFT",
+   "name": "Microsoft",
+   "typ": "aktie",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 521.9099731445312,
+   "kurs_datum": "2026-10-30",
+   "hoch": 543.4500122070312,
+   "tief": 352.1670227050781,
+   "ziel": 633.2829,
+   "fwd_kgv": 21.570484,
+   "kgv_median": 25.9067,
+   "boersenwert_eur": 3464581828786.9688,
+   "isin": "US5949181045",
+   "sektor": "Technology",
+   "rendite_1w": -0.004957077220043127,
+   "rendite_ytd": 0.08602015474851776,
+   "technik": "Neutral",
+   "zahlen": true,
+   "zahlen_staerke": 77.6,
+   "zahlen_text": "Umsatz +19 % YoY, Gewinn +32 % YoY (Vorjahresquartal)",
+   "umsatz_yoy": 0.188,
+   "gewinn_yoy": 0.323,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": -0.0452973,
+    "mittel_5j": 371.23253219,
+    "vol_1m": 0.199785,
+    "vol_median_1j": 0.24275731,
+    "gd200": 436.85394836
+   },
+   "carry": null,
+   "py": {
+    "Large Cap": {
+     "e": true,
+     "s": 100.0
+    },
+    "Earnings Momentum": {
+     "e": true,
+     "s": 77.6
+    },
+    "Pullback": {
+     "e": false,
+     "s": 9.38
+    },
+    "Valuation Gap": {
+     "e": true,
+     "s": 52.23
+    },
+    "Preis-Momentum": {
+     "e": false,
+     "s": 34.9
+    },
+    "Profitabilität": {
+     "e": true,
+     "s": 98.05
+    },
+    "Solide Bilanz": {
+     "e": true,
+     "s": 95.68
+    },
+    "FCF-Rendite": {
+     "e": false,
+     "s": 1.29
+    },
+    "Gewinnrevisionen": {
+     "e": true,
+     "s": 80.97
+    },
+    "Niedrige Volatilität": {
+     "e": true,
+     "s": 57.26
+    }
+   },
+   "kz": {
+    "kurs": 521.90997314,
+    "abstand_hoch": 0.03963573,
+    "position_spanne": 0.88739177,
+    "momentum_12_1": -0.0452973,
+    "abweichung_mittel_5j": 0.40588426,
+    "mittel_5j": 371.23253219,
+    "vol_1m": 0.199785,
+    "vol_median_1j": 0.24275731,
+    "vol_verhaeltnis": 0.82298243,
+    "gd200": 436.85394836,
+    "abstand_gd200": 0.19470128,
+    "rendite_3m": 0.07227005,
+    "kurs_3m": 486.73370361,
+    "saison": 0.04101216,
+    "saison_quote": 0.81818182,
+    "boersenwert_eur": 3464581828786.9688,
+    "umsatzwachstum": 0.188,
+    "gewinnwachstum": 0.323,
+    "kursziel_abstand": 0.2133949,
+    "hoch": 543.45001221,
+    "tief": 352.16702271,
+    "vol_1j": 0.32822868,
+    "ziel": 633.2829,
+    "fwd_kgv": 21.570484,
+    "kgv_median": 25.9067,
+    "monat": "November",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": 0.83262183,
+    "roe": 0.34221,
+    "schulden": 56826000000.0,
+    "cash": 20935000000.0,
+    "ebitda": 207519000000.0,
+    "nd_ebitda": 0.17295284,
+    "fcf_rendite": 0.00077252,
+    "eps_neu": 24.19556,
+    "eps_alt": 23.46875,
+    "eps_revision": 0.03096927
+   },
+   "sz": {
+    "m": "gewinn",
+    "anker": {
+     "bis": "2026-09-30",
+     "eps": 18.04,
+     "kgv": 28.930708,
+     "fin": "USD",
+     "umgerechnet": false,
+     "q": "berichteter Gewinn je Aktie, bereinigt wie in den Analystenschätzungen"
+    },
+    "quartale": [
+     {
+      "bis": "2025-12-31",
+      "eps": 4.14
+     },
+     {
+      "bis": "2026-03-31",
+      "eps": 4.27
+     },
+     {
+      "bis": "2026-06-30",
+      "eps": 4.74
+     },
+     {
+      "bis": "2026-09-30",
+      "eps": 4.89
+     }
+    ],
+    "prognose": [
+     "2026-12-31",
+     "2027-03-31",
+     "2027-06-30",
+     "2027-09-30"
+    ],
+    "konsens_q": {
+     "eps": 4.85731,
+     "n": 23
+    },
+    "t": {
+     "g": {
+      "d": 0.144169,
+      "b": 0.2089,
+      "u": 0.291562,
+      "q": "Konsens für das nächste Geschäftsjahr: +20,9 % (32 Analysten). Upside und Downside aus der höchsten (+6,8 %) und der niedrigsten Schätzung (−5,4 %) gegenüber dem Mittel."
+     },
+     "v": {
+      "d": -0.130435,
+      "b": 0.0,
+      "u": 0.15,
+      "q": "Basis: das KGV bleibt, wie es ist. Für Upside und Downside fehlt eine ausreichende KGV-Historie: pauschal +15 % / −13 %."
+     },
+     "div": {
+      "b": 0.006998,
+      "q": "Dividendenrendite der letzten zwölf Monate: 0,7 %, in allen Szenarien gleich."
+     }
+    },
+    "bew": {
+     "kgv": 21.570484,
+     "median": 25.9067
+    },
+    "analysten": 32,
+    "kurs": 521.909973,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": "2027-01-27",
+    "f": [
+     {
+      "k": "kgv_kurz",
+      "t": "Die KGV-Historie ist zu kurz für eine eigene Spanne: die Bewertungsänderung ist pauschal ±15 %.",
+      "g": 2
+     }
+    ]
+   }
+  },
+  "sap-de": {
+   "symbol": "SAP.DE",
+   "finnhub": null,
+   "name": "SAP",
+   "typ": "aktie",
+   "waehrung": "EUR",
+   "dez": 2,
+   "kurs": 211.25,
+   "kurs_datum": "2026-10-30",
+   "hoch": 225.03074645996094,
+   "tief": 128.32000732421875,
+   "ziel": 238.93295,
+   "fwd_kgv": 24.925726,
+   "kgv_median": 22.1239,
+   "boersenwert_eur": 243825655808.0,
+   "isin": "DE0007164600",
+   "sektor": "Technology",
+   "rendite_1w": -0.014692136129468514,
+   "rendite_ytd": 0.031127286030631307,
+   "technik": "Starker Kauf",
+   "zahlen": true,
+   "zahlen_staerke": 66.4,
+   "zahlen_text": "Umsatz +13 % YoY, Gewinn +13 % YoY (Vorjahresquartal)",
+   "umsatz_yoy": 0.132,
+   "gewinn_yoy": 0.134,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": -0.15388997,
+    "mittel_5j": 157.53851065,
+    "vol_1m": 0.26064238,
+    "vol_median_1j": 0.35257439,
+    "gd200": 164.27290466
+   },
+   "carry": null,
+   "py": {
+    "Large Cap": {
+     "e": true,
+     "s": 76.44
+    },
+    "Earnings Momentum": {
+     "e": true,
+     "s": 66.4
+    },
+    "Pullback": {
+     "e": false,
+     "s": 11.87
+    },
+    "Valuation Gap": {
+     "e": false,
+     "s": 38.51
+    },
+    "Preis-Momentum": {
+     "e": false,
+     "s": 0.0
+    },
+    "Profitabilität": {
+     "e": true,
+     "s": 57.95
+    },
+    "Solide Bilanz": {
+     "e": true,
+     "s": 100.0
+    },
+    "FCF-Rendite": {
+     "e": true,
+     "s": 61.17
+    },
+    "Gewinnrevisionen": {
+     "e": true,
+     "s": 59.15
+    },
+    "Niedrige Volatilität": {
+     "e": false,
+     "s": 35.14
+    }
+   },
+   "kz": {
+    "kurs": 211.25,
+    "abstand_hoch": 0.06123939,
+    "position_spanne": 0.85750552,
+    "momentum_12_1": -0.15388997,
+    "abweichung_mittel_5j": 0.34094196,
+    "mittel_5j": 157.53851065,
+    "vol_1m": 0.26064238,
+    "vol_median_1j": 0.35257439,
+    "vol_verhaeltnis": 0.739255,
+    "gd200": 164.27290466,
+    "abstand_gd200": 0.28596983,
+    "rendite_3m": 0.26209818,
+    "kurs_3m": 167.38000488,
+    "saison": 0.01828754,
+    "saison_quote": 0.54545455,
+    "boersenwert_eur": 243825655808.0,
+    "umsatzwachstum": 0.132,
+    "gewinnwachstum": 0.134,
+    "kursziel_abstand": 0.13104355,
+    "hoch": 225.03074646,
+    "tief": 128.32000732,
+    "vol_1j": 0.40943768,
+    "ziel": 238.93295,
+    "fwd_kgv": 24.925726,
+    "kgv_median": 22.1239,
+    "monat": "November",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": 1.1266425,
+    "roe": 0.18178,
+    "schulden": 7476000000.0,
+    "cash": 8220000000.0,
+    "ebitda": 12073000000.0,
+    "nd_ebitda": -0.06162511,
+    "fcf_rendite": 0.04117184,
+    "eps_neu": 8.47518,
+    "eps_alt": 8.39835,
+    "eps_revision": 0.00914823
+   },
+   "sz": {
+    "m": "gewinn",
+    "anker": {
+     "bis": "2026-09-30",
+     "eps": 6.82,
+     "kgv": 30.975073,
+     "fin": "EUR",
+     "umgerechnet": false,
+     "q": "berichteter Gewinn je Aktie, bereinigt wie in den Analystenschätzungen"
+    },
+    "quartale": [
+     {
+      "bis": "2025-12-31",
+      "eps": 1.62
+     },
+     {
+      "bis": "2026-03-31",
+      "eps": 1.72
+     },
+     {
+      "bis": "2026-06-30",
+      "eps": 1.59
+     },
+     {
+      "bis": "2026-09-30",
+      "eps": 1.89
+     }
+    ],
+    "prognose": [
+     "2026-12-31",
+     "2027-03-31",
+     "2027-06-30",
+     "2027-09-30"
+    ],
+    "konsens_q": {
+     "eps": 1.98039,
+     "n": 10
+    },
+    "t": {
+     "g": {
+      "d": 0.081476,
+      "b": 0.1842,
+      "u": 0.346293,
+      "q": "Konsens für das nächste Geschäftsjahr: +18,4 % (23 Analysten). Upside und Downside aus der höchsten (+13,7 %) und der niedrigsten Schätzung (−8,7 %) gegenüber dem Mittel."
+     },
+     "v": {
+      "d": -0.130435,
+      "b": 0.0,
+      "u": 0.15,
+      "q": "Basis: das KGV bleibt, wie es ist. Für Upside und Downside fehlt eine ausreichende KGV-Historie: pauschal +15 % / −13 %."
+     },
+     "div": {
+      "b": 0.011967,
+      "q": "Dividendenrendite der letzten zwölf Monate: 1,2 %, in allen Szenarien gleich."
+     }
+    },
+    "bew": {
+     "kgv": 24.925726,
+     "median": 22.1239
+    },
+    "analysten": 23,
+    "kurs": 211.25,
+    "waehrung": "EUR",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": null,
+    "f": [
+     {
+      "k": "kgv_kurz",
+      "t": "Die KGV-Historie ist zu kurz für eine eigene Spanne: die Bewertungsänderung ist pauschal ±15 %.",
+      "g": 2
+     }
+    ]
+   }
+  },
+  "iusq-de": {
+   "symbol": "IUSQ.DE",
+   "finnhub": null,
+   "name": "MSCI ACWI (ETF)",
+   "typ": "etf",
+   "waehrung": "EUR",
+   "dez": 2,
+   "kurs": 108.26000213623047,
+   "kurs_datum": "2026-10-30",
+   "hoch": 111.13999938964844,
+   "tief": 90.08999633789062,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": "IE00B6R52259",
+   "sektor": null,
+   "rendite_1w": -0.0022119618780601646,
+   "rendite_ytd": 0.16283570258407032,
+   "technik": "Verkaufen",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.16323468,
+    "mittel_5j": 76.8988175,
+    "vol_1m": 0.10991366,
+    "vol_median_1j": 0.10875911,
+    "gd200": 102.20404991
+   },
+   "carry": null,
+   "py": {},
+   "kz": {},
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.11555,
+    "t": {
+     "k": {
+      "d": -0.020037,
+      "b": 0.1,
+      "u": 0.23474,
+      "q": "Basis: Durchschnittsrendite der letzten 10 Jahre (+12,1 % pro Jahr), gedeckelt auf +10 %. Vergangene Renditen sind keine Zusage für die Zukunft. Upside und Downside: eine Jahresschwankung (Volatilität 12 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 108.260002,
+    "waehrung": "EUR",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": null,
+    "f": [
+     {
+      "k": "cagr",
+      "t": "Die Durchschnittsrendite der Vergangenheit (+12,1 %) ist für die Basis auf +10 % gedeckelt.",
+      "g": 1
+     }
+    ]
+   }
+  },
+  "eurjpy-x": {
+   "symbol": "EURJPY=X",
+   "finnhub": null,
+   "name": "EUR/JPY",
+   "typ": "forex",
+   "waehrung": "JPY",
+   "dez": 2,
+   "kurs": 176.51100158691406,
+   "kurs_datum": "2026-11-02",
+   "hoch": 187.55799865722656,
+   "tief": 175.5970001220703,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": 0.0033765589197300994,
+   "rendite_ytd": -0.039239057184246806,
+   "technik": "Verkaufen",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": -0.00291336,
+    "mittel_5j": 160.36285554,
+    "vol_1m": 0.05671856,
+    "vol_median_1j": 0.05726047,
+    "gd200": 183.25353966
+   },
+   "carry": {
+    "basis": "EUR",
+    "gegen": "JPY",
+    "zins_basis": 0.025,
+    "zins_gegen": 0.0125,
+    "differenz": 0.0125
+   },
+   "py": {
+    "Carry": {
+     "e": true,
+     "s": 54.17
+    },
+    "Momentum": {
+     "e": false,
+     "s": 49.03
+    },
+    "Value": {
+     "e": false,
+     "s": 0.0
+    },
+    "Vol-Regime": {
+     "e": true,
+     "s": 51.18
+    },
+    "Carry-to-Risk": {
+     "e": true,
+     "s": 74.74
+    },
+    "Trend": {
+     "e": false,
+     "s": 0.0
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 25.5
+    },
+    "Zinstrend": {
+     "e": true,
+     "s": 50.0
+    },
+    "Realzins-Vorsprung": {
+     "e": false,
+     "s": 39.43
+    },
+    "Volatilitätsniveau": {
+     "e": true,
+     "s": 86.85
+    }
+   },
+   "kz": {
+    "kurs": 176.51100159,
+    "abstand_hoch": 0.0588991,
+    "position_spanne": 0.07641515,
+    "momentum_12_1": -0.00291336,
+    "abweichung_mittel_5j": 0.10069755,
+    "mittel_5j": 160.36285554,
+    "vol_1m": 0.05671856,
+    "vol_median_1j": 0.05726047,
+    "vol_verhaeltnis": 0.99053603,
+    "gd200": 183.25353966,
+    "abstand_gd200": -0.03679349,
+    "rendite_3m": -0.02940206,
+    "kurs_3m": 181.85800171,
+    "saison": 0.00656546,
+    "saison_quote": 0.72727273,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 187.55799866,
+    "tief": 175.59700012,
+    "vol_1j": 0.06315267,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "Dezember",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "basis": "EUR",
+    "gegen": "JPY",
+    "zins_basis": 0.025,
+    "zins_gegen": 0.0125,
+    "zinsdifferenz": 0.0125,
+    "carry_risk": 0.19793303,
+    "zinsdifferenz_3m": 0.0125,
+    "zins_trend": 0.0,
+    "inflation_basis": 0.03770869,
+    "inflation_gegen": 0.02097902,
+    "real_basis": -0.01270869,
+    "real_gegen": -0.00847902,
+    "realzins_diff": -0.00422967
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.063153,
+    "t": {
+     "k": {
+      "d": -0.0612,
+      "b": 0.0,
+      "u": 0.065189,
+      "q": "Basis: Wechselkurse folgen keinem verlässlichen Trend, die Basis nimmt den heutigen Kurs an. Upside und Downside: eine Jahresschwankung (Volatilität 6 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     },
+     "e": {
+      "b": 0.0125,
+      "n": "Carry",
+      "q": "Zinsvorsprung der Basiswährung: +1,25 % pro Jahr. Eine gehebelte Long-Position erhält ihn, in allen Szenarien gleich."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 176.511002,
+    "waehrung": "JPY",
+    "dez": 2,
+    "stand": "2026-11-02",
+    "termin": null,
+    "f": []
+   }
+  },
+  "gbpusd-x": {
+   "symbol": "GBPUSD=X",
+   "finnhub": null,
+   "name": "GBP/USD",
+   "typ": "forex",
+   "waehrung": "USD",
+   "dez": 4,
+   "kurs": 1.339943766593933,
+   "kurs_datum": "2026-11-02",
+   "hoch": 1.382533073425293,
+   "tief": 1.3061821460723877,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": 0.0016213589153086794,
+   "rendite_ytd": -0.0050314664714071755,
+   "technik": "Kaufen",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.00201949,
+    "mittel_5j": 1.28233459,
+    "vol_1m": 0.04466385,
+    "vol_median_1j": 0.05847412,
+    "gd200": 1.34292591
+   },
+   "carry": {
+    "basis": "GBP",
+    "gegen": "USD",
+    "zins_basis": 0.0375,
+    "zins_gegen": 0.03875,
+    "differenz": -0.0012500000000000011
+   },
+   "py": {
+    "Carry": {
+     "e": false,
+     "s": 21.87
+    },
+    "Momentum": {
+     "e": true,
+     "s": 50.4
+    },
+    "Value": {
+     "e": false,
+     "s": 2.54
+    },
+    "Vol-Regime": {
+     "e": true,
+     "s": 79.52
+    },
+    "Carry-to-Risk": {
+     "e": false,
+     "s": 46.69
+    },
+    "Trend": {
+     "e": false,
+     "s": 46.3
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 46.81
+    },
+    "Zinstrend": {
+     "e": false,
+     "s": 25.0
+    },
+    "Realzins-Vorsprung": {
+     "e": true,
+     "s": 54.17
+    },
+    "Volatilitätsniveau": {
+     "e": true,
+     "s": 87.02
+    }
+   },
+   "kz": {
+    "kurs": 1.33994377,
+    "abstand_hoch": 0.03080527,
+    "position_spanne": 0.44219005,
+    "momentum_12_1": 0.00201949,
+    "abweichung_mittel_5j": 0.04492523,
+    "mittel_5j": 1.28233459,
+    "vol_1m": 0.04466385,
+    "vol_median_1j": 0.05847412,
+    "vol_verhaeltnis": 0.76382255,
+    "gd200": 1.34292591,
+    "abstand_gd200": -0.00222063,
+    "rendite_3m": -0.00383223,
+    "kurs_3m": 1.3450985,
+    "saison": 0.00299401,
+    "saison_quote": 0.63636364,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 1.38253307,
+    "tief": 1.30618215,
+    "vol_1j": 0.0629843,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "Dezember",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "basis": "GBP",
+    "gegen": "USD",
+    "zins_basis": 0.0375,
+    "zins_gegen": 0.03875,
+    "zinsdifferenz": -0.00125,
+    "carry_risk": -0.01984622,
+    "zinsdifferenz_3m": 0.00125,
+    "zins_trend": -0.0025,
+    "inflation_basis": 0.034458,
+    "inflation_gegen": 0.03737685,
+    "real_basis": 0.003042,
+    "real_gegen": 0.00137315,
+    "realzins_diff": 0.00166885
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.062984,
+    "t": {
+     "k": {
+      "d": -0.061042,
+      "b": 0.0,
+      "u": 0.06501,
+      "q": "Basis: Wechselkurse folgen keinem verlässlichen Trend, die Basis nimmt den heutigen Kurs an. Upside und Downside: eine Jahresschwankung (Volatilität 6 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     },
+     "e": {
+      "b": -0.00125,
+      "n": "Carry",
+      "q": "Zinsvorsprung der Basiswährung: −0,13 % pro Jahr. Eine gehebelte Long-Position bezahlt ihn, in allen Szenarien gleich."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 1.339944,
+    "waehrung": "USD",
+    "dez": 4,
+    "stand": "2026-11-02",
+    "termin": null,
+    "f": []
+   }
+  },
+  "eurchf-x": {
+   "symbol": "EURCHF=X",
+   "finnhub": null,
+   "name": "EUR/CHF",
+   "typ": "forex",
+   "waehrung": "CHF",
+   "dez": 4,
+   "kurs": 0.9206799864768982,
+   "kurs_datum": "2026-11-02",
+   "hoch": 0.9467700123786926,
+   "tief": 0.9001200199127197,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": -0.003679365097794096,
+   "rendite_ytd": -0.010085416274401515,
+   "technik": "Starker Verkauf",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.00395509,
+    "mittel_5j": 0.95945218,
+    "vol_1m": 0.04426183,
+    "vol_median_1j": 0.03614029,
+    "gd200": 0.92353305
+   },
+   "carry": {
+    "basis": "EUR",
+    "gegen": "CHF",
+    "zins_basis": 0.025,
+    "zins_gegen": 0.0,
+    "differenz": 0.025
+   },
+   "py": {
+    "Carry": {
+     "e": true,
+     "s": 75.0
+    },
+    "Momentum": {
+     "e": true,
+     "s": 50.79
+    },
+    "Value": {
+     "e": false,
+     "s": 45.21
+    },
+    "Vol-Regime": {
+     "e": false,
+     "s": 27.53
+    },
+    "Carry-to-Risk": {
+     "e": true,
+     "s": 100.0
+    },
+    "Trend": {
+     "e": false,
+     "s": 44.85
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 38.97
+    },
+    "Zinstrend": {
+     "e": true,
+     "s": 75.0
+    },
+    "Realzins-Vorsprung": {
+     "e": false,
+     "s": 42.98
+    },
+    "Volatilitätsniveau": {
+     "e": true,
+     "s": 100.0
+    }
+   },
+   "kz": {
+    "kurs": 0.92067999,
+    "abstand_hoch": 0.02755688,
+    "position_spanne": 0.44072819,
+    "momentum_12_1": 0.00395509,
+    "abweichung_mittel_5j": -0.04041076,
+    "mittel_5j": 0.95945218,
+    "vol_1m": 0.04426183,
+    "vol_median_1j": 0.03614029,
+    "vol_verhaeltnis": 1.22472263,
+    "gd200": 0.92353305,
+    "abstand_gd200": -0.0030893,
+    "rendite_3m": -0.01323647,
+    "kurs_3m": 0.93303001,
+    "saison": -0.00614077,
+    "saison_quote": 0.18181818,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 0.94677001,
+    "tief": 0.90012002,
+    "vol_1j": 0.04109724,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "Dezember",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "basis": "EUR",
+    "gegen": "CHF",
+    "zins_basis": 0.025,
+    "zins_gegen": 0.0,
+    "zinsdifferenz": 0.025,
+    "carry_risk": 0.60831334,
+    "zinsdifferenz_3m": 0.0225,
+    "zins_trend": 0.0025,
+    "inflation_basis": 0.03770869,
+    "inflation_gegen": 0.00990059,
+    "real_basis": -0.01270869,
+    "real_gegen": -0.00990059,
+    "realzins_diff": -0.0028081
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.041097,
+    "t": {
+     "k": {
+      "d": -0.040264,
+      "b": 0.0,
+      "u": 0.041953,
+      "q": "Basis: Wechselkurse folgen keinem verlässlichen Trend, die Basis nimmt den heutigen Kurs an. Upside und Downside: eine Jahresschwankung (Volatilität 4 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     },
+     "e": {
+      "b": 0.025,
+      "n": "Carry",
+      "q": "Zinsvorsprung der Basiswährung: +2,50 % pro Jahr. Eine gehebelte Long-Position erhält ihn, in allen Szenarien gleich."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 0.92068,
+    "waehrung": "CHF",
+    "dez": 4,
+    "stand": "2026-11-02",
+    "termin": null,
+    "f": []
+   }
+  },
+  "eurusd-x": {
+   "symbol": "EURUSD=X",
+   "finnhub": null,
+   "name": "EUR/USD",
+   "typ": "forex",
+   "waehrung": "USD",
+   "dez": 4,
+   "kurs": 1.1186933517456055,
+   "kurs_datum": "2026-11-02",
+   "hoch": 1.2017642259597778,
+   "tief": 1.1129660606384277,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": -0.00272965917198853,
+   "rendite_ytd": -0.047701099910973266,
+   "technik": "Verkaufen",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": -0.02659471,
+    "mittel_5j": 1.09906521,
+    "vol_1m": 0.03978229,
+    "vol_median_1j": 0.04462011,
+    "gd200": 1.1560166
+   },
+   "carry": {
+    "basis": "EUR",
+    "gegen": "USD",
+    "zins_basis": 0.025,
+    "zins_gegen": 0.03875,
+    "differenz": -0.013749999999999998
+   },
+   "py": {
+    "Carry": {
+     "e": false,
+     "s": 0.0
+    },
+    "Momentum": {
+     "e": false,
+     "s": 41.14
+    },
+    "Value": {
+     "e": false,
+     "s": 16.07
+    },
+    "Vol-Regime": {
+     "e": true,
+     "s": 63.55
+    },
+    "Carry-to-Risk": {
+     "e": false,
+     "s": 7.77
+    },
+    "Trend": {
+     "e": false,
+     "s": 0.0
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 25.03
+    },
+    "Zinstrend": {
+     "e": true,
+     "s": 50.0
+    },
+    "Realzins-Vorsprung": {
+     "e": false,
+     "s": 14.8
+    },
+    "Volatilitätsniveau": {
+     "e": true,
+     "s": 95.73
+    }
+   },
+   "kz": {
+    "kurs": 1.11869335,
+    "abstand_hoch": 0.0691241,
+    "position_spanne": 0.06449785,
+    "momentum_12_1": -0.02659471,
+    "abweichung_mittel_5j": 0.01785894,
+    "mittel_5j": 1.09906521,
+    "vol_1m": 0.03978229,
+    "vol_median_1j": 0.04462011,
+    "vol_verhaeltnis": 0.89157773,
+    "gd200": 1.1560166,
+    "abstand_gd200": -0.03228608,
+    "rendite_3m": -0.02995854,
+    "kurs_3m": 1.15324283,
+    "saison": 0.01132517,
+    "saison_quote": 0.81818182,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 1.20176423,
+    "tief": 1.11296606,
+    "vol_1j": 0.05426876,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "Dezember",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "basis": "EUR",
+    "gegen": "USD",
+    "zins_basis": 0.025,
+    "zins_gegen": 0.03875,
+    "zinsdifferenz": -0.01375,
+    "carry_risk": -0.25336861,
+    "zinsdifferenz_3m": -0.01375,
+    "zins_trend": 0.0,
+    "inflation_basis": 0.03770869,
+    "inflation_gegen": 0.03737685,
+    "real_basis": -0.01270869,
+    "real_gegen": 0.00137315,
+    "realzins_diff": -0.01408184
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.054269,
+    "t": {
+     "k": {
+      "d": -0.052822,
+      "b": 0.0,
+      "u": 0.055768,
+      "q": "Basis: Wechselkurse folgen keinem verlässlichen Trend, die Basis nimmt den heutigen Kurs an. Upside und Downside: eine Jahresschwankung (Volatilität 5 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     },
+     "e": {
+      "b": -0.01375,
+      "n": "Carry",
+      "q": "Zinsvorsprung der Basiswährung: −1,37 % pro Jahr. Eine gehebelte Long-Position bezahlt ihn, in allen Szenarien gleich."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 1.118693,
+    "waehrung": "USD",
+    "dez": 4,
+    "stand": "2026-11-02",
+    "termin": null,
+    "f": []
+   }
+  },
+  "si-f": {
+   "symbol": "SI=F",
+   "finnhub": null,
+   "name": "Silber",
+   "typ": "rohstoff",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 50.36000061035156,
+   "kurs_datum": "2026-11-02",
+   "hoch": 115.08000183105469,
+   "tief": 47.130001068115234,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": -0.0692688877846781,
+   "rendite_ytd": -0.28194600789939395,
+   "technik": "Starker Verkauf",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.23847773,
+    "mittel_5j": 35.35497936,
+    "vol_1m": 0.39885085,
+    "vol_median_1j": 0.49240832,
+    "gd200": 70.67426989
+   },
+   "carry": null,
+   "py": {
+    "Momentum": {
+     "e": true,
+     "s": 97.7
+    },
+    "Pullback": {
+     "e": true,
+     "s": 95.25
+    },
+    "Value": {
+     "e": false,
+     "s": 0.0
+    },
+    "Vol-Regime": {
+     "e": true,
+     "s": 73.75
+    },
+    "Terminstruktur": {
+     "e": false,
+     "s": 25.1
+    },
+    "Trend": {
+     "e": false,
+     "s": 0.0
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 0.0
+    },
+    "Saisonalität": {
+     "e": true,
+     "s": 100.0
+    },
+    "Positionierung": {
+     "e": true,
+     "s": 100.0
+    },
+    "Volatilitätsniveau": {
+     "e": false,
+     "s": 0.0
+    }
+   },
+   "kz": {
+    "kurs": 50.36000061,
+    "abstand_hoch": 0.56239138,
+    "position_spanne": 0.04753494,
+    "momentum_12_1": 0.23847773,
+    "abweichung_mittel_5j": 0.42441041,
+    "mittel_5j": 35.35497936,
+    "vol_1m": 0.39885085,
+    "vol_median_1j": 0.49240832,
+    "vol_verhaeltnis": 0.81000023,
+    "gd200": 70.67426989,
+    "abstand_gd200": -0.28743515,
+    "rendite_3m": -0.1614493,
+    "kurs_3m": 60.05599976,
+    "saison": 0.05164096,
+    "saison_quote": 0.63636364,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 115.08000183,
+    "tief": 47.13000107,
+    "vol_1j": 0.65792193,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "Dezember",
+    "jahre": 11,
+    "ko_risiko": 0.03305785,
+    "kgv_rel": null,
+    "f1": 50.36000061,
+    "f2": 50.99499893,
+    "k1": "SIZ26",
+    "k2": "SIH27",
+    "monate": 3,
+    "roll_rendite": -0.04980867,
+    "cot_perzentil": 0.03846154,
+    "cot_netto": 0.02857364,
+    "cot_wochen": 156
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.657922,
+    "t": {
+     "k": {
+      "d": -0.482073,
+      "b": 0.0,
+      "u": 0.930776,
+      "q": "Basis: der Front-Month-Kurs bleibt, wie er ist; Rohstoffpreise haben auf ein Jahr keinen verlässlichen Trend. Upside und Downside: eine Jahresschwankung (Volatilität 66 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     },
+     "e": {
+      "b": -0.049809,
+      "n": "Roll-Rendite",
+      "q": "Roll-Rendite aus der Terminkurve: −5,0 % pro Jahr (Contango), in allen Szenarien gleich."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 50.360001,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-11-02",
+    "termin": null,
+    "f": []
+   }
+  },
+  "gc-f": {
+   "symbol": "GC=F",
+   "finnhub": null,
+   "name": "Gold",
+   "typ": "rohstoff",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 3924.300048828125,
+   "kurs_datum": "2026-11-02",
+   "hoch": 5318.39990234375,
+   "tief": 3898.89990234375,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": -0.028253728277233048,
+   "rendite_ytd": -0.09601254047405039,
+   "technik": "Starker Verkauf",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.03645507,
+    "mittel_5j": 2738.81460155,
+    "vol_1m": 0.18770934,
+    "vol_median_1j": 0.23619721,
+    "gd200": 4515.82049561
+   },
+   "carry": null,
+   "py": {
+    "Momentum": {
+     "e": true,
+     "s": 57.29
+    },
+    "Pullback": {
+     "e": true,
+     "s": 82.43
+    },
+    "Value": {
+     "e": false,
+     "s": 0.0
+    },
+    "Vol-Regime": {
+     "e": true,
+     "s": 75.66
+    },
+    "Terminstruktur": {
+     "e": false,
+     "s": 25.89
+    },
+    "Trend": {
+     "e": false,
+     "s": 0.0
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 4.19
+    },
+    "Saisonalität": {
+     "e": true,
+     "s": 89.76
+    },
+    "Positionierung": {
+     "e": true,
+     "s": 92.82
+    },
+    "Volatilitätsniveau": {
+     "e": true,
+     "s": 58.98
+    }
+   },
+   "kz": {
+    "kurs": 3924.30004883,
+    "abstand_hoch": 0.26212768,
+    "position_spanne": 0.01789373,
+    "momentum_12_1": 0.03645507,
+    "abweichung_mittel_5j": 0.43284618,
+    "mittel_5j": 2738.81460155,
+    "vol_1m": 0.18770934,
+    "vol_median_1j": 0.23619721,
+    "vol_verhaeltnis": 0.79471445,
+    "gd200": 4515.82049561,
+    "abstand_gd200": -0.13098848,
+    "rendite_3m": -0.05497761,
+    "kurs_3m": 4152.60009766,
+    "saison": 0.02385643,
+    "saison_quote": 0.72727273,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 5318.39990234,
+    "tief": 3898.89990234,
+    "vol_1j": 0.27844161,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "Dezember",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "f1": 3924.69995117,
+    "f2": 3956.5,
+    "k1": "GCZ26",
+    "k2": "GCG27",
+    "monate": 2,
+    "roll_rendite": -0.04822451,
+    "cot_perzentil": 0.37179487,
+    "cot_netto": 0.26602656,
+    "cot_wochen": 156
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.278442,
+    "t": {
+     "k": {
+      "d": -0.243038,
+      "b": 0.0,
+      "u": 0.321069,
+      "q": "Basis: der Front-Month-Kurs bleibt, wie er ist; Rohstoffpreise haben auf ein Jahr keinen verlässlichen Trend. Upside und Downside: eine Jahresschwankung (Volatilität 28 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     },
+     "e": {
+      "b": -0.048225,
+      "n": "Roll-Rendite",
+      "q": "Roll-Rendite aus der Terminkurve: −4,8 % pro Jahr (Contango), in allen Szenarien gleich."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 3924.300049,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-11-02",
+    "termin": null,
+    "f": []
+   }
+  },
+  "bz-f": {
+   "symbol": "BZ=F",
+   "finnhub": null,
+   "name": "Brent-Öl",
+   "typ": "rohstoff",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 109.9800033569336,
+   "kurs_datum": "2026-11-02",
+   "hoch": 118.3499984741211,
+   "tief": 58.91999816894531,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": -0.050341026893731544,
+   "rendite_ytd": 0.8073953346721447,
+   "technik": "Kaufen",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.57307692,
+    "mittel_5j": 83.60124598,
+    "vol_1m": 0.38137977,
+    "vol_median_1j": 0.41476556,
+    "gd200": 92.68669991
+   },
+   "carry": null,
+   "py": {
+    "Momentum": {
+     "e": true,
+     "s": 100.0
+    },
+    "Pullback": {
+     "e": false,
+     "s": 14.08
+    },
+    "Value": {
+     "e": false,
+     "s": 0.0
+    },
+    "Vol-Regime": {
+     "e": true,
+     "s": 60.06
+    },
+    "Terminstruktur": {
+     "e": true,
+     "s": 100.0
+    },
+    "Trend": {
+     "e": true,
+     "s": 100.0
+    },
+    "Kurzfrist-Momentum": {
+     "e": true,
+     "s": 100.0
+    },
+    "Saisonalität": {
+     "e": true,
+     "s": 62.35
+    },
+    "Positionierung": {
+     "e": true,
+     "s": 100.0
+    },
+    "Volatilitätsniveau": {
+     "e": false,
+     "s": 0.0
+    }
+   },
+   "kz": {
+    "kurs": 109.98000336,
+    "abstand_hoch": 0.07072239,
+    "position_spanne": 0.85916212,
+    "momentum_12_1": 0.57307692,
+    "abweichung_mittel_5j": 0.31553067,
+    "mittel_5j": 83.60124598,
+    "vol_1m": 0.38137977,
+    "vol_median_1j": 0.41476556,
+    "vol_verhaeltnis": 0.91950684,
+    "gd200": 92.68669991,
+    "abstand_gd200": 0.18657805,
+    "rendite_3m": 0.38583673,
+    "kurs_3m": 79.36000061,
+    "saison": 0.00741101,
+    "saison_quote": 0.63636364,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 118.34999847,
+    "tief": 58.91999817,
+    "vol_1j": 0.54770132,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "Dezember",
+    "jahre": 11,
+    "ko_risiko": 0.01239669,
+    "kgv_rel": null,
+    "f1": 117.63999939,
+    "f2": 109.98000336,
+    "k1": "BZZ26",
+    "k2": "BZF27",
+    "monate": 1,
+    "roll_rendite": 0.83578787,
+    "cot_perzentil": 0.15384615,
+    "cot_netto": 0.00800741,
+    "cot_wochen": 156
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.547701,
+    "t": {
+     "k": {
+      "d": -0.421722,
+      "b": 0.0,
+      "u": 0.729273,
+      "q": "Basis: der Front-Month-Kurs bleibt, wie er ist; Rohstoffpreise haben auf ein Jahr keinen verlässlichen Trend. Upside und Downside: eine Jahresschwankung (Volatilität 55 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     },
+     "e": {
+      "b": 0.835788,
+      "n": "Roll-Rendite",
+      "q": "Roll-Rendite aus der Terminkurve: +83,6 % pro Jahr (Backwardation), in allen Szenarien gleich."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 109.980003,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-11-02",
+    "termin": null,
+    "f": []
+   }
+  },
+  "hg-f": {
+   "symbol": "HG=F",
+   "finnhub": null,
+   "name": "Kupfer",
+   "typ": "rohstoff",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 6.5254998207092285,
+   "kurs_datum": "2026-11-02",
+   "hoch": 6.803500175476074,
+   "tief": 4.926000118255615,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": 0.002688986475570365,
+   "rendite_ytd": 0.1590585591590592,
+   "technik": "Verkaufen",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.27845609,
+    "mittel_5j": 4.55844285,
+    "vol_1m": 0.19797824,
+    "vol_median_1j": 0.25637871,
+    "gd200": 6.20941249
+   },
+   "carry": null,
+   "py": {
+    "Momentum": {
+     "e": true,
+     "s": 100.0
+    },
+    "Pullback": {
+     "e": false,
+     "s": 14.81
+    },
+    "Value": {
+     "e": false,
+     "s": 0.0
+    },
+    "Vol-Regime": {
+     "e": true,
+     "s": 78.47
+    },
+    "Terminstruktur": {
+     "e": false,
+     "s": 17.45
+    },
+    "Trend": {
+     "e": true,
+     "s": 81.82
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 38.29
+    },
+    "Saisonalität": {
+     "e": true,
+     "s": 86.51
+    },
+    "Positionierung": {
+     "e": true,
+     "s": 88.97
+    },
+    "Volatilitätsniveau": {
+     "e": true,
+     "s": 61.62
+    }
+   },
+   "kz": {
+    "kurs": 6.52549982,
+    "abstand_hoch": 0.04086137,
+    "position_spanne": 0.85193057,
+    "momentum_12_1": 0.27845609,
+    "abweichung_mittel_5j": 0.4315195,
+    "mittel_5j": 4.55844285,
+    "vol_1m": 0.19797824,
+    "vol_median_1j": 0.25637871,
+    "vol_verhaeltnis": 0.77221014,
+    "gd200": 6.20941249,
+    "abstand_gd200": 0.05090455,
+    "rendite_3m": -0.01405158,
+    "kurs_3m": 6.61850023,
+    "saison": 0.02190647,
+    "saison_quote": 0.72727273,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 6.80350018,
+    "tief": 4.92600012,
+    "vol_1j": 0.2721164,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "Dezember",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "f1": 6.52750015,
+    "f2": 6.63549995,
+    "k1": "HGZ26",
+    "k2": "HGH27",
+    "monate": 3,
+    "roll_rendite": -0.06510424,
+    "cot_perzentil": 0.41025641,
+    "cot_netto": 0.12039381,
+    "cot_wochen": 156
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.272116,
+    "t": {
+     "k": {
+      "d": -0.238234,
+      "b": 0.0,
+      "u": 0.31274,
+      "q": "Basis: der Front-Month-Kurs bleibt, wie er ist; Rohstoffpreise haben auf ein Jahr keinen verlässlichen Trend. Upside und Downside: eine Jahresschwankung (Volatilität 27 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     },
+     "e": {
+      "b": -0.065104,
+      "n": "Roll-Rendite",
+      "q": "Roll-Rendite aus der Terminkurve: −6,5 % pro Jahr (Contango), in allen Szenarien gleich."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 6.5255,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-11-02",
+    "termin": null,
+    "f": []
+   }
+  },
+  "ndx": {
+   "symbol": "^NDX",
+   "finnhub": null,
+   "name": "Nasdaq 100",
+   "typ": "index",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 28384.849609375,
+   "kurs_datum": "2026-10-30",
+   "hoch": 31224.470703125,
+   "tief": 22953.380859375,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": -0.01977653830991033,
+   "rendite_ytd": 0.12415915534150379,
+   "technik": "Verkaufen",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.16775406,
+    "mittel_5j": 18881.38563678,
+    "vol_1m": 0.22714004,
+    "vol_median_1j": 0.18244445,
+    "gd200": 27927.30055664
+   },
+   "carry": null,
+   "py": {
+    "Trend": {
+     "e": true,
+     "s": 60.24
+    },
+    "Momentum": {
+     "e": true,
+     "s": 83.55
+    },
+    "Pullback": {
+     "e": true,
+     "s": 63.65
+    },
+    "Vol-Regime": {
+     "e": false,
+     "s": 25.5
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 38.65
+    },
+    "VIX": {
+     "e": true,
+     "s": 53.62
+    },
+    "VIX-Kurve": {
+     "e": true,
+     "s": 66.36
+    },
+    "Kreditrisiko": {
+     "e": true,
+     "s": 91.33
+    },
+    "Saisonalität": {
+     "e": true,
+     "s": 100.0
+    },
+    "Knock-out-Risiko": {
+     "e": true,
+     "s": 100.0
+    }
+   },
+   "kz": {
+    "kurs": 28384.84960938,
+    "abstand_hoch": 0.09094217,
+    "position_spanne": 0.65668115,
+    "momentum_12_1": 0.16775406,
+    "abweichung_mittel_5j": 0.5033245,
+    "mittel_5j": 18881.38563678,
+    "vol_1m": 0.22714004,
+    "vol_median_1j": 0.18244445,
+    "vol_verhaeltnis": 1.24498193,
+    "gd200": 27927.30055664,
+    "abstand_gd200": 0.01638358,
+    "rendite_3m": -0.01362039,
+    "kurs_3m": 28776.80078125,
+    "saison": 0.03513004,
+    "saison_quote": 0.81818182,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 31224.47070312,
+    "tief": 22953.38085938,
+    "vol_1j": 0.20236858,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "November",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "vix": 19.42000008,
+    "vix3m": 20.78000069,
+    "vix_struktur": 0.93455243,
+    "hy_spread": 0.0326,
+    "hy_datum": "29.10.2026"
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.202369,
+    "t": {
+     "k": {
+      "d": -0.101527,
+      "b": 0.1,
+      "u": 0.346729,
+      "q": "Basis: Durchschnittsrendite der letzten 10 Jahre (+19,5 % pro Jahr), gedeckelt auf +10 %. Vergangene Renditen sind keine Zusage für die Zukunft. Upside und Downside: eine Jahresschwankung (Volatilität 20 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 28384.849609,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": null,
+    "f": [
+     {
+      "k": "cagr",
+      "t": "Die Durchschnittsrendite der Vergangenheit (+19,5 %) ist für die Basis auf +10 % gedeckelt.",
+      "g": 1
+     }
+    ]
+   }
+  },
+  "stoxx50e": {
+   "symbol": "^STOXX50E",
+   "finnhub": null,
+   "name": "Euro Stoxx 50",
+   "typ": "index",
+   "waehrung": null,
+   "dez": 2,
+   "kurs": 6131.31005859375,
+   "kurs_datum": "2026-10-30",
+   "hoch": 6551.22021484375,
+   "tief": 5501.27978515625,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": 0.010396762397592907,
+   "rendite_ytd": 0.05781178618642824,
+   "technik": "Verkaufen",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.08258611,
+    "mittel_5j": 4813.70833178,
+    "vol_1m": 0.14153411,
+    "vol_median_1j": 0.13380731,
+    "gd200": 6107.92804443
+   },
+   "carry": null,
+   "py": {
+    "Trend": {
+     "e": true,
+     "s": 52.39
+    },
+    "Momentum": {
+     "e": true,
+     "s": 66.52
+    },
+    "Pullback": {
+     "e": true,
+     "s": 54.7
+    },
+    "Vol-Regime": {
+     "e": false,
+     "s": 44.23
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 4.34
+    },
+    "VIX": {
+     "e": true,
+     "s": 53.62
+    },
+    "VIX-Kurve": {
+     "e": true,
+     "s": 66.36
+    },
+    "Kreditrisiko": {
+     "e": true,
+     "s": 91.33
+    },
+    "Saisonalität": {
+     "e": true,
+     "s": 99.1
+    },
+    "Knock-out-Risiko": {
+     "e": true,
+     "s": 100.0
+    }
+   },
+   "kz": {
+    "kurs": 6131.31005859,
+    "abstand_hoch": 0.06409648,
+    "position_spanne": 0.60006288,
+    "momentum_12_1": 0.08258611,
+    "abweichung_mittel_5j": 0.27371865,
+    "mittel_5j": 4813.70833178,
+    "vol_1m": 0.14153411,
+    "vol_median_1j": 0.13380731,
+    "vol_verhaeltnis": 1.05774571,
+    "gd200": 6107.92804443,
+    "abstand_gd200": 0.00382814,
+    "rendite_3m": -0.05478751,
+    "kurs_3m": 6486.70019531,
+    "saison": 0.02946164,
+    "saison_quote": 0.54545455,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 6551.22021484,
+    "tief": 5501.27978516,
+    "vol_1j": 0.15628643,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "November",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "vix": 19.42000008,
+    "vix3m": 20.78000069,
+    "vix_struktur": 0.93455243,
+    "hy_spread": 0.0326,
+    "hy_datum": "29.10.2026"
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.156286,
+    "t": {
+     "k": {
+      "d": -0.082959,
+      "b": 0.072169,
+      "u": 0.253538,
+      "q": "Basis: Durchschnittsrendite der letzten 10 Jahre (+7,2 % pro Jahr). Vergangene Renditen sind keine Zusage für die Zukunft. Upside und Downside: eine Jahresschwankung (Volatilität 16 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 6131.310059,
+    "waehrung": "",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": null,
+    "f": []
+   }
+  },
+  "gspc": {
+   "symbol": "^GSPC",
+   "finnhub": null,
+   "name": "S&P 500",
+   "typ": "index",
+   "waehrung": "USD",
+   "dez": 2,
+   "kurs": 7580.06982421875,
+   "kurs_datum": "2026-10-30",
+   "hoch": 7818.93017578125,
+   "tief": 6343.72021484375,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": -0.005720380519245838,
+   "rendite_ytd": 0.10730696431506104,
+   "technik": "Verkaufen",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.11259709,
+    "mittel_5j": 5372.91994668,
+    "vol_1m": 0.11791707,
+    "vol_median_1j": 0.12315265,
+    "gd200": 7309.75716309
+   },
+   "carry": null,
+   "py": {
+    "Trend": {
+     "e": true,
+     "s": 73.11
+    },
+    "Momentum": {
+     "e": true,
+     "s": 72.52
+    },
+    "Pullback": {
+     "e": false,
+     "s": 30.55
+    },
+    "Vol-Regime": {
+     "e": true,
+     "s": 55.31
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 47.76
+    },
+    "VIX": {
+     "e": true,
+     "s": 53.62
+    },
+    "VIX-Kurve": {
+     "e": true,
+     "s": 66.36
+    },
+    "Kreditrisiko": {
+     "e": true,
+     "s": 91.33
+    },
+    "Saisonalität": {
+     "e": true,
+     "s": 100.0
+    },
+    "Knock-out-Risiko": {
+     "e": true,
+     "s": 100.0
+    }
+   },
+   "kz": {
+    "kurs": 7580.06982422,
+    "abstand_hoch": 0.03054898,
+    "position_spanne": 0.83808383,
+    "momentum_12_1": 0.11259709,
+    "abweichung_mittel_5j": 0.41079151,
+    "mittel_5j": 5372.91994668,
+    "vol_1m": 0.11791707,
+    "vol_median_1j": 0.12315265,
+    "vol_verhaeltnis": 0.95748704,
+    "gd200": 7309.75716309,
+    "abstand_gd200": 0.0369797,
+    "rendite_3m": -0.002688,
+    "kurs_3m": 7600.5,
+    "saison": 0.03776486,
+    "saison_quote": 0.90909091,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 7818.93017578,
+    "tief": 6343.72021484,
+    "vol_1j": 0.12806045,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "November",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "vix": 19.42000008,
+    "vix3m": 20.78000069,
+    "vix_struktur": 0.93455243,
+    "hy_spread": 0.0326,
+    "hy_datum": "29.10.2026"
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.12806,
+    "t": {
+     "k": {
+      "d": -0.03222,
+      "b": 0.1,
+      "u": 0.250284,
+      "q": "Basis: Durchschnittsrendite der letzten 10 Jahre (+13,6 % pro Jahr), gedeckelt auf +10 %. Vergangene Renditen sind keine Zusage für die Zukunft. Upside und Downside: eine Jahresschwankung (Volatilität 13 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 7580.069824,
+    "waehrung": "USD",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": null,
+    "f": [
+     {
+      "k": "cagr",
+      "t": "Die Durchschnittsrendite der Vergangenheit (+13,6 %) ist für die Basis auf +10 % gedeckelt.",
+      "g": 1
+     }
+    ]
+   }
+  },
+  "gdaxi": {
+   "symbol": "^GDAXI",
+   "finnhub": null,
+   "name": "DAX",
+   "typ": "index",
+   "waehrung": "EUR",
+   "dez": 2,
+   "kurs": 25818.2109375,
+   "kurs_datum": "2026-10-30",
+   "hoch": 26569.990234375,
+   "tief": 22300.75,
+   "ziel": null,
+   "fwd_kgv": null,
+   "kgv_median": null,
+   "boersenwert_eur": null,
+   "isin": null,
+   "sektor": null,
+   "rendite_1w": 0.025278746110778627,
+   "rendite_ytd": 0.05421717205953547,
+   "technik": "Starker Kauf",
+   "zahlen": null,
+   "zahlen_staerke": null,
+   "zahlen_text": null,
+   "umsatz_yoy": null,
+   "gewinn_yoy": null,
+   "earnings": null,
+   "f": {
+    "momentum_12_1": 0.04094818,
+    "mittel_5j": 18931.33953451,
+    "vol_1m": 0.14358714,
+    "vol_median_1j": 0.13936183,
+    "gd200": 24893.6575
+   },
+   "carry": null,
+   "py": {
+    "Trend": {
+     "e": true,
+     "s": 73.21
+    },
+    "Momentum": {
+     "e": true,
+     "s": 58.19
+    },
+    "Pullback": {
+     "e": false,
+     "s": 28.29
+    },
+    "Vol-Regime": {
+     "e": false,
+     "s": 46.97
+    },
+    "Kurzfrist-Momentum": {
+     "e": false,
+     "s": 37.78
+    },
+    "VIX": {
+     "e": true,
+     "s": 53.62
+    },
+    "VIX-Kurve": {
+     "e": true,
+     "s": 66.36
+    },
+    "Kreditrisiko": {
+     "e": true,
+     "s": 91.33
+    },
+    "Saisonalität": {
+     "e": true,
+     "s": 100.0
+    },
+    "Knock-out-Risiko": {
+     "e": true,
+     "s": 100.0
+    }
+   },
+   "kz": {
+    "kurs": 25818.2109375,
+    "abstand_hoch": 0.0282943,
+    "position_spanne": 0.82390794,
+    "momentum_12_1": 0.04094818,
+    "abweichung_mittel_5j": 0.36378152,
+    "mittel_5j": 18931.33953451,
+    "vol_1m": 0.14358714,
+    "vol_median_1j": 0.13936183,
+    "vol_verhaeltnis": 1.03031904,
+    "gd200": 24893.6575,
+    "abstand_gd200": 0.03714012,
+    "rendite_3m": -0.01466047,
+    "kurs_3m": 26202.34960938,
+    "saison": 0.03279148,
+    "saison_quote": 0.54545455,
+    "boersenwert_eur": null,
+    "umsatzwachstum": null,
+    "gewinnwachstum": null,
+    "kursziel_abstand": null,
+    "hoch": 26569.99023438,
+    "tief": 22300.75,
+    "vol_1j": 0.16062003,
+    "ziel": null,
+    "fwd_kgv": null,
+    "kgv_median": null,
+    "monat": "November",
+    "jahre": 11,
+    "ko_risiko": 0.0,
+    "kgv_rel": null,
+    "vix": 19.42000008,
+    "vix3m": 20.78000069,
+    "vix_struktur": 0.93455243,
+    "hy_spread": 0.0326,
+    "hy_datum": "29.10.2026"
+   },
+   "sz": {
+    "m": "kurs",
+    "sigma": 0.16062,
+    "t": {
+     "k": {
+      "d": -0.06963,
+      "b": 0.092477,
+      "u": 0.282829,
+      "q": "Basis: Durchschnittsrendite der letzten 10 Jahre (+9,2 % pro Jahr). Vergangene Renditen sind keine Zusage für die Zukunft. Upside und Downside: eine Jahresschwankung (Volatilität 16 %) darüber und darunter; bei normal verteilten Renditen liegen etwa zwei von drei Jahren in dieser Spanne."
+     }
+    },
+    "prognose": [
+     "2027-02-01",
+     "2027-05-04",
+     "2027-08-03",
+     "2027-11-02"
+    ],
+    "kurs": 25818.210938,
+    "waehrung": "EUR",
+    "dez": 2,
+    "stand": "2026-10-30",
+    "termin": null,
+    "f": []
+   }
+  }
+ },
+ "demo": false,
+ "kriterien_klassen": {
+  "forex": {
+   "min_zinsdifferenz": 0.01,
+   "min_momentum": 0.0,
+   "min_abweichung_mittel": 0.05,
+   "max_vol_verhaeltnis": 1.0,
+   "min_carry_risk": 0.0,
+   "min_abstand_gd200": 0.0,
+   "min_rendite_3m": 0.0,
+   "min_zins_trend": 0.0,
+   "min_realzins_diff": 0.0,
+   "max_vol_1j": 0.1
+  },
+  "rohstoff": {
+   "min_momentum": 0.0,
+   "min_abstand_hoch": 0.1,
+   "max_position_spanne": 0.5,
+   "max_abweichung_mittel": 0.0,
+   "max_vol_verhaeltnis": 1.0,
+   "min_roll_rendite": 0.0,
+   "min_abstand_gd200": 0.0,
+   "min_rendite_3m": 0.0,
+   "min_saison": 0.0,
+   "max_cot_perzentil": 0.8,
+   "max_vol_1j": 0.3
+  },
+  "index": {
+   "min_abstand_gd200": 0.0,
+   "min_momentum": 0.0,
+   "min_abstand_hoch": 0.05,
+   "max_vol_verhaeltnis": 1.0,
+   "min_rendite_3m": 0.0,
+   "max_vix": 20,
+   "max_vix_struktur": 1.0,
+   "max_hy_spread": 0.045,
+   "min_saison": 0.0,
+   "max_ko_risiko": 0.05
+  }
+ },
+ "zahlen_warnung_tage": 21,
+ "spez": {
+  "katalog": {
+   "aktie": [
+    {
+     "name": "Large Cap",
+     "kurz": "Large Cap",
+     "familie": "Size",
+     "erklaerung": "Marktkapitalisierung",
+     "definition": "Börsenwert von mindestens {@min_boersenwert_mrd_eur:zmrd}, also ein etablierter Großkonzern",
+     "quelle": "MSCI FaCS: Size",
+     "teile": [
+      {
+       "k": "boersenwert_eur",
+       "name": "Börsenwert",
+       "p": "min_boersenwert_mrd_eur",
+       "r": ">=",
+       "fmt": "mrd",
+       "rechnung": "Aktienanzahl × Kurs, in Euro umgerechnet",
+       "log": true,
+       "skal": 1000000000.0
+      }
+     ],
+     "text": "Market Cap {boersenwert_eur:mrd} (Schwelle {@min_boersenwert_mrd_eur:zmrd})",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": false
+    },
+    {
+     "name": "Earnings Momentum",
+     "kurz": "Earnings",
+     "familie": "Growth",
+     "erklaerung": "Umsatz- und Gewinnwachstum YoY",
+     "definition": "Umsatz wächst um mindestens {@min_umsatzwachstum:p0} und der Gewinn um mindestens {@min_gewinnwachstum:p0}, jeweils gegenüber dem Vorjahresquartal",
+     "quelle": "MSCI FaCS: Growth",
+     "teile": [
+      {
+       "k": "umsatzwachstum",
+       "name": "Umsatzwachstum",
+       "p": "min_umsatzwachstum",
+       "r": ">=",
+       "fmt": "p0v",
+       "rechnung": "Umsatz Quartal ÷ Umsatz Vorjahresquartal − 1",
+       "n": -0.15,
+       "v": 0.25
+      },
+      {
+       "k": "gewinnwachstum",
+       "name": "Gewinnwachstum",
+       "p": "min_gewinnwachstum",
+       "r": ">=",
+       "fmt": "p0v",
+       "rechnung": "Gewinn Quartal ÷ Gewinn Vorjahresquartal − 1",
+       "n": -0.3,
+       "v": 0.4
+      }
+     ],
+     "text": "Umsatz {umsatzwachstum:p0v} YoY, Gewinn {gewinnwachstum:p0v} YoY (Vorjahresquartal)",
+     "verkn": "und",
+     "standard": true,
+     "kursbasiert": false
+    },
+    {
+     "name": "Pullback",
+     "kurz": "Pullback",
+     "familie": "Momentum",
+     "erklaerung": "Drawdown vom 52W-Hoch und Lage in der Range",
+     "definition": "Kurs mindestens {@min_abstand_hoch:p0} unter dem 52-Wochen-Hoch und im unteren {@max_position_spanne:p0} der Jahresspanne",
+     "quelle": "Rücksetzer-Filter (Mean Reversion) der Equity-Strategen",
+     "teile": [
+      {
+       "k": "abstand_hoch",
+       "name": "Drawdown",
+       "p": "min_abstand_hoch",
+       "r": ">=",
+       "fmt": "p0",
+       "rechnung": "1 − {kurs:kurs} ÷ {hoch:kurs} (52W-Hoch)",
+       "n": -0.2,
+       "v": 0.3
+      },
+      {
+       "k": "position_spanne",
+       "name": "Range-Position",
+       "p": "max_position_spanne",
+       "r": "<=",
+       "fmt": "p0",
+       "rechnung": "({kurs:kurs} − {tief:kurs}) ÷ ({hoch:kurs} − {tief:kurs})",
+       "n_abs": 1.0,
+       "v_abs": 0.0
+      }
+     ],
+     "text": "Drawdown {abstand_hoch:p0} vom 52W-Hoch, Range-Position {position_spanne:p0}",
+     "verkn": "und",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Valuation Gap",
+     "kurz": "Valuation",
+     "familie": "Value",
+     "erklaerung": "Forward-KGV gegenüber 5J-Median, Upside zum Kursziel",
+     "definition": "Forward-KGV höchstens {@max_kgv_vs_median:p0} des eigenen 5-Jahres-Medians oder mindestens {@min_kursziel_abstand:p0} Upside zum Kursziel",
+     "quelle": "MSCI FaCS: Value; Kursziel-Konsens",
+     "teile": [
+      {
+       "k": "kgv_rel",
+       "name": "Fwd-KGV zum 5J-Median",
+       "p": "max_kgv_vs_median",
+       "r": "<=",
+       "fmt": "p0",
+       "rechnung": "{fwd_kgv:z1} ÷ {kgv_median:z1}",
+       "n": 0.4,
+       "v": -0.3
+      },
+      {
+       "k": "kursziel_abstand",
+       "name": "Upside zum Kursziel",
+       "p": "min_kursziel_abstand",
+       "r": ">=",
+       "fmt": "p0v",
+       "rechnung": "{ziel:kurs} ÷ {kurs:kurs} − 1",
+       "n": -0.3,
+       "v": 0.3
+      }
+     ],
+     "text": [
+      "Fwd-KGV {fwd_kgv:z1} gegenüber Ø 5J {kgv_median:z1}",
+      "Upside {kursziel_abstand:p0v} zum Konsens-Kursziel"
+     ],
+     "verkn": "oder",
+     "standard": true,
+     "kursbasiert": false
+    },
+    {
+     "name": "Preis-Momentum",
+     "kurz": "Kurs-Mom.",
+     "familie": "Momentum",
+     "erklaerung": "Kursentwicklung 12 Monate ohne den letzten Monat",
+     "definition": "Kurs ist über 12 Monate, ohne den jüngsten Monat, um mindestens {@min_momentum_12_1:p0v} gestiegen",
+     "quelle": "MSCI FaCS: Momentum; J.P. Morgan und Goldman Sachs Momentum-Faktor",
+     "teile": [
+      {
+       "k": "momentum_12_1",
+       "name": "12-1-Monats-Rendite",
+       "p": "min_momentum_12_1",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "Kurs vor 1 Monat ÷ Kurs vor 12 Monaten − 1",
+       "n": -0.15,
+       "v": 0.25
+      }
+     ],
+     "text": "12-1-Monats-Rendite {momentum_12_1:p0v}",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": true
+    },
+    {
+     "name": "Profitabilität",
+     "kurz": "Qualität",
+     "familie": "Quality",
+     "erklaerung": "Eigenkapitalrendite",
+     "definition": "Eigenkapitalrendite von mindestens {@min_roe:p0}, das Geschäft verdient deutlich mehr als seine Kapitalkosten",
+     "quelle": "MSCI FaCS: Quality (Profitability); J.P. Morgan Quality",
+     "teile": [
+      {
+       "k": "roe",
+       "name": "Eigenkapitalrendite",
+       "p": "min_roe",
+       "r": ">=",
+       "fmt": "p0",
+       "rechnung": "Jahresüberschuss ÷ Eigenkapital (letzte 12 Monate)",
+       "n": -0.15,
+       "v": 0.2
+      }
+     ],
+     "text": "Eigenkapitalrendite {roe:p0}",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Solide Bilanz",
+     "kurz": "Bilanz",
+     "familie": "Quality",
+     "erklaerung": "Nettoverschuldung im Verhältnis zum EBITDA",
+     "definition": "Nettoverschuldung höchstens {@max_nd_ebitda:x1} des operativen Gewinns vor Abschreibungen (EBITDA)",
+     "quelle": "MSCI FaCS: Quality (Leverage); J.P. Morgan Quality (Solvency)",
+     "teile": [
+      {
+       "k": "nd_ebitda",
+       "name": "Nettoverschuldung ÷ EBITDA",
+       "p": "max_nd_ebitda",
+       "r": "<=",
+       "fmt": "x1",
+       "rechnung": "({schulden:geld} Schulden − {cash:geld} Liquidität) ÷ {ebitda:geld} EBITDA",
+       "n": 2.0,
+       "v": -2.0
+      }
+     ],
+     "text": "Nettoverschuldung {nd_ebitda:x1} EBITDA",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "FCF-Rendite",
+     "kurz": "FCF",
+     "familie": "Value",
+     "erklaerung": "Free Cashflow im Verhältnis zum Börsenwert",
+     "definition": "Free Cashflow von mindestens {@min_fcf_rendite:p1} des Börsenwerts pro Jahr",
+     "quelle": "MSCI FaCS: Value und Yield (Cash-Flow-Rendite)",
+     "teile": [
+      {
+       "k": "fcf_rendite",
+       "name": "Free-Cashflow-Rendite",
+       "p": "min_fcf_rendite",
+       "r": ">=",
+       "fmt": "p1",
+       "rechnung": "Free Cashflow (12 Monate) ÷ Börsenwert, beides in Euro",
+       "n": -0.03,
+       "v": 0.05
+      }
+     ],
+     "text": "Free-Cashflow-Rendite {fcf_rendite:p1}",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Gewinnrevisionen",
+     "kurz": "Revisionen",
+     "familie": "Growth",
+     "erklaerung": "Änderung der Gewinnschätzung in 90 Tagen",
+     "definition": "Analysten haben die Gewinnschätzung fürs nächste Geschäftsjahr in 90 Tagen um mindestens {@min_eps_revision:p1v} verändert",
+     "quelle": "Earnings-Revisions-Faktor der Sell-Side-Quant-Modelle",
+     "teile": [
+      {
+       "k": "eps_revision",
+       "name": "Revision der EPS-Schätzung",
+       "p": "min_eps_revision",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "{eps_neu:z2} heute ÷ {eps_alt:z2} vor 90 Tagen − 1 (nächstes Geschäftsjahr)",
+       "n": -0.05,
+       "v": 0.05
+      }
+     ],
+     "text": "Gewinnschätzung nächstes Geschäftsjahr {eps_revision:p1v} in 90 Tagen",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Niedrige Volatilität",
+     "kurz": "Low Vol",
+     "familie": "Volatilität",
+     "erklaerung": "Annualisierte Schwankung des letzten Jahres",
+     "definition": "Schwankung des letzten Jahres höchstens {@max_vol_1j:p0} pro Jahr",
+     "quelle": "MSCI FaCS: Volatility; J.P. Morgan Minimum Volatility",
+     "teile": [
+      {
+       "k": "vol_1j",
+       "name": "Schwankung p. a.",
+       "p": "max_vol_1j",
+       "r": "<=",
+       "fmt": "p1",
+       "rechnung": "Standardabweichung der Tagesrenditen × √252",
+       "n": 0.2,
+       "v": -0.15
+      }
+     ],
+     "text": "Schwankung {vol_1j:p1} p. a.",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": true
+    }
+   ],
+   "forex": [
+    {
+     "name": "Carry",
+     "kurz": "Carry",
+     "familie": "Carry",
+     "erklaerung": "Zinsdifferenz der beiden Notenbanken",
+     "definition": "Leitzins der Basiswährung liegt mindestens {@min_zinsdifferenz:pp} über dem der Gegenwährung, wer sie hält, verdient den Zinsvorsprung",
+     "quelle": "FX-Risikoprämie Carry (Deutsche Bank, J.P. Morgan, Goldman Sachs)",
+     "teile": [
+      {
+       "k": "zinsdifferenz",
+       "name": "Zinsdifferenz",
+       "p": "min_zinsdifferenz",
+       "r": ">=",
+       "fmt": "pp",
+       "rechnung": "{basis:t} {zins_basis:p2} − {gegen:t} {zins_gegen:p2} (Leitzinsen, BIS)",
+       "n": -0.02,
+       "v": 0.03
+      }
+     ],
+     "text": "Zinsdifferenz {zinsdifferenz:pp} p. a. ({basis:t} {zins_basis:p2} gegenüber {gegen:t} {zins_gegen:p2})",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": false
+    },
+    {
+     "name": "Momentum",
+     "kurz": "Momentum",
+     "familie": "Momentum",
+     "erklaerung": "Kursentwicklung 12 Monate ohne den letzten Monat",
+     "definition": "Kurs ist über 12 Monate, ohne den jüngsten Monat, um mindestens {@min_momentum:p0v} gestiegen",
+     "quelle": "FX-Risikoprämie Momentum",
+     "teile": [
+      {
+       "k": "momentum_12_1",
+       "name": "12-1-Monats-Rendite",
+       "p": "min_momentum",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "Kurs vor 1 Monat ÷ Kurs vor 12 Monaten − 1",
+       "n": -0.15,
+       "v": 0.25
+      }
+     ],
+     "text": "12-1-Monats-Rendite {momentum_12_1:p0v}",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Value",
+     "kurz": "Value",
+     "familie": "Value",
+     "erklaerung": "Abstand zum 5-Jahres-Mittel",
+     "definition": "Kurs mindestens {@min_abweichung_mittel:p0} unter seinem 5-Jahres-Mittel, die Basiswährung ist historisch günstig",
+     "quelle": "FX-Risikoprämie Value (Kaufkraftparität, hier vereinfacht über das 5-Jahres-Mittel)",
+     "teile": [
+      {
+       "k": "abweichung_mittel_5j",
+       "name": "Abstand zum 5-Jahres-Mittel",
+       "p": "min_abweichung_mittel",
+       "r": "<=",
+       "fmt": "p1v",
+       "rechnung": "{kurs:kurs} ÷ {mittel_5j:kurs} − 1",
+       "n": 0.1,
+       "v": -0.15,
+       "vz": -1
+      }
+     ],
+     "text": "{abweichung_mittel_5j:p0v} gegenüber dem 5-Jahres-Mittel",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Vol-Regime",
+     "kurz": "Vol-Regime",
+     "familie": "Volatilität",
+     "erklaerung": "Schwankung jetzt im Vergleich zum Jahr",
+     "definition": "Schwankung des letzten Monats höchstens {@max_vol_verhaeltnis:x2} ihr Jahres-Median, der Markt ist ruhiger als üblich",
+     "quelle": "Volatilitäts-Regime: Risikosteuerung der Multi-Asset-Häuser",
+     "teile": [
+      {
+       "k": "vol_verhaeltnis",
+       "name": "Vola-Verhältnis",
+       "p": "max_vol_verhaeltnis",
+       "r": "<=",
+       "fmt": "x2",
+       "rechnung": "{vol_1m:p1} (1 Monat) ÷ {vol_median_1j:p1} (Median 1 Jahr)",
+       "n": 0.5,
+       "v": -0.4
+      }
+     ],
+     "text": "Vola 1M {vol_1m:p1} gegenüber Median 1J {vol_median_1j:p1}",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Carry-to-Risk",
+     "kurz": "C/Risk",
+     "familie": "Carry",
+     "erklaerung": "Zinsvorsprung je Einheit Schwankung",
+     "definition": "Zinsdifferenz geteilt durch die Jahresschwankung beträgt mindestens {@min_carry_risk:z2}",
+     "quelle": "Carry-to-Risk, Standardkennzahl der FX-Risikoprämien-Indizes",
+     "teile": [
+      {
+       "k": "carry_risk",
+       "name": "Carry ÷ Schwankung",
+       "p": "min_carry_risk",
+       "r": ">=",
+       "fmt": "z2",
+       "rechnung": "{zinsdifferenz:pp} ÷ {vol_1j:p1} Schwankung p. a.",
+       "n": -0.3,
+       "v": 0.4
+      }
+     ],
+     "text": "Carry-to-Risk {carry_risk:z2}",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Trend",
+     "kurz": "Trend",
+     "familie": "Momentum",
+     "erklaerung": "Abstand zur 200-Tage-Linie",
+     "definition": "Kurs notiert mindestens {@min_abstand_gd200:p1v} über seiner 200-Tage-Linie, der langfristige Trend ist intakt",
+     "quelle": "Trendfilter der Aktien- und Multi-Asset-Strategen (200-Tage-Linie)",
+     "teile": [
+      {
+       "k": "abstand_gd200",
+       "name": "Abstand zur 200-Tage-Linie",
+       "p": "min_abstand_gd200",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "{kurs:kurs} ÷ {gd200:kurs} − 1",
+       "n": -0.03,
+       "v": 0.03
+      }
+     ],
+     "text": "{abstand_gd200:p0v} gegenüber der 200-Tage-Linie",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": true
+    },
+    {
+     "name": "Kurzfrist-Momentum",
+     "kurz": "3M",
+     "familie": "Momentum",
+     "erklaerung": "Kursentwicklung der letzten 3 Monate",
+     "definition": "Kurs ist in den letzten 3 Monaten um mindestens {@min_rendite_3m:p0v} gestiegen",
+     "quelle": "Mehrfristige Trendsignale der Managed-Futures- und Risikoprämien-Indizes",
+     "teile": [
+      {
+       "k": "rendite_3m",
+       "name": "3-Monats-Rendite",
+       "p": "min_rendite_3m",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "{kurs:kurs} ÷ {kurs_3m:kurs} (vor 3 Monaten) − 1",
+       "n": -0.06,
+       "v": 0.08
+      }
+     ],
+     "text": "3-Monats-Rendite {rendite_3m:p1v}",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": true
+    },
+    {
+     "name": "Zinstrend",
+     "kurz": "Zinstrend",
+     "familie": "Carry",
+     "erklaerung": "Veränderung der Zinsdifferenz in 3 Monaten",
+     "definition": "Die Zinsdifferenz ist in den letzten 3 Monaten um mindestens {@min_zins_trend:pp} gewachsen",
+     "quelle": "Zinserwartungen als Treiber der Wechselkurse (Leitzinsverlauf der BIS)",
+     "teile": [
+      {
+       "k": "zins_trend",
+       "name": "Veränderung der Zinsdifferenz",
+       "p": "min_zins_trend",
+       "r": ">=",
+       "fmt": "pp",
+       "rechnung": "{zinsdifferenz:pp} heute − {zinsdifferenz_3m:pp} vor 3 Monaten",
+       "n": -0.005,
+       "v": 0.005
+      }
+     ],
+     "text": "Zinsdifferenz in 3 Monaten {zins_trend:pp}",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Realzins-Vorsprung",
+     "kurz": "Realzins",
+     "familie": "Value",
+     "erklaerung": "Zinsdifferenz nach Abzug der Inflation",
+     "definition": "Der reale Leitzins (Zins minus Inflation) der Basiswährung liegt mindestens {@min_realzins_diff:pp} über dem der Gegenwährung",
+     "quelle": "Realzinsdifferenz, Fundamentalfaktor der FX-Research-Teams (Inflation laut BIS)",
+     "teile": [
+      {
+       "k": "realzins_diff",
+       "name": "Realzinsdifferenz",
+       "p": "min_realzins_diff",
+       "r": ">=",
+       "fmt": "pp",
+       "rechnung": "({zins_basis:p2} − {inflation_basis:p1}) − ({zins_gegen:p2} − {inflation_gegen:p1})",
+       "n": -0.02,
+       "v": 0.02
+      }
+     ],
+     "text": "Realzinsdifferenz {realzins_diff:pp} ({basis:t} real {real_basis:p1}, {gegen:t} real {real_gegen:p1})",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Volatilitätsniveau",
+     "kurz": "Vola",
+     "familie": "Volatilität",
+     "erklaerung": "Annualisierte Schwankung des letzten Jahres",
+     "definition": "Schwankung des letzten Jahres höchstens {@max_vol_1j:p0} pro Jahr",
+     "quelle": "Risikobudget der Währungsstrategien",
+     "teile": [
+      {
+       "k": "vol_1j",
+       "name": "Schwankung p. a.",
+       "p": "max_vol_1j",
+       "r": "<=",
+       "fmt": "p1",
+       "rechnung": "Standardabweichung der Tagesrenditen × √252",
+       "n": 0.06,
+       "v": -0.05
+      }
+     ],
+     "text": "Schwankung {vol_1j:p1} p. a.",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": true
+    }
+   ],
+   "rohstoff": [
+    {
+     "name": "Momentum",
+     "kurz": "Momentum",
+     "familie": "Momentum",
+     "erklaerung": "Kursentwicklung 12 Monate ohne den letzten Monat",
+     "definition": "Kurs ist über 12 Monate, ohne den jüngsten Monat, um mindestens {@min_momentum:p0v} gestiegen",
+     "quelle": "Rohstoff-Risikoprämie Momentum (Trend)",
+     "teile": [
+      {
+       "k": "momentum_12_1",
+       "name": "12-1-Monats-Rendite",
+       "p": "min_momentum",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "Kurs vor 1 Monat ÷ Kurs vor 12 Monaten − 1",
+       "n": -0.15,
+       "v": 0.25
+      }
+     ],
+     "text": "12-1-Monats-Rendite {momentum_12_1:p0v}",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Pullback",
+     "kurz": "Pullback",
+     "familie": "Momentum",
+     "erklaerung": "Drawdown vom 52W-Hoch und Lage in der Range",
+     "definition": "Kurs mindestens {@min_abstand_hoch:p0} unter dem 52-Wochen-Hoch und im unteren {@max_position_spanne:p0} der Jahresspanne",
+     "quelle": "Rücksetzer-Filter der Rohstoffstrategen",
+     "teile": [
+      {
+       "k": "abstand_hoch",
+       "name": "Drawdown",
+       "p": "min_abstand_hoch",
+       "r": ">=",
+       "fmt": "p0",
+       "rechnung": "1 − {kurs:kurs} ÷ {hoch:kurs} (52W-Hoch)",
+       "n": -0.15,
+       "v": 0.25
+      },
+      {
+       "k": "position_spanne",
+       "name": "Range-Position",
+       "p": "max_position_spanne",
+       "r": "<=",
+       "fmt": "p0",
+       "rechnung": "({kurs:kurs} − {tief:kurs}) ÷ ({hoch:kurs} − {tief:kurs})",
+       "n_abs": 1.0,
+       "v_abs": 0.0
+      }
+     ],
+     "text": "Drawdown {abstand_hoch:p0} vom 52W-Hoch, Range-Position {position_spanne:p0}",
+     "verkn": "und",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Value",
+     "kurz": "Value",
+     "familie": "Value",
+     "erklaerung": "Abstand zum 5-Jahres-Mittel",
+     "definition": "Kurs höchstens {@max_abweichung_mittel:p0v} über seinem 5-Jahres-Mittel",
+     "quelle": "Rohstoff-Risikoprämie Value (Rückkehr zum langfristigen Mittel)",
+     "teile": [
+      {
+       "k": "abweichung_mittel_5j",
+       "name": "Abstand zum 5-Jahres-Mittel",
+       "p": "max_abweichung_mittel",
+       "r": "<=",
+       "fmt": "p1v",
+       "rechnung": "{kurs:kurs} ÷ {mittel_5j:kurs} − 1",
+       "n": 0.25,
+       "v": -0.25
+      }
+     ],
+     "text": "{abweichung_mittel_5j:p0v} gegenüber dem 5-Jahres-Mittel",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Vol-Regime",
+     "kurz": "Vol-Regime",
+     "familie": "Volatilität",
+     "erklaerung": "Schwankung jetzt im Vergleich zum Jahr",
+     "definition": "Schwankung des letzten Monats höchstens {@max_vol_verhaeltnis:x2} ihr Jahres-Median, der Markt ist ruhiger als üblich",
+     "quelle": "Volatilitäts-Regime: Risikosteuerung der Multi-Asset-Häuser",
+     "teile": [
+      {
+       "k": "vol_verhaeltnis",
+       "name": "Vola-Verhältnis",
+       "p": "max_vol_verhaeltnis",
+       "r": "<=",
+       "fmt": "x2",
+       "rechnung": "{vol_1m:p1} (1 Monat) ÷ {vol_median_1j:p1} (Median 1 Jahr)",
+       "n": 0.5,
+       "v": -0.4
+      }
+     ],
+     "text": "Vola 1M {vol_1m:p1} gegenüber Median 1J {vol_median_1j:p1}",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Terminstruktur",
+     "kurz": "Kurve",
+     "familie": "Carry",
+     "erklaerung": "Roll-Rendite zwischen den nächsten Kontrakten",
+     "definition": "Annualisierte Roll-Rendite von mindestens {@min_roll_rendite:p0v}, die Kurve liegt in Backwardation",
+     "quelle": "Rohstoff-Carry bzw. Curve-Prämie (Goldman Sachs, J.P. Morgan, Bloomberg Roll Yield)",
+     "teile": [
+      {
+       "k": "roll_rendite",
+       "name": "Roll-Rendite p. a.",
+       "p": "min_roll_rendite",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "({f1:z2} {k1:t} ÷ {f2:z2} {k2:t} − 1) × 12 ÷ {monate:z0} Monate",
+       "n": -0.1,
+       "v": 0.1
+      }
+     ],
+     "text": "Roll-Rendite {roll_rendite:p1v} p. a. ({k1:t} gegen {k2:t})",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Trend",
+     "kurz": "Trend",
+     "familie": "Momentum",
+     "erklaerung": "Abstand zur 200-Tage-Linie",
+     "definition": "Kurs notiert mindestens {@min_abstand_gd200:p1v} über seiner 200-Tage-Linie, der langfristige Trend ist intakt",
+     "quelle": "Trendfilter der Aktien- und Multi-Asset-Strategen (200-Tage-Linie)",
+     "teile": [
+      {
+       "k": "abstand_gd200",
+       "name": "Abstand zur 200-Tage-Linie",
+       "p": "min_abstand_gd200",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "{kurs:kurs} ÷ {gd200:kurs} − 1",
+       "n": -0.08,
+       "v": 0.08
+      }
+     ],
+     "text": "{abstand_gd200:p0v} gegenüber der 200-Tage-Linie",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": true
+    },
+    {
+     "name": "Kurzfrist-Momentum",
+     "kurz": "3M",
+     "familie": "Momentum",
+     "erklaerung": "Kursentwicklung der letzten 3 Monate",
+     "definition": "Kurs ist in den letzten 3 Monaten um mindestens {@min_rendite_3m:p0v} gestiegen",
+     "quelle": "Mehrfristige Trendsignale der Managed-Futures- und Risikoprämien-Indizes",
+     "teile": [
+      {
+       "k": "rendite_3m",
+       "name": "3-Monats-Rendite",
+       "p": "min_rendite_3m",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "{kurs:kurs} ÷ {kurs_3m:kurs} (vor 3 Monaten) − 1",
+       "n": -0.06,
+       "v": 0.08
+      }
+     ],
+     "text": "3-Monats-Rendite {rendite_3m:p1v}",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": true
+    },
+    {
+     "name": "Saisonalität",
+     "kurz": "Saison",
+     "familie": "Saisonalität",
+     "erklaerung": "Durchschnitt des kommenden Monats in früheren Jahren",
+     "definition": "Im kommenden Kalendermonat ist der Kurs in den vergangenen Jahren im Schnitt um mindestens {@min_saison:p1v} gestiegen",
+     "quelle": "Saisonale Muster, z. B. in den Rohstoff- und Aktienkalendern der Banken",
+     "teile": [
+      {
+       "k": "saison",
+       "name": "Ø Rendite im Folgemonat",
+       "p": "min_saison",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "Ø der {monat:t}-Renditen aus {jahre:z0} Jahren, positiv in {saison_quote:p0}",
+       "n": -0.03,
+       "v": 0.03
+      }
+     ],
+     "text": "Ø {saison:p1v} im {monat:t} ({jahre:z0} Jahre)",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Positionierung",
+     "kurz": "COT",
+     "familie": "Positionierung",
+     "erklaerung": "Netto-Position der Fonds laut CFTC",
+     "definition": "Die Netto-Long-Position der Fonds (Managed Money) liegt höchstens im {@max_cot_perzentil:p0}-Perzentil der letzten 3 Jahre, der Markt ist nicht überfüllt",
+     "quelle": "CFTC Commitments of Traders, Positionierungsanalyse der Rohstoffstrategen",
+     "teile": [
+      {
+       "k": "cot_perzentil",
+       "name": "Perzentil der Netto-Position",
+       "p": "max_cot_perzentil",
+       "r": "<=",
+       "fmt": "p0",
+       "rechnung": "Netto-Long {cot_netto:p1} des Open Interest, Rang unter {cot_wochen:z0} Wochen",
+       "n": 0.2,
+       "v": -0.5
+      }
+     ],
+     "text": "Netto-Position der Fonds im {cot_perzentil:p0}-Perzentil (3 Jahre)",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Volatilitätsniveau",
+     "kurz": "Vola",
+     "familie": "Volatilität",
+     "erklaerung": "Annualisierte Schwankung des letzten Jahres",
+     "definition": "Schwankung des letzten Jahres höchstens {@max_vol_1j:p0} pro Jahr",
+     "quelle": "Risikobudget der Rohstoffstrategien",
+     "teile": [
+      {
+       "k": "vol_1j",
+       "name": "Schwankung p. a.",
+       "p": "max_vol_1j",
+       "r": "<=",
+       "fmt": "p1",
+       "rechnung": "Standardabweichung der Tagesrenditen × √252",
+       "n": 0.15,
+       "v": -0.12
+      }
+     ],
+     "text": "Schwankung {vol_1j:p1} p. a.",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": true
+    }
+   ],
+   "index": [
+    {
+     "name": "Trend",
+     "kurz": "Trend",
+     "familie": "Momentum",
+     "erklaerung": "Abstand zur 200-Tage-Linie",
+     "definition": "Kurs notiert mindestens {@min_abstand_gd200:p1v} über seiner 200-Tage-Linie, der langfristige Trend ist intakt",
+     "quelle": "Trendfilter der Aktien- und Multi-Asset-Strategen (200-Tage-Linie)",
+     "teile": [
+      {
+       "k": "abstand_gd200",
+       "name": "Abstand zur 200-Tage-Linie",
+       "p": "min_abstand_gd200",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "{kurs:kurs} ÷ {gd200:kurs} − 1",
+       "n": -0.08,
+       "v": 0.08
+      }
+     ],
+     "text": "{abstand_gd200:p0v} gegenüber der 200-Tage-Linie",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Momentum",
+     "kurz": "Momentum",
+     "familie": "Momentum",
+     "erklaerung": "Kursentwicklung 12 Monate ohne den letzten Monat",
+     "definition": "Kurs ist über 12 Monate, ohne den jüngsten Monat, um mindestens {@min_momentum:p0v} gestiegen",
+     "quelle": "Trendfolge der Multi-Asset-Häuser",
+     "teile": [
+      {
+       "k": "momentum_12_1",
+       "name": "12-1-Monats-Rendite",
+       "p": "min_momentum",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "Kurs vor 1 Monat ÷ Kurs vor 12 Monaten − 1",
+       "n": -0.15,
+       "v": 0.25
+      }
+     ],
+     "text": "12-1-Monats-Rendite {momentum_12_1:p0v}",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Pullback",
+     "kurz": "Pullback",
+     "familie": "Momentum",
+     "erklaerung": "Korrektur vom 52W-Hoch",
+     "definition": "Index mindestens {@min_abstand_hoch:p0} unter seinem 52-Wochen-Hoch, also in einer Korrektur",
+     "quelle": "Rücksetzer im Aufwärtstrend, taktisches Einstiegsmuster",
+     "teile": [
+      {
+       "k": "abstand_hoch",
+       "name": "Drawdown",
+       "p": "min_abstand_hoch",
+       "r": ">=",
+       "fmt": "p0",
+       "rechnung": "1 − {kurs:kurs} ÷ {hoch:kurs} (52W-Hoch)",
+       "v": 0.15,
+       "n_abs": 0.0
+      }
+     ],
+     "text": "Drawdown {abstand_hoch:p0} vom 52W-Hoch",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Vol-Regime",
+     "kurz": "Vol-Regime",
+     "familie": "Volatilität",
+     "erklaerung": "Schwankung jetzt im Vergleich zum Jahr",
+     "definition": "Schwankung des letzten Monats höchstens {@max_vol_verhaeltnis:x2} ihr Jahres-Median, der Markt ist ruhiger als üblich",
+     "quelle": "Volatilitäts-Regime: Risikosteuerung der Multi-Asset-Häuser",
+     "teile": [
+      {
+       "k": "vol_verhaeltnis",
+       "name": "Vola-Verhältnis",
+       "p": "max_vol_verhaeltnis",
+       "r": "<=",
+       "fmt": "x2",
+       "rechnung": "{vol_1m:p1} (1 Monat) ÷ {vol_median_1j:p1} (Median 1 Jahr)",
+       "n": 0.5,
+       "v": -0.4
+      }
+     ],
+     "text": "Vola 1M {vol_1m:p1} gegenüber Median 1J {vol_median_1j:p1}",
+     "verkn": "einzeln",
+     "standard": true,
+     "kursbasiert": true
+    },
+    {
+     "name": "Kurzfrist-Momentum",
+     "kurz": "3M",
+     "familie": "Momentum",
+     "erklaerung": "Kursentwicklung der letzten 3 Monate",
+     "definition": "Kurs ist in den letzten 3 Monaten um mindestens {@min_rendite_3m:p0v} gestiegen",
+     "quelle": "Mehrfristige Trendsignale der Managed-Futures- und Risikoprämien-Indizes",
+     "teile": [
+      {
+       "k": "rendite_3m",
+       "name": "3-Monats-Rendite",
+       "p": "min_rendite_3m",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "{kurs:kurs} ÷ {kurs_3m:kurs} (vor 3 Monaten) − 1",
+       "n": -0.06,
+       "v": 0.08
+      }
+     ],
+     "text": "3-Monats-Rendite {rendite_3m:p1v}",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": true
+    },
+    {
+     "name": "VIX",
+     "kurz": "VIX",
+     "familie": "Risiko",
+     "erklaerung": "Implizite Volatilität, das „Angstbarometer“",
+     "definition": "Der VIX liegt höchstens bei {@max_vix:z0} Punkten, Optionen preisen ruhige Märkte ein",
+     "quelle": "Risikoindikatoren der Aktienstrategen (CBOE VIX)",
+     "teile": [
+      {
+       "k": "vix",
+       "name": "VIX",
+       "p": "max_vix",
+       "r": "<=",
+       "fmt": "z1",
+       "rechnung": "Implizite 30-Tage-Volatilität der S&P-500-Optionen",
+       "n": 10,
+       "v": -8
+      }
+     ],
+     "text": "VIX {vix:z1} Punkte",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "VIX-Kurve",
+     "kurz": "VIX-Kurve",
+     "familie": "Risiko",
+     "erklaerung": "VIX gegenüber dem 3-Monats-VIX",
+     "definition": "VIX höchstens {@max_vix_struktur:x2} des 3-Monats-VIX, die Volatilitätskurve steigt an (Contango)",
+     "quelle": "Volatilitäts-Terminstruktur, Timing-Signal der Derivate-Desks",
+     "teile": [
+      {
+       "k": "vix_struktur",
+       "name": "VIX ÷ VIX3M",
+       "p": "max_vix_struktur",
+       "r": "<=",
+       "fmt": "x2",
+       "rechnung": "{vix:z1} ÷ {vix3m:z1}",
+       "n": 0.15,
+       "v": -0.2
+      }
+     ],
+     "text": "VIX ÷ VIX3M {vix_struktur:x2}",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Kreditrisiko",
+     "kurz": "Kredit",
+     "familie": "Risiko",
+     "erklaerung": "Risikoaufschlag für Hochzinsanleihen",
+     "definition": "Der Risikoaufschlag US-amerikanischer Hochzinsanleihen liegt höchstens bei {@max_hy_spread:p1}, der Kreditmarkt ist entspannt",
+     "quelle": "Kreditspreads als Frühindikator (ICE BofA US High Yield, FRED)",
+     "teile": [
+      {
+       "k": "hy_spread",
+       "name": "High-Yield-Spread",
+       "p": "max_hy_spread",
+       "r": "<=",
+       "fmt": "p2",
+       "rechnung": "Optionsbereinigter Aufschlag über Staatsanleihen, Stand {hy_datum:t}",
+       "n": 0.02,
+       "v": -0.015
+      }
+     ],
+     "text": "High-Yield-Spread {hy_spread:p2}",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Saisonalität",
+     "kurz": "Saison",
+     "familie": "Saisonalität",
+     "erklaerung": "Durchschnitt des kommenden Monats in früheren Jahren",
+     "definition": "Im kommenden Kalendermonat ist der Kurs in den vergangenen Jahren im Schnitt um mindestens {@min_saison:p1v} gestiegen",
+     "quelle": "Saisonale Muster, z. B. in den Rohstoff- und Aktienkalendern der Banken",
+     "teile": [
+      {
+       "k": "saison",
+       "name": "Ø Rendite im Folgemonat",
+       "p": "min_saison",
+       "r": ">=",
+       "fmt": "p1v",
+       "rechnung": "Ø der {monat:t}-Renditen aus {jahre:z0} Jahren, positiv in {saison_quote:p0}",
+       "n": -0.03,
+       "v": 0.03
+      }
+     ],
+     "text": "Ø {saison:p1v} im {monat:t} ({jahre:z0} Jahre)",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    },
+    {
+     "name": "Knock-out-Risiko",
+     "kurz": "KO-Risiko",
+     "familie": "Risiko",
+     "erklaerung": "Wie oft ein Knock-out mit Hebel 5 gerissen wäre",
+     "definition": "In höchstens {@max_ko_risiko:p0} der 10-Tage-Fenster des letzten Jahres wäre ein Long-Knock-out mit Hebel 5 ausgelöst worden",
+     "quelle": "Risikoprüfung für Hebelprodukte (Knock-out-Schwelle rund 20 % unter dem Kaufkurs)",
+     "teile": [
+      {
+       "k": "ko_risiko",
+       "name": "Knock-out-Häufigkeit",
+       "p": "max_ko_risiko",
+       "r": "<=",
+       "fmt": "p1",
+       "rechnung": "Anteil der 10-Tage-Fenster mit mindestens 20 % Rückgang, letzte 12 Monate",
+       "n": 0.1,
+       "v": -0.05
+      }
+     ],
+     "text": "Knock-out bei Hebel 5 in {ko_risiko:p1} der Fenster",
+     "verkn": "einzeln",
+     "standard": false,
+     "kursbasiert": false
+    }
+   ]
+  },
+  "params": {
+   "aktie": {
+    "min_momentum_12_1": 0.0,
+    "min_roe": 0.15,
+    "max_nd_ebitda": 2.0,
+    "min_fcf_rendite": 0.03,
+    "min_eps_revision": 0.0,
+    "max_vol_1j": 0.35,
+    "min_boersenwert_mrd_eur": 50,
+    "min_umsatzwachstum": 0.05,
+    "min_gewinnwachstum": 0.0,
+    "min_abstand_hoch": 0.2,
+    "max_position_spanne": 0.4,
+    "max_kgv_vs_median": 0.8,
+    "min_kursziel_abstand": 0.2
+   },
+   "forex": {
+    "min_carry_risk": 0.0,
+    "min_abstand_gd200": 0.0,
+    "min_rendite_3m": 0.0,
+    "min_zins_trend": 0.0,
+    "min_realzins_diff": 0.0,
+    "max_vol_1j": 0.1,
+    "min_zinsdifferenz": 0.01,
+    "min_momentum": 0.0,
+    "min_abweichung_mittel": 0.05,
+    "max_vol_verhaeltnis": 1.0
+   },
+   "rohstoff": {
+    "min_roll_rendite": 0.0,
+    "min_abstand_gd200": 0.0,
+    "min_rendite_3m": 0.0,
+    "min_saison": 0.0,
+    "max_cot_perzentil": 0.8,
+    "max_vol_1j": 0.3,
+    "min_momentum": 0.0,
+    "min_abstand_hoch": 0.1,
+    "max_position_spanne": 0.5,
+    "max_abweichung_mittel": 0.0,
+    "max_vol_verhaeltnis": 1.0
+   },
+   "index": {
+    "min_rendite_3m": 0.0,
+    "max_vix": 20,
+    "max_vix_struktur": 1.0,
+    "max_hy_spread": 0.045,
+    "min_saison": 0.0,
+    "max_ko_risiko": 0.05,
+    "min_abstand_gd200": 0.0,
+    "min_momentum": 0.0,
+    "min_abstand_hoch": 0.05,
+    "max_vol_verhaeltnis": 1.0
+   }
+  },
+  "regler": {
+   "aktie": {
+    "min_boersenwert_mrd_eur": {
+     "stufen": [
+      1,
+      2,
+      5,
+      10,
+      20,
+      30,
+      50,
+      75,
+      100,
+      150,
+      200,
+      300,
+      500
+     ],
+     "fmt": "zmrd"
+    },
+    "min_umsatzwachstum": {
+     "min": -0.1,
+     "max": 0.3,
+     "step": 0.01,
+     "fmt": "p0v"
+    },
+    "min_gewinnwachstum": {
+     "min": -0.2,
+     "max": 0.4,
+     "step": 0.01,
+     "fmt": "p0v"
+    },
+    "min_abstand_hoch": {
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "fmt": "p0"
+    },
+    "max_position_spanne": {
+     "min": 0.05,
+     "max": 1,
+     "step": 0.05,
+     "fmt": "p0"
+    },
+    "max_kgv_vs_median": {
+     "min": 0.5,
+     "max": 1.2,
+     "step": 0.05,
+     "fmt": "p0"
+    },
+    "min_kursziel_abstand": {
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "fmt": "p0v"
+    },
+    "min_momentum_12_1": {
+     "min": -0.2,
+     "max": 0.4,
+     "step": 0.01,
+     "fmt": "p1v"
+    },
+    "min_roe": {
+     "min": 0,
+     "max": 0.4,
+     "step": 0.01,
+     "fmt": "p0"
+    },
+    "max_nd_ebitda": {
+     "min": 0,
+     "max": 5,
+     "step": 0.1,
+     "fmt": "x1"
+    },
+    "min_fcf_rendite": {
+     "min": 0,
+     "max": 0.1,
+     "step": 0.005,
+     "fmt": "p1"
+    },
+    "min_eps_revision": {
+     "min": -0.1,
+     "max": 0.1,
+     "step": 0.005,
+     "fmt": "p1v"
+    },
+    "max_vol_1j": {
+     "min": 0.15,
+     "max": 0.7,
+     "step": 0.01,
+     "fmt": "p1"
+    }
+   },
+   "forex": {
+    "min_zinsdifferenz": {
+     "min": -0.03,
+     "max": 0.05,
+     "step": 0.0025,
+     "fmt": "pp"
+    },
+    "min_momentum": {
+     "min": -0.1,
+     "max": 0.2,
+     "step": 0.01,
+     "fmt": "p1v"
+    },
+    "min_abweichung_mittel": {
+     "min": 0,
+     "max": 0.2,
+     "step": 0.01,
+     "fmt": "p1v"
+    },
+    "max_vol_verhaeltnis": {
+     "min": 0.5,
+     "max": 2,
+     "step": 0.05,
+     "fmt": "x2"
+    },
+    "min_carry_risk": {
+     "min": -0.5,
+     "max": 1,
+     "step": 0.05,
+     "fmt": "z2"
+    },
+    "min_abstand_gd200": {
+     "min": -0.1,
+     "max": 0.1,
+     "step": 0.005,
+     "fmt": "p1v"
+    },
+    "min_rendite_3m": {
+     "min": -0.1,
+     "max": 0.15,
+     "step": 0.005,
+     "fmt": "p1v"
+    },
+    "min_zins_trend": {
+     "min": -0.01,
+     "max": 0.01,
+     "step": 0.0025,
+     "fmt": "pp"
+    },
+    "min_realzins_diff": {
+     "min": -0.04,
+     "max": 0.04,
+     "step": 0.0025,
+     "fmt": "pp"
+    },
+    "max_vol_1j": {
+     "min": 0.04,
+     "max": 0.2,
+     "step": 0.005,
+     "fmt": "p1"
+    }
+   },
+   "rohstoff": {
+    "min_momentum": {
+     "min": -0.1,
+     "max": 0.2,
+     "step": 0.01,
+     "fmt": "p1v"
+    },
+    "min_abstand_hoch": {
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "fmt": "p0"
+    },
+    "max_position_spanne": {
+     "min": 0.05,
+     "max": 1,
+     "step": 0.05,
+     "fmt": "p0"
+    },
+    "max_abweichung_mittel": {
+     "min": -0.2,
+     "max": 0.3,
+     "step": 0.01,
+     "fmt": "p1v"
+    },
+    "max_vol_verhaeltnis": {
+     "min": 0.5,
+     "max": 2,
+     "step": 0.05,
+     "fmt": "x2"
+    },
+    "min_roll_rendite": {
+     "min": -0.15,
+     "max": 0.15,
+     "step": 0.01,
+     "fmt": "p1v"
+    },
+    "min_abstand_gd200": {
+     "min": -0.1,
+     "max": 0.1,
+     "step": 0.005,
+     "fmt": "p1v"
+    },
+    "min_rendite_3m": {
+     "min": -0.1,
+     "max": 0.15,
+     "step": 0.005,
+     "fmt": "p1v"
+    },
+    "min_saison": {
+     "min": -0.03,
+     "max": 0.03,
+     "step": 0.0025,
+     "fmt": "p1v"
+    },
+    "max_cot_perzentil": {
+     "min": 0.3,
+     "max": 1,
+     "step": 0.05,
+     "fmt": "p0"
+    },
+    "max_vol_1j": {
+     "min": 0.1,
+     "max": 0.6,
+     "step": 0.01,
+     "fmt": "p1"
+    }
+   },
+   "index": {
+    "min_abstand_gd200": {
+     "min": -0.1,
+     "max": 0.1,
+     "step": 0.005,
+     "fmt": "p1v"
+    },
+    "min_momentum": {
+     "min": -0.1,
+     "max": 0.2,
+     "step": 0.01,
+     "fmt": "p1v"
+    },
+    "min_abstand_hoch": {
+     "min": 0,
+     "max": 0.5,
+     "step": 0.01,
+     "fmt": "p0"
+    },
+    "max_vol_verhaeltnis": {
+     "min": 0.5,
+     "max": 2,
+     "step": 0.05,
+     "fmt": "x2"
+    },
+    "min_rendite_3m": {
+     "min": -0.1,
+     "max": 0.15,
+     "step": 0.005,
+     "fmt": "p1v"
+    },
+    "max_vix": {
+     "min": 12,
+     "max": 35,
+     "step": 1,
+     "fmt": "z1"
+    },
+    "max_vix_struktur": {
+     "min": 0.8,
+     "max": 1.2,
+     "step": 0.01,
+     "fmt": "x2"
+    },
+    "max_hy_spread": {
+     "min": 0.025,
+     "max": 0.08,
+     "step": 0.0025,
+     "fmt": "p2"
+    },
+    "min_saison": {
+     "min": -0.03,
+     "max": 0.03,
+     "step": 0.0025,
+     "fmt": "p1v"
+    },
+    "max_ko_risiko": {
+     "min": 0,
+     "max": 0.2,
+     "step": 0.01,
+     "fmt": "p1"
+    }
+   }
+  },
+  "auswahl": {
+   "aktie": {
+    "zaehlt": [
+     "Large Cap",
+     "Earnings Momentum",
+     "Pullback",
+     "Valuation Gap"
+    ],
+    "pflicht": [],
+    "treffer_ab": 3
+   },
+   "forex": {
+    "zaehlt": [
+     "Carry",
+     "Momentum",
+     "Value",
+     "Vol-Regime"
+    ],
+    "pflicht": [],
+    "treffer_ab": 3
+   },
+   "rohstoff": {
+    "zaehlt": [
+     "Momentum",
+     "Pullback",
+     "Value",
+     "Vol-Regime"
+    ],
+    "pflicht": [],
+    "treffer_ab": 3
+   },
+   "index": {
+    "zaehlt": [
+     "Trend",
+     "Momentum",
+     "Pullback",
+     "Vol-Regime"
+    ],
+    "pflicht": [],
+    "treffer_ab": 3
+   }
+  },
+  "abschnitt": {
+   "aktie": "kriterien",
+   "forex": "kriterien_forex",
+   "rohstoff": "kriterien_rohstoff",
+   "index": "kriterien_index"
+  }
+ },
+ "fx": {
+  "EUR": 1.0,
+  "CHF": 1.0856000185012817,
+  "CNY": 0.13447999954223633,
+  "HKD": 0.11392000317573547,
+  "JPY": 0.005665299948304892,
+  "USD": 0.8938999772071838
+ }
+}
